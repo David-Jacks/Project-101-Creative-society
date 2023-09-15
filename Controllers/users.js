@@ -9,7 +9,9 @@ const updateUser = async (req, res, next) => {
       { new: true }
     );
     res.status(200).json(updatedUser);
+    console.log("We are here");
   } catch (err) {
+    console.log("It failed to update");
     next(err);
   }
 };
@@ -34,7 +36,7 @@ const getUser = async (req, res, next) => {
   }
 };
 
-// Search for a user by parameters
+// Search for all users
 const getUsers = async (req, res, next) => {
   try {
     const users = await User.find();

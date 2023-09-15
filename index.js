@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const auths = require("./Routes/auths");
 const users = require("./Routes/users");
+const posts = require("./Routes/posts");
 const cookieParser = require("cookie-parser");
 
 dotenv.config();
@@ -11,23 +12,24 @@ app.use(express.json());
 app.use(cookieParser());
 app.use("/api/auths", auths);
 app.use("/api/users", users);
+app.use("/api/posts", posts);
 
 const connect = async () => {
-    try {
-        await mongoose.connect(process.env.MONGODB_URL);
-        console.log("Successfully connected to mongoDB");
-      } catch (error) {
-        throw error;
-      }
-}
+  try {
+    await mongoose.connect(process.env.MONGODB_URL);
+    console.log("Successfully connected to mongoDB");
+  } catch (error) {
+    throw error;
+  }
+};
 
 mongoose.connection.on("disconnected", () => {
-    console.log("Disconnected From MongoDB");
+  console.log("Disconnected From MongoDB");
 });
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () =>{
-    connect();
-    console.log(`Backend server listening on port ${PORT}`);
+app.listen(PORT, () => {
+  connect();
+  console.log(`Backend server listening on port ${PORT}`);
 });

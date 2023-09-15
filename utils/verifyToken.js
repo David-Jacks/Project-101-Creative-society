@@ -15,8 +15,9 @@ const verifyToken = (req, res, next) => {
 };
 
 const verifyUser = (req, res, next) => {
+  console.log("We came to the verfiy user section");
   verifyToken(req, res, next, () => {
-    if (req.user.id === req.params.id ) {
+    if (req.user.id === req.params.id || req.user.isAdmin) {
       next();
     } else {
       return next(createError(403, "You are not authorized!"));
@@ -24,16 +25,18 @@ const verifyUser = (req, res, next) => {
   });
 };
 
-// const verifyAdmin = (req, res, next) => {
-//   verifyToken(req, res, next, () => {
-//     if (req.user.isAdmin) {
-//       next();
-//     } else {
-//       return next(createError(403, "You are not authorized!"));
-//     }
-//   });
-// };
+const verifyAdmin = (req, res, next) => {
+  verifyToken(req, res, next, () => {
+    if (!req.user.isAdmin) {
+      res.json("It actually cam here, woww");
+      res.json(`Admin or not: ${req.user.isAdmin}`);
+      next();
+    } else {
+      return next(createError(403, "You are not authorized!"));
+    }
+  });
+};
 
 module.exports.verifyToken = verifyToken;
 module.exports.verifyUser = verifyUser;
-// module.exports.verifyAdmin = verifyAdmin;
+module.exports.verifyAdmin = verifyAdmin;

@@ -5,7 +5,8 @@ const {
   getUser,
   getUsers,
 } = require("../Controllers/users");
-const {verifyUser} = require("../utils/verifyToken");
+
+const { verifyUser, verifyAdmin } = require("../utils/verifyToken");
 
 const router = require("express").Router();
 
@@ -18,7 +19,7 @@ router.delete("/:id", verifyUser, deleteUser);
 // GET
 router.get("/:id", verifyUser, getUser);
 
-//GET ALL
-// router.get("/", verifyAdmin, getUsers);
+// GET ALL USERS
+router.get("/", verifyAdmin, getUsers);
 
 module.exports = router;

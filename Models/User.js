@@ -8,8 +8,9 @@ const userSchema = new mongoose.Schema(
     lastName: { type: String, required: true, min: 10 },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    year: {type: String},
-    program: {type: String},
+    year: { type: String },
+    program: { type: String },
+    isAdmin: { type: Boolean, default: false },
   },
   { timestamps: true }
 );
@@ -19,6 +20,7 @@ userSchema.methods.generateAuthToken = function () {
     {
       _id: this._id,
       username: this.username,
+      isAdmin: this.isAdmin,
     },
     process.env.JWT_PRIVATEKEY
   );

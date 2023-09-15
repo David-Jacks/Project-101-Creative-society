@@ -10,18 +10,17 @@ const register = async (req, res, next) => {
     const hash = bcrypt.hashSync(req.body.password, salt);
 
     const newUser = new User({
-      username : req.body.username,
+      username: req.body.username,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
       password: hash,
       year: req.body.year,
-      program: req.body.program
-      
+      program: req.body.program,
     });
 
     await newUser.save();
-    res.status(200).send("User has been created.");
+    res.status(200).send("User has been created succesfully.");
   } catch (err) {
     next(err);
   }
@@ -42,17 +41,17 @@ const login = async (req, res, next) => {
       return next(createError(400, "Wrong password or username!"));
 
     const token = jwt.sign(
-      { id: user._id, username: user.username, email: user.email },
+      { id: user._id, username: user.username, isAdmin: user.isAdmin },
       process.env.JWT_PRIVATEKEY
     );
 
-    const { password, ...otherDetails } = user._doc;
+    const { username, isAdmin, password, ...otherDetails } = user._doc;
     res
       .cookie("access_token", token, {
         httpOnly: true,
       })
       .status(200)
-      .json({ details: { ...otherDetails }, username, email });
+      .json({ details: { ...otherDetails }, password });
   } catch (err) {
     next(err);
   }
