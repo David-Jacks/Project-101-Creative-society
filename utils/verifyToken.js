@@ -15,21 +15,34 @@ const verifyToken = (req, res, next) => {
 };
 
 const verifyUser = (req, res, next) => {
-  console.log("We came to the verfiy user section");
-  verifyToken(req, res, next, () => {
+  // Verify the token first before proceeding with user authorization checks
+  verifyToken(req, res, (err) => {
+    if (err) {
+      console.log("Is the token invalid?");
+      // Handle token verification errors
+      return next(err);
+    }
+
     if (req.user.id === req.params.id || req.user.isAdmin) {
       next();
     } else {
+      res.status(403).send("You are not authorized");
       return next(createError(403, "You are not authorized!"));
     }
   });
 };
 
 const verifyAdmin = (req, res, next) => {
-  verifyToken(req, res, next, () => {
-    if (!req.user.isAdmin) {
-      res.json("It actually cam here, woww");
-      res.json(`Admin or not: ${req.user.isAdmin}`);
+  // Verify the token first before proceeding with admin authorization checks
+  verifyToken(req, res, (err) => {
+    if (err) {
+      // Handle token verification errors
+      return next(err);
+    }
+
+    if (req.user.isAdmin) {
+      res.send("It actually came here, woww");
+      res.send(`Admin or not: ${req.user.isAdmin}`);
       next();
     } else {
       return next(createError(403, "You are not authorized!"));

@@ -11,6 +11,7 @@ const makeAPost = async (req, res, next) => {
   }
 };
 
+// This will update the post, if you want to make some edits to your posts
 const updatePost = async (req, res, next) => {
   try {
     const updatePost = await Post.findByIdAndUpdate(

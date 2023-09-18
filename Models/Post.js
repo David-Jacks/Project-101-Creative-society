@@ -3,9 +3,17 @@ const mongoose = require("mongoose");
 
 const postSchema = new mongoose.Schema(
   {
-    title: { type: String, required: true, unique: true },
+    title: { type: String, required: true }, // String is shorthand for {type: String}
+    author: { type: String, required: true },
     body: { type: String, required: true, min: 10 },
     photos: { type: [String] },
+    comments: [{ body: String, date: Date }],
+    date: { type: Date, default: Date.now },
+    hidden: Boolean,
+    meta: {
+      likes: Number,
+      // favs: Number
+    },
   },
   { timestamps: true }
 );

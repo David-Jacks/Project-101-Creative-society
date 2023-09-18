@@ -8,10 +8,12 @@ const updateUser = async (req, res, next) => {
       { $set: req.body },
       { new: true }
     );
-    res.status(200).json(updatedUser);
-    console.log("We are here");
+    res.status(200).send("Succesfully updated");
   } catch (err) {
-    console.log("It failed to update");
+    console.log("Not updated");
+    res
+      .status(400)
+      .send("Not authorized to update this user or user doesnt exist");
     next(err);
   }
 };
@@ -19,8 +21,13 @@ const updateUser = async (req, res, next) => {
 // Delete user by unique ID
 const deleteUser = async (req, res, next) => {
   try {
+    const deletedUser = await User.findById(req.params.id);
+    if (deletedUser == null) {
+      res.status(404).send("User does not exist.");
+      return;
+    }
     await User.findByIdAndDelete(req.params.id);
-    res.status(200).json("User has been deleted.");
+    res.status(200).send("User has been deleted.");
   } catch (err) {
     next(err);
   }

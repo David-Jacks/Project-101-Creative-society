@@ -17,7 +17,16 @@ const register = async (req, res, next) => {
       password: hash,
       year: req.body.year,
       program: req.body.program,
+      isAdmin: req.body.isAdmin,
     });
+    const newUsername = await User.findOne({ username: req.body.username });
+    const newEmail = await User.findOne({ email: req.body.email });
+    if (newUsername || newEmail) {
+      res
+        .status(400)
+        .send("An account with this username and or email already exists");
+      return;
+    }
 
     await newUser.save();
     res.status(200).send("User has been created succesfully.");
@@ -30,28 +39,34 @@ const register = async (req, res, next) => {
 const login = async (req, res, next) => {
   try {
     const user = await User.findOne({ username: req.body.username });
-    if (!user) return next(createError(404, "User not found!"));
+    if (!user) {
+      res.status(404).send("User not found");
+      return;
+    }
 
     const isPasswordCorrect = await bcrypt.compare(
       req.body.password,
       user.password
     );
 
-    if (!isPasswordCorrect)
-      return next(createError(400, "Wrong password or username!"));
+    if (!isPasswordCorrect) {
+      res.status(400).send("You entered a wrong password");
+      return;
+      // return next(createError(400, "Wrong password or username!"));
+    }
 
     const token = jwt.sign(
       { id: user._id, username: user.username, isAdmin: user.isAdmin },
       process.env.JWT_PRIVATEKEY
     );
 
-    const { username, isAdmin, password, ...otherDetails } = user._doc;
+    var { username, isAdmin, password, ...otherDetails } = user._doc;
     res
       .cookie("access_token", token, {
         httpOnly: true,
       })
       .status(200)
-      .json({ details: { ...otherDetails }, password });
+      .json({ details: { ...otherDetails }, isAdmin, password });
   } catch (err) {
     next(err);
   }

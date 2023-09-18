@@ -11,12 +11,16 @@ const userSchema = new mongoose.Schema(
     year: { type: String },
     program: { type: String },
     isAdmin: { type: Boolean, default: false },
+    following: { type: Number, default: 0 },
+    followers: { type: Number, default: 0 },
+    savedArticles: { type: [String] },
   },
   { timestamps: true }
 );
 
 userSchema.methods.generateAuthToken = function () {
-  const token = jwt.sign(
+  console.log("I am here when registering ....");
+  var token = jwt.sign(
     {
       _id: this._id,
       username: this.username,
@@ -24,6 +28,9 @@ userSchema.methods.generateAuthToken = function () {
     },
     process.env.JWT_PRIVATEKEY
   );
+  console.log("I am here again when registering ....");
+  console.log(`Token for ${username} : ${token}`);
+
   return token;
 };
 
