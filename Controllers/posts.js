@@ -43,7 +43,12 @@ const deletePost = async (req, res, next) => {
 const getPost = async (req, res, next) => {
   try {
     const post = await Post.findById(req.params.id);
-    res.status(200).json(post);
+    if (post == null) {
+      res.status(404).send("The post you are looking for isnt available");
+      return;
+    }
+
+    res.status(200).send(post);
   } catch (err) {
     next(err);
   }
@@ -53,7 +58,7 @@ const getPost = async (req, res, next) => {
 const getPosts = async (req, res, next) => {
   try {
     const users = await Post.find();
-    res.status(200).json(users);
+    res.status(200).send(users);
   } catch (err) {
     next(err);
   }

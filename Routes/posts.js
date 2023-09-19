@@ -1,4 +1,3 @@
-// const express = require("express");
 const {
   makeAPost,
   updatePost,
@@ -7,16 +6,17 @@ const {
   getPosts,
 } = require("../Controllers/posts");
 
-const { verifyUser } = require("../utils/verifyToken");
+const { verifyPostOwner } = require("../utils/verifyToken");
 
 const router = require("express").Router();
 
 router.post("/", makeAPost);
+
 // UPDATE/EDIT
-router.put("/:id", verifyUser, updatePost);
+router.put("/:id", verifyPostOwner, updatePost);
 
 // DELETE
-router.delete("/:id", verifyUser, deletePost);
+router.delete("/:id", verifyPostOwner, deletePost);
 
 // GET
 router.get("/:id", getPost);

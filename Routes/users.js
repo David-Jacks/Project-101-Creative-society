@@ -1,4 +1,3 @@
-const express = require("express");
 const {
   updateUser,
   deleteUser,
@@ -6,7 +5,7 @@ const {
   getUsers,
 } = require("../Controllers/users");
 
-const { verifyUser, verifyAdmin } = require("../utils/verifyToken");
+const { verifyUser } = require("../utils/verifyToken");
 
 const router = require("express").Router();
 
@@ -20,6 +19,6 @@ router.delete("/:id", verifyUser, deleteUser);
 router.get("/:id", verifyUser, getUser);
 
 // GET ALL USERS
-router.get("/", verifyAdmin, getUsers);
+router.get("/", getUsers);
 
 module.exports = router;

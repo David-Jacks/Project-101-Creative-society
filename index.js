@@ -4,6 +4,8 @@ const dotenv = require("dotenv");
 const auths = require("./Routes/auths");
 const users = require("./Routes/users");
 const posts = require("./Routes/posts");
+const likes = require("./Routes/likes");
+
 const cookieParser = require("cookie-parser");
 
 dotenv.config();
@@ -13,6 +15,7 @@ app.use(cookieParser());
 app.use("/api/auths", auths);
 app.use("/api/users", users);
 app.use("/api/posts", posts);
+app.use("/api/post/likes", likes);
 
 const connect = async () => {
   try {
