@@ -42,7 +42,8 @@ const unlikeAPost = async (req, res, next) => {
       return res.status(404).send("Post not found!");
     }
 
-    if (!post.likes.includes(userId)) {
+    // Check if the post.likes array exists and if the user has liked the post
+    if (!post.likes || !post.likes.includes(userId)) {
       return res.status(400).send("You haven't liked this post.");
     }
 
@@ -88,6 +89,28 @@ const likeCount = async (req, res, next) => {
   }
 };
 
+// Get the three most liked posts
+const topLiked = async (req, res, next) => {
+  try {
+    const topLikedPosts = await Post.getTopLikedPosts();
+    res.status(200).json(topLikedPosts);
+  } catch (error) {
+    next(error);
+  }
+};
+
+// Get the 6 most recent blog posts
+const getRecentPosts = async (req, res, next) => {
+  try {
+    const recentPosts = await Post.getRecentPosts();
+    res.status(200).json(recentPosts);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports.likeAPost = likeAPost;
 module.exports.unlikeAPost = unlikeAPost;
 module.exports.likeCount = likeCount;
+module.exports.topLiked = topLiked;
+module.exports.getRecentPosts = getRecentPosts;

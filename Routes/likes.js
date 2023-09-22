@@ -1,9 +1,17 @@
-const { likeAPost, unlikeAPost, likeCount } = require("../Controllers/likes");
+const {
+  likeAPost,
+  likeCount,
+  topLiked,
+  getRecentPosts,
+} = require("../Controllers/likes");
 const router = require("express").Router();
 const { verifyToken } = require("../utils/verifyToken");
 
+// the top liked route has to be defined first else there would be a castID error
+router.get("/recent-posts", getRecentPosts);
+router.get("/top-liked", topLiked);
 router.post("/:id", verifyToken, likeAPost);
-router.post("/:id", verifyToken, unlikeAPost);
+// router.put("/:id", verifyToken, unlikeAPost);
 router.get("/:id", verifyToken, likeCount);
 
 module.exports = router;
