@@ -5,6 +5,7 @@ const auths = require("./Routes/auths");
 const users = require("./Routes/users");
 const posts = require("./Routes/posts");
 const likes = require("./Routes/likes");
+const categories = require("./Routes/categories");
 
 const cookieParser = require("cookie-parser");
 
@@ -16,6 +17,7 @@ app.use("/api/auths", auths);
 app.use("/api/users", users);
 app.use("/api/posts", posts);
 app.use("/api/post/likes", likes);
+app.use("/api/categories", categories);
 
 const connect = async () => {
   try {

@@ -10,7 +10,9 @@ const postSchema = new mongoose.Schema(
     date: { type: Date, default: Date.now },
     timeTakenToReadPost: { type: Number, required: true },
     likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User", default: [] }],
+    categories: [{ type: String, required: true }],
   },
+
   { timestamps: true }
 );
 

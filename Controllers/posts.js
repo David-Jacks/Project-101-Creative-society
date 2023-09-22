@@ -1,9 +1,11 @@
+const express = require("express");
+const router = express.Router();
 const { Post } = require("../Models/Post");
 
-// Update Post by unique ID
 const makeAPost = async (req, res, next) => {
-  const newPost = new Post(req.body);
   try {
+    const newPost = new Post(req.body);
+    console.log(`newPost: ${newPost}`);
     const savedPost = await newPost.save();
     res.status(200).json(savedPost);
   } catch (error) {
