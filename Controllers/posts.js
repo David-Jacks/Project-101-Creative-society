@@ -66,8 +66,25 @@ const getPosts = async (req, res, next) => {
   }
 };
 
+const searchByTitle = async (req, res, next) => {
+  try {
+    const searchText = req.query.q || ""; // Get the search query from the request
+
+    // Create a regex pattern for case-insensitive and partial matching
+    const regex = new RegExp(searchText, "i");
+
+    // Find articles whose title matches the regex pattern
+    const articles = await Post.find({ title: regex });
+
+    res.status(200).json(articles);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports.makeAPost = makeAPost;
 module.exports.getPost = getPost;
 module.exports.getPosts = getPosts;
 module.exports.updatePost = updatePost;
 module.exports.deletePost = deletePost;
+module.exports.searchByTitle = searchByTitle;
