@@ -1,12 +1,23 @@
 const express = require("express");
 const router = express.Router();
+const multer = require("multer");
+
 const { Post } = require("../Models/Post");
 
 const makeAPost = async (req, res, next) => {
   try {
-    const newPost = new Post(req.body);
-    console.log(`newPost: ${newPost}`);
+    const newPostData = req.body;
+
+    // Map uploaded files to an array of objects with data and contentType
+    const photos = req.files.map((file) => ({
+      data: file.buffer, // Use the buffer from multer
+      contentType: file.mimetype, // Use the content type from multer
+    }));
+
+    newPostData.photos = photos;
+    const newPost = new Post(newPostData);
     const savedPost = await newPost.save();
+
     res.status(200).json(savedPost);
   } catch (error) {
     next(error);
