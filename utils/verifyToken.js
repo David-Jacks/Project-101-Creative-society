@@ -65,6 +65,61 @@ const verifyPostOwner = (req, res, next) => {
   });
 };
 
+const verifyCommentOwner = (req, res, next) => {
+  // Verify the token first before proceeding with comment authorization checks
+  verifyToken(req, res, (err) => {
+    if (err) {
+      // Handle token verification errors
+      return next(err);
+    }
+
+    // Check if the user is the owner of the comment or admin
+    const postId = req.params.postId;
+    const commentId = req.params.commentId;
+
+    Post.findById(postId)
+      .then((post) => {
+        if (!post) {
+          res.status(404).send("Post Not Found");
+          return next(createError(404, "Post not found!"));
+        }
+
+        const comment = post.comments.id(commentId);
+
+        if (!comment) {
+          res.status(404).send("Comment Not Found");
+          return next(createError(404, "Comment not found!"));
+        }
+
+        console.log("req.user:", req.user);
+        console.log("comment.user:", comment.user);
+        console.log(
+          "Comparison:",
+          comment.user.toString() === req.user._id.toString()
+        );
+
+        if (
+          req.user &&
+          req.user._id &&
+          comment.user &&
+          comment.user.toString() === req.user._id.toString()
+        ) {
+          next();
+        } else if (req.user.isAdmin) {
+          next();
+        } else {
+          res
+            .status(403)
+            .send("You are not authorized to perform this request.");
+        }
+      })
+      .catch((err) => {
+        console.log(`Detailed : ${err}`);
+        return next(createError(500, "Internal server error."));
+      });
+  });
+};
+
 const verifyAdmin = (req, res, next) => {
   // Verify the token first before proceeding with admin authorization checks
   verifyToken(req, res, (err) => {
@@ -87,3 +142,4 @@ module.exports.verifyToken = verifyToken;
 module.exports.verifyUser = verifyUser;
 module.exports.verifyAdmin = verifyAdmin;
 module.exports.verifyPostOwner = verifyPostOwner;
+module.exports.verifyCommentOwner = verifyCommentOwner;

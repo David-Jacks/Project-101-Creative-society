@@ -7,10 +7,21 @@ const posts = require("./Routes/posts");
 const likes = require("./Routes/likes");
 const categories = require("./Routes/categories");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 
 dotenv.config();
 const app = express();
 app.use(express.json());
+
+// CORS configuration to allow any origin
+const corsOptions = {
+  origin: "*", // Allow requests from any origin
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true, // Enable credentials (cookies, authorization headers, etc.)
+  allowedHeaders: "*", // Allow any headers
+};
+
+app.use(cors(corsOptions));
 
 app.use(cookieParser());
 app.use("/api/auths", auths);
@@ -18,6 +29,9 @@ app.use("/api/users", users);
 app.use("/api/posts", posts);
 app.use("/api/post/likes", likes);
 app.use("/api/categories", categories);
+
+// Mount the comment routes
+app.use("/api/posts", require("./Routes/comments"));
 
 const connect = async () => {
   try {
@@ -32,7 +46,7 @@ mongoose.connection.on("disconnected", () => {
   console.log("Disconnected From MongoDB");
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {
   connect();
