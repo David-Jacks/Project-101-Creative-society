@@ -24,7 +24,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Publish a post
-router.post("/", upload.array("photos", 5), makeAPost);
+// router.post("/", upload.array("photos", 5), makeAPost);
+router.post("/", makeAPost);
 
 // UPDATE/EDIT
 router.put("/:id", verifyPostOwner, updatePost);

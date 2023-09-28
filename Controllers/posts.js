@@ -9,12 +9,12 @@ const makeAPost = async (req, res, next) => {
     const newPostData = req.body;
 
     // Map uploaded files to an array of objects with data and contentType
-    const photos = req.files.map((file) => ({
-      data: file.buffer, // Use the buffer from multer
-      contentType: file.mimetype, // Use the content type from multer
-    }));
+    // const photos = req.files.map((file) => ({
+    //   data: file.buffer, // Use the buffer from multer
+    //   contentType: file.mimetype, // Use the content type from multer
+    // }));
 
-    newPostData.photos = photos;
+    // newPostData.photos = photos;
     const newPost = new Post(newPostData);
     const savedPost = await newPost.save();
 

@@ -9,14 +9,14 @@ const commentSchema = new mongoose.Schema({
 const postSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
-    author: { type: String, required: true },
+    author: { type: String },
     body: { type: String, required: true, min: 10 },
     photos: [{ data: Buffer, contentType: String }],
     comments: [commentSchema],
     date: { type: Date, default: Date.now },
-    timeTakenToReadPost: { type: Number, required: true },
+    timeTakenToReadPost: { type: Number },
     likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User", default: [] }],
-    categories: [{ type: String, required: true }],
+    categories: [{ type: String }],
   },
 
   { timestamps: true }

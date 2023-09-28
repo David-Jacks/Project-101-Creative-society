@@ -11,7 +11,7 @@ const cors = require("cors");
 
 dotenv.config();
 const app = express();
-app.use(express.json());
+app.use(express.json({ limit: "100mb" }));
 
 // CORS configuration to allow any origin
 const corsOptions = {
