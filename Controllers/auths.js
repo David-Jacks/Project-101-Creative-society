@@ -73,5 +73,14 @@ const login = async (req, res, next) => {
   }
 };
 
+const logout = (req, res) => {
+  // Clear the access_token cookie
+  res.clearCookie("access_token", { path: "/" });
+
+  //sending this response to the client
+  res.status(200).json({ message: "Logout successful" });
+};
+
 module.exports.register = register;
 module.exports.login = login;
+module.exports.logout = logout;

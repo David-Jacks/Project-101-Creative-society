@@ -17,6 +17,7 @@ const postSchema = new mongoose.Schema(
     timeTakenToReadPost: { type: Number },
     likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User", default: [] }],
     categories: [{ type: String }],
+    description: { type: String, required: true },
   },
 
   { timestamps: true }
