@@ -5,6 +5,7 @@ const {
   getPost,
   getPosts,
   searchByTitle,
+  getAllUserPosts,
 } = require("../Controllers/posts");
 const multer = require("multer");
 
@@ -42,5 +43,8 @@ router.get("/:id", getPost);
 
 // GET ALL POSTS
 router.get("/", getPosts);
+
+// GET all posts of a user
+router.get("/user/:userId", getAllUserPosts);
 
 module.exports = router;

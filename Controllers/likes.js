@@ -23,7 +23,9 @@ const likeAPost = async (req, res, next) => {
     post.likes.push(userId);
     await post.save();
 
-    res.status(200).send("Post liked successfully.");
+    // Return a boolean value indicating success
+    console.log("Post liked by this user sucessfully");
+    res.status(200).json({ liked: true });
   } catch (error) {
     next(error);
   }

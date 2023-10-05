@@ -93,9 +93,28 @@ const searchByTitle = async (req, res, next) => {
   }
 };
 
+// Controller to get all posts of a specific user
+const getAllUserPosts = async (req, res, next) => {
+  try {
+    const userId = req.params.userId;
+
+    // Use Mongoose to query for posts created by the specified user
+    const userPosts = await Post.find({ author: userId });
+
+    if (!userPosts) {
+      return res.status(404).send("User has no posts.");
+    }
+
+    res.status(200).json(userPosts);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports.makeAPost = makeAPost;
 module.exports.getPost = getPost;
 module.exports.getPosts = getPosts;
 module.exports.updatePost = updatePost;
 module.exports.deletePost = deletePost;
 module.exports.searchByTitle = searchByTitle;
+module.exports.getAllUserPosts = getAllUserPosts;
