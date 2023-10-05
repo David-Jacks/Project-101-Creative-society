@@ -1,10 +1,9 @@
-const express = require("express");
-const router = express.Router();
 const {
   saveArticle,
   getSavedArticles,
 } = require("../Controllers/savedArticles");
 const { verifyToken } = require("../utils/verifyToken");
+const router = require("express").Router();
 
 // Route to save an article for a user
 router.post("/save-article/:articleId", verifyToken, saveArticle);

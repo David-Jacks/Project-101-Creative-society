@@ -1,3 +1,5 @@
+const express = require("express");
+const router = express.Router();
 const { User } = require("../Models/User"); // Import User model
 const { Post } = require("../Models/Post"); // Import Post model
 
@@ -6,6 +8,7 @@ const saveArticle = async (req, res, next) => {
   try {
     const userId = req.user._id;
     const articleId = req.params.articleId;
+    console.log("req.user object : ", req.user);
     console.log("UserId: ", userId);
     console.log("articleId: ", articleId);
 
