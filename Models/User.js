@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
+const { postSchema } = require("./Post");
 
 const userSchema = new mongoose.Schema(
   {
@@ -13,7 +14,7 @@ const userSchema = new mongoose.Schema(
     isAdmin: { type: Boolean, default: false },
     following: { type: Number, default: 0 },
     followers: { type: Number, default: 0 },
-    savedArticles: { type: [String] },
+    savedArticles: [postSchema],
   },
   { timestamps: true }
 );
