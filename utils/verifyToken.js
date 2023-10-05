@@ -10,6 +10,7 @@ const verifyToken = (req, res, next) => {
 
   jwt.verify(token, process.env.JWT_PRIVATEKEY, (err, user) => {
     if (err) return next(createError(403, "Token is not valid!"));
+    console.log("User object from token:", user);
     req.user = user;
     next();
   });
@@ -21,6 +22,7 @@ const verifyUser = (req, res, next) => {
     if (err) {
       console.log("Is the token invalid?");
       // Handle token verification errors
+
       return next(err);
     }
 
