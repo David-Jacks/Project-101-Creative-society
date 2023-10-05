@@ -6,7 +6,7 @@ const { Post } = require("../Models/Post"); // Import Post model
 // Function to save an article for a user
 const saveArticle = async (req, res, next) => {
   try {
-    const userId = req.user._id;
+    const userId = req.user.id;
     const articleId = req.params.articleId;
     console.log("req.user object : ", req.user);
     console.log("UserId: ", userId);
