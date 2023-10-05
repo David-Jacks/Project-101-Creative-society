@@ -9,7 +9,8 @@ const commentSchema = new mongoose.Schema({
 const postSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
-    author: { type: mongoose.Schema.Types.ObjectId, ref: "User" }, // Reference the User model
+    author: { type: String },
+    authorId: { type: mongoose.Schema.Types.ObjectId, ref: "User" }, // Reference the User model
     body: { type: String, required: true, min: 10 },
     photos: [{ data: Buffer, contentType: String }],
     comments: [commentSchema],

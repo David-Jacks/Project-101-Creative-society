@@ -99,7 +99,7 @@ const getAllUserPosts = async (req, res, next) => {
     const userId = req.params.userId;
 
     // Use Mongoose to query for posts created by the specified user
-    const userPosts = await Post.find({ author: userId });
+    const userPosts = await Post.find({ authorId: userId });
 
     if (!userPosts) {
       return res.status(404).send("User has no posts.");
