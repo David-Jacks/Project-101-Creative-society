@@ -6,19 +6,26 @@ const saveArticle = async (req, res, next) => {
   try {
     const userId = req.user._id;
     const articleId = req.params.articleId;
+    console.log("UserId: ", userId);
+    console.log("articleId: ", articleId);
 
     // Retrieve the article by ID
     const article = await Post.findById(articleId);
+    console.log("The article: ", article);
 
     if (!article) {
       return res.status(404).send("Article not found.");
     }
+    console.log("The article was found...");
 
     // Add the entire article object to the user's savedArticles array
     await User.findByIdAndUpdate(userId, { $push: { savedArticles: article } });
 
+    console.log("It worked......");
+
     res.status(200).send("Article saved successfully.");
   } catch (error) {
+    console.log("This is the Error: ", error);
     next(error);
   }
 };
