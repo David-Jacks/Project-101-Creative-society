@@ -1,5 +1,5 @@
-const User = require("../Models/User"); // Import User model
-const Post = require("../Models/Post"); // Import Post model
+const { User } = require("../Models/User"); // Import User model
+const { Post } = require("../Models/Post"); // Import Post model
 
 // Function to save an article for a user
 const saveArticle = async (req, res, next) => {
