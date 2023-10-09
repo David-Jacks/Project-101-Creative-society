@@ -23,6 +23,7 @@ const saveArticle = async (req, res, next) => {
 
     // Add the entire article object to the user's savedArticles array
     await User.findByIdAndUpdate(userId, { $push: { savedArticles: article } });
+    console.log("saved user object: ", User);
 
     console.log("It worked......");
 

@@ -4,6 +4,7 @@ const { postSchema } = require("./Post");
 
 const userSchema = new mongoose.Schema(
   {
+    profilePicture: { type: String }, // Store the URL or reference to the profile picture
     username: { type: String, required: true, unique: true },
     firstName: { type: String },
     lastName: { type: String },
