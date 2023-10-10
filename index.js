@@ -63,9 +63,9 @@ app.listen(PORT, () => {
   console.log(`Backend server listening on port ${PORT}`);
 });
 
-// const fs = require("fs");
-// const folderPath = "./uploads";
+const fs = require("fs");
+const folderPath = "./uploads";
 
-// if (!fs.existsSync(folderPath)) {
-//   fs.mkdirSync(folderPath);
-// }
+if (!fs.existsSync(folderPath)) {
+  fs.mkdirSync(folderPath);
+}

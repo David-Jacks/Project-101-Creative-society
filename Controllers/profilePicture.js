@@ -1,10 +1,11 @@
-const uuid = require("uuid");
 const multer = require("multer");
+const uuid = require("uuid");
+const User = require("../Models/User");
 
 // Configure Multer for handling file uploads
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "uploads/"); // Specify the destination folder for storing profile pictures
+    cb(null, "uploads/"); // Specify the destination folder for storing pictures
   },
   filename: function (req, file, cb) {
     // Generate a unique filename (you can use a package like `uuid`)
@@ -16,9 +17,9 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Controller function to upload a user's profile picture
-const uploadProfilePicture = upload.single("profilePicture"); // 'profilePicture' is the name of the field in the form
+const uploadProfilePicture = upload.single("file"); // 'file' is the name of the field in the form
 
-const updateProfilePicture = async (req, res, next) => {
+const uploadPic = async (req, res, next) => {
   try {
     const userId = req.user._id;
 
@@ -34,11 +35,10 @@ const updateProfilePicture = async (req, res, next) => {
       profilePicture: profilePicturePath,
     });
 
-    res.status(200).send("Profile picture updated successfully.");
+    res.status(200).json({ filename: req.file.filename });
   } catch (error) {
     next(error);
   }
 };
 
-module.exports.uploadProfilePicture = uploadProfilePicture;
-module.exports.updateProfilePicture = updateProfilePicture;
+module.exports = { uploadPic, uploadProfilePicture };

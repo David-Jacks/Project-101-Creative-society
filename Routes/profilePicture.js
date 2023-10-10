@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const {
+  uploadPic,
   uploadProfilePicture,
-  updateProfilePicture,
 } = require("../Controllers/profilePicture");
 const { verifyToken } = require("../utils/verifyToken");
 
@@ -10,8 +10,8 @@ const { verifyToken } = require("../utils/verifyToken");
 router.post(
   "/upload-profile-picture",
   verifyToken,
-  uploadProfilePicture,
-  updateProfilePicture
+  uploadPic,
+  uploadProfilePicture
 );
 
 module.exports = router;
