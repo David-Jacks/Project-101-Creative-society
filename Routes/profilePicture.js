@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const {
-  uploadPic,
   uploadProfilePicture,
+  uploadPic,
 } = require("../Controllers/profilePicture");
 const { verifyToken } = require("../utils/verifyToken");
 
