@@ -4,10 +4,12 @@ const {
   uploadProfilePicture,
   updateProfilePicture,
 } = require("../Controllers/profilePicture");
+const { verifyToken } = require("../utils/verifyToken");
 
 // Route to upload a user's profile picture
 router.post(
   "/upload-profile-picture",
+  verifyToken,
   uploadProfilePicture,
   updateProfilePicture
 );
