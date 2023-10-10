@@ -23,6 +23,7 @@ const uploadPic = async (req, res, next) => {
   try {
     const userId = req.user._id;
 
+    console.log("Request user : ", req.user);
     console.log("UserId: ", userId);
     console.log("Request: ", req);
     console.log("Request File: ", req.file);

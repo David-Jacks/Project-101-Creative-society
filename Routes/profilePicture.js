@@ -10,8 +10,8 @@ const { verifyToken } = require("../utils/verifyToken");
 router.post(
   "/upload-profile-picture",
   verifyToken,
-  uploadPic,
-  uploadProfilePicture
+  uploadProfilePicture,
+  uploadPic
 );
 
 module.exports = router;
