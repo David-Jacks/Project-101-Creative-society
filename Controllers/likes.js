@@ -18,6 +18,7 @@ const likeOrUnlikePost = async (req, res, next) => {
     }
 
     const isLiked = post.likes.includes(userId);
+    console.log("isLiked: ", isLiked);
 
     if (isLiked) {
       // User has already liked the post, so unlike it
@@ -37,6 +38,7 @@ const likeOrUnlikePost = async (req, res, next) => {
     // Return a boolean value indicating success, whether the user liked or unliked the post, and the number of likes
     res.status(200).json({ liked: !isLiked, likes: numberOfLikes });
   } catch (error) {
+    console.log("Error: ", error);
     next(error);
   }
 };
