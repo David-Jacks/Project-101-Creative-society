@@ -2,11 +2,13 @@ const express = require("express");
 const router = express.Router();
 const { Post } = require("../Models/Post");
 
-// Like a post
-const likeAPost = async (req, res, next) => {
+// Like or unlike a post and return the number of likes
+const likeOrUnlikePost = async (req, res, next) => {
   try {
     const postId = req.params.id;
     const userId = req.user._id;
+    console.log("userId: ", req.user._id);
+    console.log("userId: ", req.user.id);
 
     // Check if the user has already liked the post
     const post = await Post.findById(postId);
@@ -15,47 +17,25 @@ const likeAPost = async (req, res, next) => {
       return res.status(404).send("Post not found!");
     }
 
-    if (post.likes.includes(userId)) {
-      return res.status(400).send("You've already liked this post.");
+    const isLiked = post.likes.includes(userId);
+
+    if (isLiked) {
+      // User has already liked the post, so unlike it
+      post.likes = post.likes.filter(
+        (like) => like.toString() !== userId.toString()
+      );
+    } else {
+      // User hasn't liked the post, so like it
+      post.likes.push(userId);
     }
 
-    // Add the user's ID to the post's likes array
-    post.likes.push(userId);
     await post.save();
 
-    // Return a boolean value indicating success
-    console.log("Post liked by this user sucessfully");
-    res.status(200).json({ liked: true });
-  } catch (error) {
-    next(error);
-  }
-};
+    // Calculate the number of likes
+    const numberOfLikes = post.likes.length;
 
-// Unlike a post
-const unlikeAPost = async (req, res, next) => {
-  try {
-    const postId = req.params.id;
-    const userId = req.user._id;
-
-    // Check if the user has already liked the post
-    const post = await Post.findById(postId);
-
-    if (!post) {
-      return res.status(404).send("Post not found!");
-    }
-
-    // Check if the post.likes array exists and if the user has liked the post
-    if (!post.likes || !post.likes.includes(userId)) {
-      return res.status(400).send("You haven't liked this post.");
-    }
-
-    // Remove the user's ID from the post's likes array
-    post.likes = post.likes.filter(
-      (like) => like.toString() !== userId.toString()
-    );
-    await post.save();
-
-    res.status(200).send("Post unliked successfully.");
+    // Return a boolean value indicating success, whether the user liked or unliked the post, and the number of likes
+    res.status(200).json({ liked: !isLiked, likes: numberOfLikes });
   } catch (error) {
     next(error);
   }
@@ -111,8 +91,7 @@ const getRecentPosts = async (req, res, next) => {
   }
 };
 
-module.exports.likeAPost = likeAPost;
-module.exports.unlikeAPost = unlikeAPost;
+module.exports.likeOrUnlikePost = likeOrUnlikePost;
 module.exports.likeCount = likeCount;
 module.exports.topLiked = topLiked;
 module.exports.getRecentPosts = getRecentPosts;
