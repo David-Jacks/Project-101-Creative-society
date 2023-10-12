@@ -6,9 +6,9 @@ const { Post } = require("../Models/Post");
 const likeOrUnlikePost = async (req, res, next) => {
   try {
     const postId = req.params.id;
-    const userId = req.user._id;
+    const userId = req.user.id;
     console.log("userId: ", req.user._id);
-    console.log("userId: ", req.user.id);
+    console.log("userId without underscore: ", req.user.id);
 
     // Check if the user has already liked the post
     const post = await Post.findById(postId);
