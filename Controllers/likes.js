@@ -60,13 +60,13 @@ const likeCount = async (req, res, next) => {
 
     // Send the post details, including the number of likes
     res.status(200).json({
-      post: {
-        _id: post._id,
-        title: post.title,
-        content: post.content,
-        // ... other post fields ...
-        likes: numberOfLikes,
-      },
+      // post: {
+      _id: post._id,
+      // title: post.title,
+      // content: post.content,
+      // ... other post fields ...
+      likes: numberOfLikes,
+      // },
     });
   } catch (error) {
     next(error);
