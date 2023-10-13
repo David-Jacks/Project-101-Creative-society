@@ -7,8 +7,8 @@ const likeOrUnlikePost = async (req, res, next) => {
   try {
     const postId = req.params.id;
     const userId = req.user.id;
-    console.log("userId: ", req.user._id);
-    console.log("userId without underscore: ", req.user.id);
+
+    console.log("userId: ", req.user.id);
 
     // Check if the user has already liked the post
     const post = await Post.findById(postId);
@@ -18,13 +18,15 @@ const likeOrUnlikePost = async (req, res, next) => {
     }
 
     const isLiked = post.likes.includes(userId);
-    console.log("isLiked: ", isLiked);
+    console.log("isLiked before: ", isLiked);
 
     if (isLiked) {
       // User has already liked the post, so unlike it
       post.likes = post.likes.filter(
         (like) => like.toString() !== userId.toString()
       );
+      const isLikedAgain = post.likes.includes(userId);
+      console.log("isLiked after: ", isLikedAgain);
     } else {
       // User hasn't liked the post, so like it
       post.likes.push(userId);
