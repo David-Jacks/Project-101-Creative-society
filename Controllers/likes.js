@@ -47,9 +47,15 @@ const likeOrUnlikePost = async (req, res, next) => {
 const likeCount = async (req, res, next) => {
   try {
     const postId = req.params.id;
-
-    // Retrieve the post by ID
+    const userId = req.user.id;
     const post = await Post.findById(postId);
+    console.log("In likeCount logic...........");
+    console.log("postId: ", postId);
+    console.log("userId: ", userId);
+    console.log("post: ", post);
+
+    const isLiked = post.likes.includes(userId);
+    console.log("isLiked: ", isLiked);
 
     if (!post) {
       return res.status(404).send("Post not found!");
@@ -57,18 +63,12 @@ const likeCount = async (req, res, next) => {
 
     // Calculate the number of likes
     const numberOfLikes = post.likes.length;
+    console.log("numberOfLikes: ", numberOfLikes);
 
     // Send the post details, including the number of likes
-    res.status(200).json({
-      // post: {
-      _id: post._id,
-      // title: post.title,
-      // content: post.content,
-      // ... other post fields ...
-      likes: numberOfLikes,
-      // },
-    });
+    res.status(200).json({ liked: isLiked, likes: numberOfLikes });
   } catch (error) {
+    console.log("Error: ", error);
     next(error);
   }
 };
