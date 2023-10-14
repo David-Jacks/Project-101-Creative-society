@@ -16,7 +16,9 @@ const uploadProfilePic = async (req, res) => {
     const base64Image = processedImageBuffer.toString("base64");
 
     // Get the user ID from the authenticated request
-    const userId = req.user._id;
+    const userId = req.user.id;
+    console.log("userId without underscore: ", userId);
+    console.log("userId with underscore: ", req.user._id);
 
     // Update the user's profile picture field in the database
     await User.findByIdAndUpdate(userId, { profilePicture: base64Image });
