@@ -54,38 +54,13 @@ const deletePost = async (req, res, next) => {
 
 // Search for a post by unique ID
 const getPost = async (req, res, next) => {
-  console.log("it came here........");
   try {
-    const post = await Post.findById(req.params.postId)
-      .populate({
-        path: "authorId",
-        model: "User",
-        select: "profilePicture",
-      })
-      .exec();
+    const post = await Post.findById(req.params.postId);
 
     if (post == null) {
       res.status(404).send("The post you are looking for isnt available");
       return;
     }
-
-    console.log("Did we get here.....");
-    if (post && post.authorId) {
-      console.log("The job is doneeeeeee.....");
-      console.log("post.authorProfilePic: ", post.authorProfilePic);
-      console.log(
-        "post.authorId.profilePicture: ",
-        post.authorId.profilePicture
-      );
-
-      // Populate authorProfilePic with the profilePicture of the author
-      post.authorProfilePic = post.authorId.profilePicture;
-    }
-    console.log("post.authorProfilePic after : ", post.authorProfilePic);
-    console.log(
-      "post.authorId.profilePicture after : ",
-      post.authorId.profilePicture
-    );
 
     res.status(200).send(post);
   } catch (err) {
@@ -94,11 +69,26 @@ const getPost = async (req, res, next) => {
 };
 
 // Search for all posts
+
 const getPosts = async (req, res, next) => {
   try {
-    const users = await Post.find();
-    res.status(200).send(users);
+    const posts = await Post.find()
+      .populate({
+        path: "authorId",
+        model: "User",
+        select: "profilePicture",
+      })
+      .exec();
+
+    console.log("Did we get here, getPosts..........");
+    posts.forEach((post) => {
+      if (post.authorId) {
+        console.log("How about my if func, getPosts..........");
+        post.authorProfilePic = post.authorId.profilePicture;
+      }
+    });
   } catch (err) {
+    console.log("Error: ", err);
     next(err);
   }
 };
