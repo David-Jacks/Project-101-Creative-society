@@ -3,19 +3,28 @@ const router = express.Router();
 const multer = require("multer");
 
 const { Post } = require("../Models/Post");
+const { User } = require("../Models/User");
 
 const makeAPost = async (req, res, next) => {
   try {
     const newPostData = req.body;
+    const userId = req.user.id; // Assuming you have the user ID in the request
 
-    // Map uploaded files to an array of objects with data and contentType
-    // const photos = req.files.map((file) => ({
-    //   data: file.buffer, // Use the buffer from multer
-    //   contentType: file.mimetype, // Use the content type from multer
-    // }));
+    // Retrieve the user's profile picture
+    const author = await User.findById(userId).select("profilePicture").exec();
+    console.log("Author: ", author);
 
-    // newPostData.photos = photos;
+    if (!author) {
+      return res.status(400).json({ error: "User not found" });
+    }
+
+    // Include the authorProfilePic in the new post data
+    newPostData.authorProfilePic = author.profilePicture;
+
+    // Create a new post with the updated data
     const newPost = new Post(newPostData);
+
+    // Save the new post to the database
     const savedPost = await newPost.save();
 
     res.status(200).json(savedPost);
@@ -55,34 +64,11 @@ const deletePost = async (req, res, next) => {
 // Search for a post by unique ID
 const getPost = async (req, res, next) => {
   try {
-    const post = await Post.findById(req.params.postId)
-      .populate({
-        path: "authorId",
-        model: "User",
-        select: "profilePicture",
-      })
-      .exec();
+    const post = await Post.findById(req.params.postId);
 
     if (post == null) {
       res.status(404).send("The post you are looking for isn't available");
       return;
-    }
-
-    if (post && post.authorId) {
-      console.log("Individual....................It came here");
-      // Populate authorProfilePic with the profilePicture of the author
-      console.log("post.authorProfilePic before: ", post.authorProfilePic);
-      console.log(
-        "post.authorId.profilePicture before: ",
-        post.authorId.profilePicture
-      );
-      post.authorProfilePic = post.authorId.profilePicture;
-
-      console.log("post.authorProfilePic after: ", post.authorProfilePic);
-      console.log(
-        "post.authorId.profilePicture after: ",
-        post.authorId.profilePicture
-      );
     }
 
     res.status(200).send(post);
