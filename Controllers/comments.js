@@ -77,6 +77,8 @@ exports.deleteComment = async (req, res, next) => {
   try {
     const postId = req.params.postId;
     const commentId = req.params.commentId;
+    console.log("ID of post: ", postId);
+    console.log("ID of the Comment: ", commentId);
 
     const post = await Post.findById(postId);
 
@@ -86,6 +88,7 @@ exports.deleteComment = async (req, res, next) => {
 
     // Find the comment within the post's comments array
     const comment = post.comments.id(commentId);
+    console.log("Comment to be deleted: ", comment);
 
     if (!comment) {
       return res.status(404).json({ error: "Comment not found" });
