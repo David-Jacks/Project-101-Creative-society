@@ -33,6 +33,7 @@ exports.createComment = async (req, res, next) => {
       commentText: req.body.commentText,
       user: req.user.id, // Assuming you have user authentication
     };
+    console.log("Request Body: ", req.body);
     console.log("newComment ", newComment);
     console.log("commentText: ", newComment.commentText);
 
