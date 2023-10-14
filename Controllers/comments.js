@@ -22,18 +22,19 @@ exports.getComments = async (req, res, next) => {
 exports.createComment = async (req, res, next) => {
   try {
     const post = await Post.findById(req.params.postId);
+    console.log("Post: ", post);
     if (!post) {
       return res.status(404).json({ error: "Post not found" });
     }
 
     // Access the Comment subdocument through the Post model
-    console.log(`req.user: `, req.user);
+    console.log("req.user: ", req.user);
     const newComment = {
-      text: req.body.text,
-      user: req.user._id, // Assuming you have user authentication
+      commentText: req.body.commentText,
+      user: req.user.id, // Assuming you have user authentication
     };
-    console.log(`newComment `, newComment);
-    console.log(`text: `, newComment.text);
+    console.log("newComment ", newComment);
+    console.log("commentText: ", newComment.commentText);
 
     post.comments.push(newComment);
     await post.save();
@@ -52,15 +53,15 @@ exports.updateComment = async (req, res, next) => {
     }
 
     const commentId = req.params.commentId;
-    const updatedText = req.body.text;
+    const updatedText = req.body.commentText;
 
-    // Find the comment by its _id and update its text
+    // Find the comment by its _id and update its commentText
     const comment = post.comments.id(commentId);
     if (!comment) {
       return res.status(404).json({ error: "Comment not found" });
     }
 
-    comment.text = updatedText;
+    comment.commentText = updatedText;
     await post.save();
 
     res.status(200).json(comment);
