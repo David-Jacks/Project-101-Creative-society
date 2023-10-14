@@ -3,6 +3,7 @@ const User = require("../Models/User"); // Import your User model
 
 const uploadProfilePic = async (req, res) => {
   try {
+    console.log("Request File: ", req.file);
     if (!req.file) {
       return res.status(400).send("No file uploaded.");
     }
@@ -12,8 +13,12 @@ const uploadProfilePic = async (req, res) => {
       .resize(200, 200) // Resize the image (example)
       .toBuffer();
 
+    console.log("ProcessedImage: ", processedImageBuffer);
+
     // Convert the processed image buffer to a base64 string
     const base64Image = processedImageBuffer.toString("base64");
+
+    console.log("base64Image: ", base64Image);
 
     // Get the user ID from the authenticated request
     const userId = req.user.id;
