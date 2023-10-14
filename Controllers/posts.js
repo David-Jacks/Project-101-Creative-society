@@ -17,8 +17,12 @@ const makeAPost = async (req, res, next) => {
         .resize(200, 200)
         .toBuffer();
 
+      console.log("ProcessedImage: ", processedImageBuffer);
+
       // Convert the processed image buffer to a base64 string
       const base64Image = processedImageBuffer.toString("base64");
+
+      console.log("base64Image: ", base64Image);
 
       // Include the base64 image data in the descPhoto field of the new post data
       newPostData.descPhoto = base64Image;
@@ -45,6 +49,7 @@ const makeAPost = async (req, res, next) => {
 
     res.status(200).json(savedPost);
   } catch (error) {
+    console.log("Error: ", error);
     next(error);
   }
 };
