@@ -12,8 +12,10 @@ exports.getComments = async (req, res, next) => {
     if (!post) {
       return res.status(404).json({ error: "Post not found" });
     }
+    console.log("All comments: ", post.comments);
     res.status(200).json(post.comments);
   } catch (error) {
+    console.log("Error ", error);
     next(error);
   }
 };
