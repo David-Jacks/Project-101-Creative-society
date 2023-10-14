@@ -95,12 +95,7 @@ exports.deleteComment = async (req, res, next) => {
     }
 
     // Delete the comment using deleteOne()
-    const deleteResult = await comment.deleteOne();
-
-    // Check the deleteResult for success or failure
-    if (deleteResult.ok !== 1) {
-      return res.status(500).json({ error: "Failed to delete the comment" });
-    }
+    await comment.deleteOne();
 
     await post.save();
 
