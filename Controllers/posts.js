@@ -81,12 +81,22 @@ const getPosts = async (req, res, next) => {
       .exec();
 
     console.log("Did we get here, getPosts..........");
+    // console.log("post.authorProfilePic before: ", post.authorProfilePic);
+    // console.log("post.authorId.profilePicture before: ", post.authorId.profilePicture);
     posts.forEach((post) => {
       if (post.authorId) {
         console.log("How about my if func, getPosts..........");
         post.authorProfilePic = post.authorId.profilePicture;
       }
     });
+    console.log("post.authorProfilePic after: ", post.authorProfilePic);
+    console.log(
+      "post.authorId.profilePicture after : ",
+      post.authorId.profilePicture
+    );
+
+    // Send the posts as a response
+    res.status(200).json(posts);
   } catch (err) {
     console.log("Error: ", err);
     next(err);
