@@ -64,13 +64,25 @@ const getPost = async (req, res, next) => {
       .exec();
 
     if (post == null) {
-      res.status(404).send("The post you are looking for isnt available");
+      res.status(404).send("The post you are looking for isn't available");
       return;
     }
 
     if (post && post.authorId) {
+      console.log("Individual....................It came here");
       // Populate authorProfilePic with the profilePicture of the author
+      console.log("post.authorProfilePic before: ", post.authorProfilePic);
+      console.log(
+        "post.authorId.profilePicture before: ",
+        post.authorId.profilePicture
+      );
       post.authorProfilePic = post.authorId.profilePicture;
+
+      console.log("post.authorProfilePic after: ", post.authorProfilePic);
+      console.log(
+        "post.authorId.profilePicture after: ",
+        post.authorId.profilePicture
+      );
     }
 
     res.status(200).send(post);
