@@ -11,7 +11,7 @@ const makeAPost = async (req, res, next) => {
     const userId = req.user.id;
 
     // Initialize descPhoto as an empty string by default
-    newPostData.descPhoto = "";
+    // newPostData.descPhoto = "";
 
     // Check if a photo was uploaded
     console.log("Main rquest body (req.body): ", req.body);
