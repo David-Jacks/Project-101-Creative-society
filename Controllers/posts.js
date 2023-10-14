@@ -55,10 +55,22 @@ const deletePost = async (req, res, next) => {
 // Search for a post by unique ID
 const getPost = async (req, res, next) => {
   try {
-    const post = await Post.findById(req.params.id);
+    const post = await Post.findById(req.params.postId)
+      .populate({
+        path: "authorId",
+        model: "User",
+        select: "profilePicture",
+      })
+      .exec();
+
     if (post == null) {
       res.status(404).send("The post you are looking for isnt available");
       return;
+    }
+
+    if (post && post.authorId) {
+      // Populate authorProfilePic with the profilePicture of the author
+      post.authorProfilePic = post.authorId.profilePicture;
     }
 
     res.status(200).send(post);
