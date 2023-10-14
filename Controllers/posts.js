@@ -29,6 +29,7 @@ const makeAPost = async (req, res, next) => {
 
     res.status(200).json(savedPost);
   } catch (error) {
+    console.log("Error ", error);
     next(error);
   }
 };

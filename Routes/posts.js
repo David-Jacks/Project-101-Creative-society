@@ -9,7 +9,7 @@ const {
 } = require("../Controllers/posts");
 const multer = require("multer");
 
-const { verifyPostOwner } = require("../utils/verifyToken");
+const { verifyPostOwner, verifyToken } = require("../utils/verifyToken");
 
 const router = require("express").Router();
 
@@ -26,7 +26,7 @@ const upload = multer({ storage: storage });
 
 // Publish a post
 // router.post("/", upload.array("photos", 5), makeAPost);
-router.post("/", makeAPost);
+router.post("/", verifyToken, makeAPost);
 
 // UPDATE/EDIT
 router.put("/:id", verifyPostOwner, updatePost);
