@@ -1,5 +1,5 @@
 const sharp = require("sharp");
-const { User } = require("../Models/User"); // Import your User model
+const { User } = require("../Models/User");
 
 const uploadProfilePic = async (req, res) => {
   try {
