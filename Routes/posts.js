@@ -15,7 +15,7 @@ const { verifyPostOwner, verifyToken } = require("../utils/verifyToken");
 const storage = multer.memoryStorage(); // Store uploaded file in memory
 const upload = multer({ storage });
 
-router.post("/", verifyToken, upload.single("file"), makeAPost);
+router.post("/", verifyToken, upload.single("descPhoto"), makeAPost);
 
 router.put("/:id", verifyPostOwner, updatePost);
 
