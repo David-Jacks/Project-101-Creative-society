@@ -10,12 +10,7 @@ const makeAPost = async (req, res, next) => {
     const newPostData = req.body;
     const userId = req.user.id;
 
-    // Check if a photo was uploaded
-    console.log("Main rquest body (req.body): ", req.body);
-    console.log("REquest description photo: ", req.file);
     if (req.file) {
-      console.log("It came here..........");
-      // Process the uploaded image using an image processing library (sharp)
       const processedImageBuffer = await sharp(req.file.buffer)
         .resize(200, 200)
         .toBuffer();
@@ -56,7 +51,6 @@ const makeAPost = async (req, res, next) => {
   }
 };
 
-// This will update the post, if you want to make some edits to your posts
 const updatePost = async (req, res, next) => {
   try {
     const updatePost = await Post.findByIdAndUpdate(
@@ -72,7 +66,6 @@ const updatePost = async (req, res, next) => {
   }
 };
 
-// Delete user by unique ID
 const deletePost = async (req, res, next) => {
   try {
     const post = await Post.findById(req.params.id);
@@ -84,7 +77,6 @@ const deletePost = async (req, res, next) => {
   }
 };
 
-// Search for a post by unique ID
 const getPost = async (req, res, next) => {
   try {
     const post = await Post.findById(req.params.postId);
@@ -99,8 +91,6 @@ const getPost = async (req, res, next) => {
     next(err);
   }
 };
-
-// Search for all posts
 
 const getPosts = async (req, res, next) => {
   try {
