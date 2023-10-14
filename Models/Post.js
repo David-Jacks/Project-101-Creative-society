@@ -13,7 +13,7 @@ const postSchema = new mongoose.Schema(
     authorId: { type: mongoose.Schema.Types.ObjectId, ref: "User" }, // Reference the User model
     authorProfilePic: { type: String },
     body: { type: String, required: true, min: 10 },
-    photos: [{ data: Buffer, contentType: String }],
+    descPhoto: { type: String },
     comments: [commentSchema],
     date: { type: Date, default: Date.now },
     timeTakenToReadPost: { type: Number },

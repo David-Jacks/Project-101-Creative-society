@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const multer = require("multer");
 
 const { Post } = require("../Models/Post");
 const { User } = require("../Models/User");
@@ -8,11 +7,27 @@ const { User } = require("../Models/User");
 const makeAPost = async (req, res, next) => {
   try {
     const newPostData = req.body;
-    const userId = req.user.id; // Assuming you have the user ID in the request
+    const userId = req.user.id;
 
-    // Retrieve the user's profile picture
+    // Check if a photo was uploaded
+    if (req.file) {
+      // Process the uploaded image using an image processing library(sharp)
+      const processedImageBuffer = await sharp(req.file.buffer)
+        .resize(200, 200)
+        .toBuffer();
+
+      // Convert the processed image buffer to a base64 string
+      const base64Image = processedImageBuffer.toString("base64");
+
+      // Include the base64 image data in the descPhoto field of the new post data
+      newPostData.descPhoto = base64Image;
+    }
+
+    // Include the user's ID as the author
+    newPostData.authorId = userId;
+
+    // Fetch the author's profilePicture
     const author = await User.findById(userId).select("profilePicture").exec();
-    console.log("Author: ", author);
 
     if (!author) {
       return res.status(400).json({ error: "User not found" });
@@ -29,7 +44,6 @@ const makeAPost = async (req, res, next) => {
 
     res.status(200).json(savedPost);
   } catch (error) {
-    console.log("Error ", error);
     next(error);
   }
 };
