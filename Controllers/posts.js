@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const sharp = require("sharp");
 
 const { Post } = require("../Models/Post");
 const { User } = require("../Models/User");
