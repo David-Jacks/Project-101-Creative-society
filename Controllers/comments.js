@@ -94,12 +94,19 @@ exports.deleteComment = async (req, res, next) => {
       return res.status(404).json({ error: "Comment not found" });
     }
 
-    // Remove the comment from the post's comments array
-    comment.remove();
+    // Delete the comment using deleteOne()
+    const deleteResult = await comment.deleteOne();
+
+    // Check the deleteResult for success or failure
+    if (deleteResult.ok !== 1) {
+      return res.status(500).json({ error: "Failed to delete the comment" });
+    }
+
     await post.save();
 
     return res.status(200).json({ message: "Comment deleted successfully" });
   } catch (error) {
+    console.log("Error: ", error);
     next(error);
   }
 };
