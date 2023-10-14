@@ -14,11 +14,12 @@ const makeAPost = async (req, res, next) => {
     newPostData.descPhoto = "";
 
     // Check if a photo was uploaded
-    console.log("REquest file: ", req.file);
-    if (req.file) {
+    console.log("Main rquest: ", req);
+    console.log("REquest description photo: ", req.descPhoto);
+    if (req.descPhoto) {
       console.log("It came here..........");
       // Process the uploaded image using an image processing library (sharp)
-      const processedImageBuffer = await sharp(req.file.buffer)
+      const processedImageBuffer = await sharp(req.descPhoto.buffer)
         .resize(200, 200)
         .toBuffer();
 
