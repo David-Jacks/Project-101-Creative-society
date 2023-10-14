@@ -10,18 +10,22 @@ const makeAPost = async (req, res, next) => {
     const newPostData = req.body;
     const userId = req.user.id;
 
+    // Initialize descPhoto as an empty string by default
+    newPostData.descPhoto = "";
+
     // Check if a photo was uploaded
+    console.log("REquest file: ", req.file);
     if (req.file) {
-      // Process the uploaded image using an image processing library(sharp)
+      console.log("It came here..........");
+      // Process the uploaded image using an image processing library (sharp)
       const processedImageBuffer = await sharp(req.file.buffer)
         .resize(200, 200)
         .toBuffer();
 
-      console.log("ProcessedImage: ", processedImageBuffer);
+      console.log("processedImageBuffer: ", processedImageBuffer);
 
       // Convert the processed image buffer to a base64 string
       const base64Image = processedImageBuffer.toString("base64");
-
       console.log("base64Image: ", base64Image);
 
       // Include the base64 image data in the descPhoto field of the new post data
