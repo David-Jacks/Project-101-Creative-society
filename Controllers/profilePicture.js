@@ -1,5 +1,5 @@
 const sharp = require("sharp");
-const User = require("../Models/User"); // Import your User model
+const { User } = require("../Models/User"); // Import your User model
 
 const uploadProfilePic = async (req, res) => {
   try {
@@ -23,7 +23,6 @@ const uploadProfilePic = async (req, res) => {
     // Get the user ID from the authenticated request
     const userId = req.user.id;
     console.log("userId without underscore: ", userId);
-    console.log("userId with underscore: ", req.user._id);
 
     // Update the user's profile picture field in the database
     await User.findByIdAndUpdate(userId, { profilePicture: base64Image });
