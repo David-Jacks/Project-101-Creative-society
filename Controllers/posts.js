@@ -54,6 +54,7 @@ const deletePost = async (req, res, next) => {
 
 // Search for a post by unique ID
 const getPost = async (req, res, next) => {
+  console.log("it came here........");
   try {
     const post = await Post.findById(req.params.postId)
       .populate({
@@ -68,10 +69,23 @@ const getPost = async (req, res, next) => {
       return;
     }
 
+    console.log("Did we get here.....");
     if (post && post.authorId) {
+      console.log("The job is doneeeeeee.....");
+      console.log("post.authorProfilePic: ", post.authorProfilePic);
+      console.log(
+        "post.authorId.profilePicture: ",
+        post.authorId.profilePicture
+      );
+
       // Populate authorProfilePic with the profilePicture of the author
       post.authorProfilePic = post.authorId.profilePicture;
     }
+    console.log("post.authorProfilePic after : ", post.authorProfilePic);
+    console.log(
+      "post.authorId.profilePicture after : ",
+      post.authorId.profilePicture
+    );
 
     res.status(200).send(post);
   } catch (err) {
