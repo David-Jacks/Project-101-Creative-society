@@ -17,7 +17,7 @@ app.use(express.json({ limit: "100mb" }));
 
 // CORS configuration to allow any origin
 const corsOptions = {
-  origin: "*", // Allow requests from any origin
+  origin: "https://lugblog.netlify.app/", // Allow requests from any origin
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true, // Enable credentials (cookies, authorization headers, etc.)
   allowedHeaders: "*", // Allow any headers
