@@ -37,6 +37,16 @@ app.use("/api/profile", profilePicture);
 // Mount the comment routes
 app.use("/api/posts", require("./Routes/comments"));
 
+app.use(express.static(path.join(__dirname, "./lug_creative_world/build")));
+app.get("*", function (_, res) {
+  res.sendFile(
+    path.join(__dirname, "./lug_creative_world/build/index.html"),
+    function (err) {
+      res.status(500).send(err);
+    }
+  );
+});
+
 const connect = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URL);
@@ -51,10 +61,10 @@ mongoose.connection.on("disconnected", () => {
 });
 
 // Define a route handler for the root URL ("/")
-app.get("/", (req, res) => {
-  // Redirect to the desired URL
-  res.redirect("https://lugblog.netlify.app/");
-});
+// app.get("/", (req, res) => {
+//   // Redirect to the desired URL
+//   res.redirect("https://lugblog.netlify.app/");
+// });
 
 const PORT = process.env.PORT || 8080;
 

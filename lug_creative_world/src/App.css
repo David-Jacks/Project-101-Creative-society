@@ -1,0 +1,16 @@
+.App
+{
+    background: var(--white);
+}
+
+body {
+    background-color: #fff;
+    color: #333;
+  }
+  
+  .dark-mode body {
+    background-color: #111;
+    color: #fff;
+  }
+  
+  
