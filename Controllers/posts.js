@@ -94,22 +94,22 @@ const getPost = async (req, res, next) => {
 
 const getPosts = async (req, res, next) => {
   try {
-    const posts = await Post.find()
-      .populate({
-        path: "authorId",
-        model: "User",
-        select: "profilePicture",
-      })
-      .exec();
+    const posts = await Post.find();
+    // .populate({
+    //   path: "authorId",
+    //   model: "User",
+    //   select: "profilePicture",
+    // })
+    // .exec();
 
     console.log("Did we get here, getPosts..........");
 
-    posts.forEach((post) => {
-      if (post.authorId) {
-        console.log("How about my if func, getPosts..........");
-        post.authorProfilePic = post.authorId.profilePicture;
-      }
-    });
+    // posts.forEach((post) => {
+    //   if (post.authorId) {
+    //     console.log("How about my if func, getPosts..........");
+    //     post.authorProfilePic = post.authorId.profilePicture;
+    //   }
+    // });
 
     // Send the posts as a response
     res.status(200).json(posts);
