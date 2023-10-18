@@ -79,7 +79,7 @@ const deletePost = async (req, res, next) => {
 
 const getPost = async (req, res, next) => {
   try {
-    const post = await Post.findById(req.params.postId);
+    const post = await Post.findById(req.params.id);
 
     if (post == null) {
       res.status(404).send("The post you are looking for isn't available");
