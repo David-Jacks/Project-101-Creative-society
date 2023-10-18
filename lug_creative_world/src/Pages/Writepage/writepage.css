@@ -1,0 +1,111 @@
+.writepage {
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--white);
+}
+.writediv {
+  background-color: var(--white);
+  width: 90%;
+  margin: auto;
+  /* display: flex; */
+}
+
+/* changes */
+.Editor_container #header
+{ 
+  width: 100%;
+  /* height: auto; */
+  /* min-height: 8vh; */
+  resize: none;
+  outline: none;
+  font-size: 3.5rem;
+  padding: 0rem 1.2rem;
+  background: var(--white);
+  border: none;
+  text-transform: capitalize;
+}
+
+element.style {
+}
+.ql-editor p, .ql-editor ol, .ql-editor ul, .ql-editor pre, .ql-editor blockquote, .ql-editor h1, .ql-editor h2, .ql-editor h3, .ql-editor h4, .ql-editor h5, .ql-editor h6 {
+    margin: 0;
+    padding: 0;
+    counter-reset: list-1 list-2 list-3 list-4 list-5 list-6 list-7 list-8 list-9;
+}
+.ql-snow * {
+    box-sizing: border-box;
+}
+.ql-editor > * {
+    cursor: text;
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+user agent stylesheet
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+.ql-editor {
+  font-size: 2rem;
+}
+.ql-editor img {
+  width: 45%; /* Limit the image width to the container width */
+  height: 32dvh;
+  margin: 1rem auto;
+  margin-left: 0;
+  display: flex;
+  flex-direction: row;
+  object-fit: contain; /* Maintain the aspect ratio */
+  /* You can adjust the max-width and height values to control the image size */
+}
+.quill .ql-toolbar.ql-snow {
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-family: var(--poppins);
+  padding: 0.2rem;
+  font-size: 2rem;
+  font-weight: bold;
+  background-color: var(--second-color);
+  color: var(--third-color);
+}
+
+.quill .ql-toolbar.ql-snow .ql-formats
+{
+  margin: 0;
+  margin-right: 1rem;
+}
+
+#toolbar
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 1rem;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+#toolbar button
+{
+  border: none;
+  padding: 0.5rem 1.5rem;
+  background: var(--second-color);
+  font-size: 1.4rem;
+  font-weight: 500;
+  font-family: var(--poppins);
+  cursor: pointer;
+}
+.preview .preview_head h1
+{
+  font-size: 3rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-family: var(--roboto);
+  margin-bottom: 1rem;
+}

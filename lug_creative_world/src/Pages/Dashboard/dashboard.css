@@ -1,0 +1,165 @@
+#dashboard
+{
+    width: 100dvw;
+    height: 100dvh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+#dashboard .dash_script
+{
+    background-color: var(--second-color);
+    font-size: 2rem;
+    font-family: var(--poppins);
+    display: flex;
+    flex-direction: column;
+    /* line-height: 2rem; */
+    padding: 0rem 3rem;
+    margin-top: 1.5rem;
+}
+#dashboard .dash_script span
+{
+    align-self: flex-end;
+    font-weight: 600;
+}
+#dashboard .dashboard_wrapper
+{
+    display: flex;
+    flex-direction: row;
+    /* height: 80dvh; */
+    /* overflow: hidden; */
+}
+#dashboard .dashboard_wrapper .dashboard_right
+{
+    flex: 7;
+    height: calc(100dvh - 15dvh);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0rem 0rem 3rem 0rem;
+    overflow-y: scroll;
+}
+#dashboard .dashboard_wrapper .dashboard_left
+{
+    flex: 3;
+    height: calc(100dvh - 15dvh);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem 1rem 3rem 1rem;
+    gap: 1.5rem;
+    overflow-y: scroll;
+}
+#dashboard .dashboard_wrapper .dashboard_left .top_authors
+{
+    width: 36rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* padding: 0rem 2rem; */
+}
+#dashboard .dashboard_wrapper .dashboard_left .top_authors h2
+{
+    align-self: flex-start;
+    font-family: var(--roboto);
+    font-size: 2rem;
+    font-weight: 700;
+    /* padding-bottom: 1.5rem; */
+    padding-bottom: 2rem;
+}
+#dashboard .dashboard_wrapper .dashboard_left .top_authors .authors_contain
+{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.8rem;
+}
+#dashboard .dashboard_wrapper .dashboard_left .top_authors img
+{
+  /* width: 10rem;
+  height: 9rem; */
+  width: 11rem;
+  height: 10rem;
+  /* border-radius: 0.8rem; */
+  border-radius: 0.5rem;
+  object-fit: cover;
+}
+#dashboard .dashboard_left .search
+{
+    border: none;
+    outline: none;
+    background-color: var(--second-color);
+    width: 36rem;
+    /* width: 30rem; */
+    height: 5rem;
+    border-radius: 10rem;
+    padding: 2rem;
+    /* font-size: 2rem; */
+    font-size: 1.8rem;
+    font-family: var(--poppins);
+}
+
+/* categories */
+#categories
+{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--second-color);
+    width: 36rem;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+}
+#categories h1
+{
+    align-self: flex-start;
+    font-family: var(--roboto);
+    font-size: 2rem;
+    font-weight: 700;
+    padding-bottom: 0.8rem;
+}
+#categories ul
+{
+    display: flex;
+    flex-direction: column;
+}
+#categories ul .link
+{
+    text-decoration: none;
+    color: var(--black);
+}
+#categories li
+{
+    list-style: none;
+    font-family: var(--poppins);
+    font-size: 1.5rem;
+    font-weight: 400;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: center; */
+    align-items: center;
+    padding: 0.5rem 0rem;
+    margin-top: 1rem;
+}
+#categories ul .link:not(:nth-child(1))
+{
+    border-top: 0.1rem solid var(--black);
+
+}
+
+
+/* Light mode styles for the dashboard */
+#dashboard-light {
+    background-color: #ffffff;
+    color: #000000;
+    /* Add other light mode styles as needed */
+  }
+  
+  /* Dark mode styles for the dashboard */
+  #dashboard-dark {
+    background-color: #121212;
+    color: #ffffff;
+    /* Add other dark mode styles as needed */
+  }
+  

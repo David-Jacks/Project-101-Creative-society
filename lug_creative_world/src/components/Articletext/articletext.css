@@ -1,0 +1,13 @@
+ .article_view_para
+{
+    margin: auto;
+    width: 100%;
+    font-family: var(--lato);
+    font-size: 1.8rem;
+    line-height: 3rem;
+    font-weight: 400;
+    color: var(--text);
+    /* letter-spacing: -0.003rem; */
+}
+
+/*  */
