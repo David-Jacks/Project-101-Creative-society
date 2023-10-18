@@ -7,13 +7,13 @@ import profile_img2 from "../../images/image2.jpg"
 import { useQuery } from "react-query";
 import { fetchPostData, getCat } from "../../api";
 // import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Loading from "../../components/Modals/loadingmodal/loading";
 const Dashboard = () =>
 {
     // const {search} = useLocation();
     // console.log(location);
-    const {data: articleData, error: articleerror, isLoading: articleisloading, refetch} = useQuery("postdata", fetchPostData);
+    const {data: articleData, error: articleerror, isLoading: articleisloading} = useQuery("postdata", fetchPostData);
     const {data: catsData, error: catserror, isLoading: catsisloading} = useQuery("catsdata", getCat);
     // this is to sort the post according to the time they were created
     const sortedPosts = articleData ? [...articleData].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) : [];

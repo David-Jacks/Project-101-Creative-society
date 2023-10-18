@@ -103,7 +103,7 @@
     display: block;
   }
   
-  .publish-modal input[type="file"] {
+  .publish-modal input[type="file"]{
     display: none;
   }
   

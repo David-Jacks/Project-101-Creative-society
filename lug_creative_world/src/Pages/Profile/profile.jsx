@@ -2,14 +2,13 @@ import React from "react";
 import Button from "../../components/button/button";
 import Articlecard from "../../components/Articlecard/articlecard";
 import "./profile.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import profile_img2 from "../../images/image2.jpg";
 import Topbar from "../../components/Topbar/topbar";
 import { IoMdArrowDropdown } from "react-icons/io";
-import { CiEdit, CiCamera } from "react-icons/ci";
-import profile_img2 from "../../images/image2.jpg";
-import { useSelector } from "react-redux/es/hooks/useSelector";
+import { CiCamera } from "react-icons/ci";
 import { useQuery } from "react-query";
-import { Logout, fetchPostData, fetchUserData, fetchuserArticles } from "../../api";
+import { Logout, fetchUserData, fetchuserArticles } from "../../api";
 import { useDispatch } from "react-redux";
 import { logout } from "../../features/users";
 import FollowerList from "../../components/Modals/Follow-modal/FollowerList"
@@ -25,13 +24,13 @@ const Profile = () =>
     const userProfileId = location.pathname.split("/")[2];
     const rightUser = user._id === userProfileId;
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [img, setImg] = useState(null);
+    // const [img, setImg] = useState(null);
     const dispatch = useDispatch();
     const [on, setOn] = useState(false);
 
-    const handleImg = (e) =>{
-        setImg(e.target.value);
-    }
+    // const handleImg = (e) =>{
+    //     setImg(e.target.value);
+    // }
 
     const {data: userDataQuery, error: usererror, isLoading: userisloading} = useQuery(["userdata", userProfileId], () =>fetchUserData(userProfileId), { 
       enabled: userProfileId !== undefined});
@@ -51,9 +50,9 @@ const Profile = () =>
     setIsModalOpen(true);
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  // const closeModal = () => {
+  //   setIsModalOpen(false);
+  // };
 
   // const handleSubmit = (e) => {
   //   e.preventDefault();
@@ -97,8 +96,9 @@ const Profile = () =>
         <Topbar logoutClick={handleLogout} profile={true} profilepic={userDataQuery.profilePicture}/>
         <div className="profile_first_half">
           <div className="profile_img">
-            {/* <img src={profile_img2} alt="profile" /> */}
-            <img src={`data:image/png;base64,${userDataQuery.profilePicture}`} alt="profile" />
+            {userDataQuery.profilePicture ? <img src={`data:image/png;base64,${userDataQuery.profilePicture}`} alt="profile" /> :
+            <img src={profile_img2} alt="profile" />
+            }
             <CiCamera className="profile_img_update" />
           
           </div>
@@ -116,7 +116,7 @@ const Profile = () =>
                 <IoMdArrowDropdown className="icon hvr-sink" />
               </button>
             </li>
-            <li>20 contributed articles</li>
+            <li>{userArticleQuery.length} contributed articles</li>
             {rightUser && <li className="profile_edit_btn" onClick={openModal} >
               <span>Edit profile</span>
             </li>}
@@ -139,16 +139,17 @@ const Profile = () =>
 
           {on ? (
             <div className="profile_art_contain">
-              {userDataQuery.savedArticles &&
-                userDataQuery.savedArticles.map((data) => <Articlecard key={data.id} articles={data} />)}
-              {user.saveArticle === null && 
-                (<p>You have no saved posts</p>)
+              {userDataQuery.savedArticles && userDataQuery.length > 0 ?
+                userDataQuery.savedArticles.map((data) => <Articlecard key={data.id} articles={data} />) :
+                (<p className="profile_no_data">You have no saved posts</p>)
               }
             </div>
           ) : (
             <div className="profile_art_contain">
-              {userArticleQuery &&
-                userArticleQuery.map((data) => <Articlecard key={data.id} articles={data} />)}
+              {userArticleQuery && userArticleQuery.length > 0 ?
+                userArticleQuery.map((data) => <Articlecard key={data.id} articles={data} />) :
+                (<p className="profile_no_data">No articles contributed yet.. visit write to start writting</p>)
+                }
             </div>
           )}
         </div>

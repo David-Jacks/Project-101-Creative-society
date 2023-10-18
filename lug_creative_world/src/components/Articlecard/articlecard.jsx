@@ -1,16 +1,14 @@
 import "./articlecard.css";
-import {GiSelfLove} from "react-icons/gi";
-import {FaFlag, FaRegSave, FaShareSquare} from "react-icons/fa";
+import { FaRegSave, FaShareSquare} from "react-icons/fa";
 import { BiSolidEditAlt, BiLike } from "react-icons/bi";
 import {MdDeleteForever} from "react-icons/md";
 import {AiFillLike} from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useQuery } from "react-query";
-// import profile_img from "../../images/profile6.JPG";
+import profile_img from "../../images/profile6.JPG";
 // import profile_img2 from "../../images/image2.jpg";
 import { deleteArticle, getLikes, handleLikeClick, saveArticle} from "../../api";
-import { useDispatch, useSelector } from "react-redux/";
+import { useDispatch } from "react-redux/";
 import { update } from "../../features/article";
 
 
@@ -26,11 +24,7 @@ const Articlecard = ({articles}) =>
     const [likes, setLikes] = useState(0);
     const [liked, setLiked] = useState(false);
     const [flagged, setFlaged] = useState("Not Flagged");
-        // setLikeData(likesData);
-        // setLiked()
-        // console.log(likesData);
-        // setLikeData(likesData);
-        // setLikes(likeData.likes);
+     
         console.log(articles.authorId);
 
     useEffect(()=>{
@@ -111,8 +105,8 @@ const Articlecard = ({articles}) =>
                         <p>{articles.description}</p>                  
                     </div>
                     <div className="img_part">
-                        {/* <img src={profile_img} alt="article_img" /> */}
-                        <img src={`data:image/png;base64,${articles.descPhoto}`} alt="article_img" />
+                        {!articles.descPhoto ? <img src={profile_img} alt="article_img" /> :
+                        <img src={`data:image/png;base64,${articles.descPhoto}`} alt="article_img" />}
                     </div>
                 </div>
                 <div className="article_reactions">

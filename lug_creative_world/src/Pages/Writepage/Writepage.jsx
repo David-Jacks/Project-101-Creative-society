@@ -24,7 +24,16 @@ const Writepage = () => {
   const [reviewed, setReviewed] = useState(true);
   const [userData, setUserData] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [rows, setRows] = useState(1);
 
+
+
+// const textarea = document.getElementById('header');
+
+// textarea.addEventListener('input', function () {
+//     this.style.height = 'auto';
+//     this.style.height = (this.scrollHeight) + 'px';
+// });
 
   const userdatastring= localStorage.getItem("user");//getting user info from the localstorage
   const user = JSON.parse(userdatastring);
@@ -36,14 +45,26 @@ const Writepage = () => {
     }
 
     fetchUser();
-},[])
+},[user._id])
 
   const author = userData.username;
   const authorId = userData._id;
 
   const articleData = {title, body, author, description, timeTakenToReadPost, categories, authorId};
   
+  // making text area responsive
+  const textareaLineHeight = 40; // Adjust this value based on your textarea's line-height 
   const handleHeadingChange = (e) => {
+    const previousRows = e.target.rows;
+    e.target.rows = 1; // Reset the number of rows to 1 for accurate scrollHeight
+    const currentRows = Math.floor(e.target.scrollHeight / textareaLineHeight);
+
+    if (currentRows === previousRows) {
+      e.target.rows = currentRows;
+    }
+
+    setRows(currentRows < 10 ? currentRows : 10);
+
     setHeading(e.target.value);
   };
 
@@ -109,7 +130,13 @@ const Writepage = () => {
         {reviewed ? (  
           <div className="Editor_container">
                 <div className="article-write-header">
-                  <textarea name="header" id="header" placeholder="Write your tittle" value={title} onChange={handleHeadingChange} required>
+                  <textarea 
+                  name="header" 
+                  id="header" 
+                  placeholder="Write your tittle" 
+                  value={title} 
+                  rows={rows}
+                  onChange={handleHeadingChange} required>
                   </textarea>
                 </div>
               

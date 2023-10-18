@@ -1,8 +1,7 @@
 import { useState } from "react";
 import Modal from "react-modal";
-import Button from "../../button/button";
 import "./Editprofile.css";
-import { profileUpdate, uploadProfileImage } from "../../../api";
+import { uploadProfileImage } from "../../../api";
 
 const EditModal = (props) =>{
     const [isPhotoSelected, setIsPhotoSelected] = useState(false);

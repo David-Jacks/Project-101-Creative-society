@@ -5,8 +5,6 @@ import image2 from "../../images/image2.jpg";
 import { IoBookOutline } from "react-icons/io5";
 import { IoIosNotifications } from "react-icons/io";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux/es/hooks/useSelector";
-
 export default function Topbar(props) {
   // const user = useSelector((state) => state.user.value);
   const topbarClasses = [
@@ -49,9 +47,9 @@ export default function Topbar(props) {
           {!props.profile ? (
           <li>
             <Link to={`/profile/${user._id}`}>
-              {/* <img className="img4" src={image2} alt="" /> */}
-              <img className="img4" src={`data:image/png;base64,${user.profilePicture}`} alt="" />
-              
+             { !user.profilePicture ? (<img className="img4" src={image2} alt="" />) :
+              (<img className="img4" src={`data:image/png;base64,${user.profilePicture}`} alt="" />)
+          }
             </Link>
           </li>) : ( 
           <li>

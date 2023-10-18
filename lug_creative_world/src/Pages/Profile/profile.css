@@ -122,7 +122,12 @@
     overflow-y: scroll;
     padding-bottom: 1.5rem;
 }
-
+#profile_page .profile_no_data{
+    font-family: var(--poppins);
+    color: var(--first-color);
+    font-size: 3rem;
+    text-transform: capitalize;
+}
 .modal-button{
 background: none;
 border: none;
