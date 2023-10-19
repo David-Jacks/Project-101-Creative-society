@@ -58,7 +58,9 @@ const updatePost = async (req, res, next) => {
       { $set: req.body },
       { new: true }
     );
+    console.log("Params for id: ", req.params.id);
     console.log("Updated Post: ", updatePost);
+    console.log("Request Body....: ", req.body);
     res.status(200).json(updatePost);
     console.log("We are here, Edited Succesfully");
   } catch (err) {
