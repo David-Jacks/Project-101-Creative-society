@@ -58,10 +58,12 @@ const updatePost = async (req, res, next) => {
       { $set: req.body },
       { new: true }
     );
+    console.log("Updated Post: ", updatePost);
     res.status(200).json(updatePost);
     console.log("We are here, Edited Succesfully");
   } catch (err) {
     console.log("It failed to update");
+    console.log("Error: ", err);
     next(err);
   }
 };
