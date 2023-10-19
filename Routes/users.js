@@ -1,3 +1,4 @@
+const { verify } = require("jsonwebtoken");
 const {
   updateUser,
   deleteUser,
@@ -5,12 +6,12 @@ const {
   getUsers,
 } = require("../Controllers/users");
 
-const { verifyUser } = require("../utils/verifyToken");
+const { verifyUser, verifyToken } = require("../utils/verifyToken");
 
 const router = require("express").Router();
 
 // UPDATE
-router.put("/:id", verifyUser, updateUser);
+router.put("/:id", verifyToken, updateUser);
 
 // DELETE
 router.delete("/:id", verifyUser, deleteUser);

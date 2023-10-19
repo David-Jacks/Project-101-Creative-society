@@ -8,7 +8,9 @@ const updateUser = async (req, res, next) => {
       { $set: req.body },
       { new: true }
     );
-    res.status(200).send("Succesfully updated");
+    console.log("Sucessfully Updated");
+    console.log("Updated User: ", updatedUser);
+    res.status(200).send(updatedUser);
   } catch (err) {
     console.log("Not updated");
     res
