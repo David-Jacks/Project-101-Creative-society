@@ -85,6 +85,20 @@ const topLiked = async (req, res, next) => {
   }
 };
 
+const getTopLikedAuthors = async (req, res, next) => {
+  try {
+    const topLikedPosts = await Post.getTopLikedPosts();
+    const topLikedAuthors = topLikedPosts.map((post) => ({
+      name: post.author,
+      profilePic: post.authorProfilePic,
+    }));
+
+    res.status(200).json(topLikedAuthors);
+  } catch (error) {
+    next(error);
+  }
+};
+
 // Get the 6 most recent blog posts
 const getRecentPosts = async (req, res, next) => {
   try {
@@ -99,3 +113,4 @@ module.exports.likeOrUnlikePost = likeOrUnlikePost;
 module.exports.likeCount = likeCount;
 module.exports.topLiked = topLiked;
 module.exports.getRecentPosts = getRecentPosts;
+module.exports.getTopLikedAuthors = getTopLikedAuthors;

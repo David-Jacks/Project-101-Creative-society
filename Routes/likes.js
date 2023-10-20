@@ -1,9 +1,9 @@
 const {
-  likeAPost,
   likeCount,
   topLiked,
   getRecentPosts,
   likeOrUnlikePost,
+  getTopLikedAuthors,
 } = require("../Controllers/likes");
 const router = require("express").Router();
 const { verifyToken } = require("../utils/verifyToken");
@@ -12,7 +12,7 @@ const { verifyToken } = require("../utils/verifyToken");
 router.get("/recent-posts", getRecentPosts);
 router.get("/top-liked", topLiked);
 router.post("/:id", verifyToken, likeOrUnlikePost);
-// router.put("/:id", verifyToken, unlikeAPost);
 router.get("/:id", verifyToken, likeCount);
+router.get("/top-liked-authors", getTopLikedAuthors);
 
 module.exports = router;

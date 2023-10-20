@@ -122,7 +122,8 @@ const getPost = async (req, res, next) => {
 
 const getPosts = async (req, res, next) => {
   try {
-    const posts = await Post.find();
+    const offset = req.query.offset || 0; // Get the offset from the request
+    const posts = await Post.find().skip(offset).limit(10); // Adjust '10' to the desired batch size
     // Send the posts as a response
     res.status(200).json(posts);
   } catch (err) {
