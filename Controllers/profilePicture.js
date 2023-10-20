@@ -1,5 +1,6 @@
 const sharp = require("sharp");
 const { User } = require("../Models/User");
+const { Post } = require("../Models/Post");
 
 const uploadProfilePic = async (req, res) => {
   try {
@@ -26,6 +27,12 @@ const uploadProfilePic = async (req, res) => {
 
     // Update the user's profile picture field in the database
     await User.findByIdAndUpdate(userId, { profilePicture: base64Image });
+
+    // Update authorProfilePic in all posts created by the user
+    await Post.updateMany(
+      { authorId: userId },
+      { authorProfilePic: base64Image }
+    );
 
     // Send a response indicating success
     res.status(200).send("Profile picture updated successfully.");
