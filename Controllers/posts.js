@@ -53,18 +53,28 @@ const makeAPost = async (req, res, next) => {
 
 const updatePost = async (req, res, next) => {
   try {
-    const updatedPost = await Post.findByIdAndUpdate(
-      req.params.id,
-      { $set: req.body },
+    const postId = req.params.id;
+    const updatedFields = req.body;
+    console.log("PostID: ", postId);
+    console.log("Fields to be updated: ", updatedFields);
+
+    // Use findOneAndUpdate to find and update the post
+    const updatedPost = await Post.findOneAndUpdate(
+      { _id: postId },
+      { $set: updatedFields },
       { new: true }
     );
-    console.log("Params for id: ", req.params.id);
+    console.log("Fields updated now: ", updatedPost);
+
+    if (!updatedPost) {
+      return res.status(404).json({ error: "Post not found" });
+    }
+
     console.log("Updated Post: ", updatedPost);
-    console.log("Request Body....: ", req.body);
     res.status(200).json(updatedPost);
-    console.log("We are here, Edited Succesfully");
+    console.log("Post updated successfully");
   } catch (err) {
-    console.log("It failed to update");
+    console.log("Failed to update post");
     console.log("Error: ", err);
     next(err);
   }
