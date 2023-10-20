@@ -234,3 +234,23 @@ export const delComment = async(id, commentid) =>{
         throw error;
     }
 }
+
+// dealing with searching
+
+export const getArticleByCat = async(query) =>{
+    try {
+        const res = await axios.get(`/api/categories/${query}`);
+        return res.data;
+    } catch (error) {
+        throw error;
+    }
+}
+
+export const getArticleByTitle = async(query) =>{
+    try {
+        const res = await axios.get(`/api/posts/search?q=${query}`);
+        return res.data;
+    } catch (error) {
+        throw error;
+    }
+}

@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./topbar.css";
 import image1 from "../../images/image1.png";
 import image2 from "../../images/image2.jpg";
 import { IoBookOutline } from "react-icons/io5";
 import { IoIosNotifications } from "react-icons/io";
 import { Link } from "react-router-dom";
+import { fetchUserData } from "../../api";
+
 export default function Topbar(props) {
-  // const user = useSelector((state) => state.user.value);
+  const [userinfo, setUserInfo] = useState({});
+
+  // css classes specification
   const topbarClasses = [
     "topbar",
     props.showBottomBoxShadow ? "bottom-box-shadow" : "",
@@ -14,6 +18,15 @@ export default function Topbar(props) {
 
   const userString = localStorage.getItem("user");
   const user = JSON.parse(userString);
+  useEffect(()=>{
+    const userDataFromBackend = async() =>{
+      const ans = await fetchUserData(user._id);
+      setUserInfo(ans);
+    }
+
+    userDataFromBackend();
+  },[user._id])
+
   return (
     <section className={topbarClasses}>
       <div className="container">
@@ -48,7 +61,7 @@ export default function Topbar(props) {
           <li>
             <Link to={`/profile/${user._id}`}>
              { !user.profilePicture ? (<img className="img4" src={image2} alt="" />) :
-              (<img className="img4" src={`data:image/png;base64,${user.profilePicture}`} alt="" />)
+              (<img className="img4" src={`data:image/png;base64,${userinfo.profilePicture}`} alt="" />)
           }
             </Link>
           </li>) : ( 

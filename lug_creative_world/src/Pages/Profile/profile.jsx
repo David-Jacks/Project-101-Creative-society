@@ -3,7 +3,7 @@ import Button from "../../components/button/button";
 import Articlecard from "../../components/Articlecard/articlecard";
 import "./profile.css";
 import { useState } from "react";
-import profile_img2 from "../../images/image2.jpg";
+import profile_img2 from "../../images/profilevactor.jpg";
 import Topbar from "../../components/Topbar/topbar";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { CiCamera } from "react-icons/ci";
@@ -24,6 +24,7 @@ const Profile = () =>
     const userProfileId = location.pathname.split("/")[2];
     const rightUser = user._id === userProfileId;
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isprofilepic, setIsprofilepic] = useState(false);
     // const [img, setImg] = useState(null);
     const dispatch = useDispatch();
     const [on, setOn] = useState(false);
@@ -48,11 +49,13 @@ const Profile = () =>
 
   const openModal = () => {
     setIsModalOpen(true);
+    setIsprofilepic(false);
   };
 
-  // const closeModal = () => {
-  //   setIsModalOpen(false);
-  // };
+  const handleProfilePic = () => {
+    setIsModalOpen(true);
+    setIsprofilepic(true);
+  };
 
   // const handleSubmit = (e) => {
   //   e.preventDefault();
@@ -99,7 +102,7 @@ const Profile = () =>
             {userDataQuery.profilePicture ? <img src={`data:image/png;base64,${userDataQuery.profilePicture}`} alt="profile" /> :
             <img src={profile_img2} alt="profile" />
             }
-            <CiCamera className="profile_img_update" />
+            {rightUser && <CiCamera className="profile_img_update" onClick={handleProfilePic}/>}
           
           </div>
           <h2>{userDataQuery.username}</h2>
@@ -117,16 +120,18 @@ const Profile = () =>
               </button>
             </li>
             <li>{userArticleQuery.length} contributed articles</li>
-            {rightUser && <li className="profile_edit_btn" onClick={openModal} >
-              <span>Edit profile</span>
+            {rightUser && <li className="profile_edit_btn" onClick={openModal}>
+              <span onClick={openModal}>Edit profile</span>
             </li>}
           </ul>
           {!rightUser && <Button name={"Follow"} />}
         </div>
-        <EditModal 
+        {isModalOpen && <EditModal 
             isOpen={isModalOpen}
-            onClose={() => setIsModalOpen(false)}    
-        />
+            onClose={() => setIsModalOpen(false)} 
+            userDataQuery = {userDataQuery}  
+            isprofilepic = {isprofilepic} 
+        />}
         <div className="profile_second_half">
           <div className="profile_toggle_row">
             <button className={on ? "not_clicked" : "clicked"} onClick={() => setOn(false)}>
@@ -139,7 +144,7 @@ const Profile = () =>
 
           {on ? (
             <div className="profile_art_contain">
-              {userDataQuery.savedArticles && userDataQuery.length > 0 ?
+              {userDataQuery.savedArticles && userDataQuery.savedArticles.length > 0 ?
                 userDataQuery.savedArticles.map((data) => <Articlecard key={data.id} articles={data} />) :
                 (<p className="profile_no_data">You have no saved posts</p>)
               }

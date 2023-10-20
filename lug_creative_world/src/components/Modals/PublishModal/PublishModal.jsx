@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { GiCancel } from "react-icons/gi";
 import "./PublishModal.css";
 import { sendPostData, updateArticle } from "../../../api";
@@ -13,28 +13,19 @@ const PublishModal = (props) => {
     setIsPhotoSelected(true);
   };
   const {title, body, description, author, timeTakenToReadPost, categories, authorId} = props.transfer1;
-
-  const formData = new FormData();
-    formData.append("title", title);
-    formData.append("descPhoto", descPhoto);
-    formData.append("body", body);
-    formData.append("author", author);
-    formData.append("authorId", authorId);
-    formData.append("timeTakenToReadPost", timeTakenToReadPost);
-    formData.append("description", description);
-    formData.append("categories", categories);
   
-  // const formData = {
-  //   description,
-  //   descPhoto,
-  //   title, 
-  //   body, 
-  //   author, 
-  //   timeTakenToReadPost, 
-  //   categories, 
-  //   authorId
-  // };
-  console.log(formData);
+  const formData = useMemo(() => {
+    const data = new FormData();
+    data.append("title", title);
+    data.append("descPhoto", descPhoto);
+    data.append("body", body);
+    data.append("author", author);
+    data.append("authorId", authorId);
+    data.append("timeTakenToReadPost", timeTakenToReadPost);
+    data.append("description", description);
+    data.append("categories", categories);
+    return data;
+  }, [title, body, description, author, timeTakenToReadPost, categories, authorId, descPhoto]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -91,7 +82,6 @@ const PublishModal = (props) => {
               <option value="Sports">Sports</option>
               <option value="Inspiration and motivation">Inspiration and motivation</option>
               <option value="Technology">Technology</option>
-              {/* Add other category options as needed */}
             </select>
           </label>
           <div htmlFor="timetaken" className='label'>

@@ -1,0 +1,81 @@
+.storiescard {
+  width: 22%;
+  margin-left: 1.5rem;
+}
+/* .card-div{
+ 
+} */
+.card {
+  height: 60vh;
+  width: 100%;
+  background-color: orange;
+  border-radius: 2.5rem;
+  display: flex;
+  align-items: last baseline;
+  padding: 1rem 0rem;
+  /* flex-direction: column; */
+}
+.card_second{
+  height: 75vh;
+  width: 100%;
+  background-color: brown;
+  border-radius: 2.5rem;
+  display: flex;
+  align-items: last baseline;
+  padding: 1rem 0rem;
+}
+.img2 {
+  height: 8vh;
+  border-radius: 50%;
+}
+
+.tri {
+  display: flex;
+  font-size: 0.9rem;
+}
+.tri1 {
+  height: 4vh;
+  width: 15%;
+  background-color: bisque;
+  border-radius: 20px;
+  margin-top: 10px;
+  padding-top: 5px;
+  text-align: center;
+  font-family: var(--poppins);
+  background-color: var(--white-ash);
+}
+.tri2 {
+  height: 4vh;
+  width: 12%;
+  background-color: orange;
+  border-radius: 20px;
+  margin-top: 10px;
+  margin-left: 5px;
+  text-align: center;
+  padding-top: 5px;
+  font-family: var(--poppins);
+  background-color: var(--white-ash);
+}
+.tri3 {
+  height: 4vh;
+  width: 17%;
+  background-color: brown;
+  border-radius: 20px;
+  margin-top: 10px;
+  margin-left: 5px;
+  text-align: center;
+  padding-top: 5px;
+  font-family: var(--poppins);
+  background-color: var(--white-ash);
+}
+.stories_title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  font-family: var(--roboto);
+  padding-top: 10px;
+}
+.stories_subtitle {
+  font-size: 1.3rem;
+  font-family: var(--poppins);
+}
+

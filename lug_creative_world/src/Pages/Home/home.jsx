@@ -1,4 +1,4 @@
-import Stories from "../../components/Stories/stories";
+// import Stories from "../../components/Stories/stories";
 import Landing from "../../components/Landing/landing";
 import "./home.css";
 
@@ -9,7 +9,7 @@ const Home = () =>
         <>
         <div id="home_container">
             <Landing />
-            <Stories />
+            {/* <Stories /> */}
         </div>
         </>
     );

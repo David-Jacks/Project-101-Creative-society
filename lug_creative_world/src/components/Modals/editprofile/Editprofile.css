@@ -1,54 +1,103 @@
-.custom-modal .edit_profile_form{
+.edit_profile_modal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+.modal_content_editprofile{
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    height: 90vh;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+}
+.modal_content_editprofile .edit_profile_top{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.modal_content_editprofile .edit_profile_top h4{
+    font-family: var(--poppins);
+    font-size: 2rem;
+    text-transform: capitalize;
+}
+.edit_profile_modal .edit_profile_form{
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    gap: 1rem;
-    align-items: center;
-    padding: 3rem 0rem;
+    justify-content: center;
+    gap: 2.5rem;
 }
-.custom-modal .edit_profile_form label{
+.edit_profile_modal .edit_profile_form label{
     font-family: var(--lato);
     font-size: 2rem;
-    background-color: #3498db;
+    background-color: var(--first-color);
     color: #fff; 
     padding: 1rem 1.5rem;
     border-radius: 0.5rem;
     cursor: pointer;
 }
-.custom-modal .edit_profile_form h2{
-    font-size: 2rem;
-    font-family: var(--roboto);
-    font-weight: normal;
-    text-transform: capitalize;
-    color: var(--white);
+.edit_profile_modal .profile_pic_form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
 }
-.custom-modal .edit_profile_form button{
-    padding: 0.8rem 2rem;
+.edit_profile_modal .profile_pic_form label{
+    width: 90%;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.edit_profile_modal .edit_profile_form button{
+    width: 10rem;
+    padding: 1rem 2rem;
     outline: none;
     border: none;
     border-radius: 0.3rem;
     background-color: var(--second-color);
     cursor: pointer;
+    transition: all .3s ease;
+    align-self: flex-end;
 }
-.custom-modal .edit_profile_form input{
-    width: 60%;
+.edit_profile_modal .edit_profile_form button:hover{
+    background-color: var(--black);
+    color: var(--white);
+}
+.edit_profile_modal .edit_profile_form input{
+    width: 100%;
     height: 5rem;
     padding: 0.2rem 1rem;
     border: none;
+    background: transparent;
+    border-bottom: 1px solid var(--black);
 }
-.custom-modal .edit_profile_form input[type="file"]{
+.edit_profile_modal .edit_profile_form input[type="file"]{
     display: none;
 }
-.custom-modal .profile_edit_img{
-    width: 30rem;
-    height: 10rem;
-    object-fit: contain;
+.edit_profile_modal .edit_profile_form select{
+    height: 5vh;
+    color: var(--second-color);
+    font-size: 1.5rem;
 }
-.custom-modal{
-    padding-top: 4rem;
-    width: 30%;
-    /* height: 60vh; */
-    margin: 20% auto;
-    background: var(--first-color);
+.edit_profile_modal .profile_edit_img{
+    width: 35rem;
+    height: 15rem;
+    object-fit: contain;
 }

@@ -5,8 +5,8 @@ import {MdDeleteForever} from "react-icons/md";
 import {AiFillLike} from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import profile_img from "../../images/profile6.JPG";
-// import profile_img2 from "../../images/image2.jpg";
+import profile_img from "../../images/profilevactor.jpg";
+import article_img from "../../images/articlepic.jpg";
 import { deleteArticle, getLikes, handleLikeClick, saveArticle} from "../../api";
 import { useDispatch } from "react-redux/";
 import { update } from "../../features/article";
@@ -24,8 +24,6 @@ const Articlecard = ({articles}) =>
     const [likes, setLikes] = useState(0);
     const [liked, setLiked] = useState(false);
     const [flagged, setFlaged] = useState("Not Flagged");
-     
-        console.log(articles.authorId);
 
     useEffect(()=>{
         if (articles._id !== undefined) {
@@ -92,7 +90,9 @@ const Articlecard = ({articles}) =>
                 <div className="article_card_about">
                     <ul>
                         <Link to={`/profile/${articles.authorId}` } className="article_card_linker">
-                            <li><img src={`data:image/png;base64,${articles.authorProfilePic}`} alt="" /> <span>{articles.author}</span></li>
+                            <li>{articles.authorProfilePic ?<img src={`data:image/png;base64,${articles.authorProfilePic}`} alt="" /> :
+                            <img src={profile_img} alt="profile" />
+                            } <span>{articles.author}</span></li>
                         </Link>
                         <li>{new Date(articles.createdAt).toLocaleDateString('en-US', { month: 'short', day: '2-digit' })}</li>
                     </ul>
@@ -105,7 +105,7 @@ const Articlecard = ({articles}) =>
                         <p>{articles.description}</p>                  
                     </div>
                     <div className="img_part">
-                        {!articles.descPhoto ? <img src={profile_img} alt="article_img" /> :
+                        {!articles.descPhoto ? <img src={article_img} alt="article_img" /> :
                         <img src={`data:image/png;base64,${articles.descPhoto}`} alt="article_img" />}
                     </div>
                 </div>

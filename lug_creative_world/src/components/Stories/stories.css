@@ -37,6 +37,7 @@ span {
 
 .card1-div {
   width: 22%;
+  background: red;
 }
 .card2-div,
 .card3-div,
@@ -223,6 +224,7 @@ span {
   color: #444546;
 }
 .fourth-div {
+  width: 100%;
   display: flex;
   justify-content: center;
   margin-top: 30px;

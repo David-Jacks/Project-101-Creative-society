@@ -2,6 +2,7 @@ import React from "react";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import "./stories.css";
 import image2 from "../../images/image2.jpg";
+import Storiescard from "../partials/Storiescard";
 
 export default function Stories() {
   return (
@@ -21,7 +22,7 @@ export default function Stories() {
       </div>
 
       <div className="second_div">
-        <div className="card1-div">
+        {/* <div className="card1-div">
           <div className="card1">
             <div className="img2-bg">
               <img className="img2" src={image2} alt="author" />
@@ -52,105 +53,12 @@ export default function Stories() {
               doloremque corporis asperiore.....
             </p>
           </div>
-        </div>
-
-        <div className="card2-div">
-          <div className="card2">
-            <div className="img2-bg">
-              <img className="img2" src={image2} alt="author" />
-            </div>
-          </div>
-          <div className="tri">
-            <div className="tri1">
-              <p>Design</p>
-            </div>
-            <div className="tri2">
-              <p>Idea</p>
-            </div>
-            <div className="tri3">
-              <p>Review</p>
-            </div>
-          </div>
-          <div className="info">
-            <h1>
-              Migrating to Linear 101 in <br />
-              the Modern Era
-            </h1>
-            <br />
-            <p>
-              Lorem ipsum dolor sit amet
-              <br />
-              consectetur adipisicing elit. Et
-              <br />
-              doloremque corporis asperiore.....
-            </p>
-          </div>
-        </div>
-
-        <div className="card3-div">
-          <div className="card3">
-            <div className="img2-bg">
-              <img className="img2" src={image2} alt="author" />
-            </div>
-          </div>
-          <div className="tri">
-            <div className="tri1">
-              <p>Design</p>
-            </div>
-            <div className="tri2">
-              <p>Idea</p>
-            </div>
-            <div className="tri3">
-              <p>Review</p>
-            </div>
-          </div>
-          <div className="info">
-            <h1>
-              Migrating to Linear 101 in <br />
-              the Modern Era
-            </h1>
-            <br />
-            <p>
-              Lorem ipsum dolor sit amet
-              <br />
-              consectetur adipisicing elit. Et
-              <br />
-              doloremque corporis asperiore.....
-            </p>
-          </div>
-        </div>
-        <div className="card4-div">
-          <div className="card4">
-            <div className="img2-bg">
-              <img className="img2" src={image2} alt="author" />
-            </div>
-          </div>
-          <div className="tri">
-            <div className="tri1">
-              <p>Design</p>
-            </div>
-            <div className="tri2">
-              <p>Idea</p>
-            </div>
-            <div className="tri3">
-              <p>Review</p>
-            </div>
-          </div>
-          <div className="info">
-            <h1>
-              Migrating to Linear 101 in <br />
-              the Modern Era
-            </h1>
-            <br />
-            <p>
-              Lorem ipsum dolor sit amet
-              <br />
-              consectetur adipisicing elit. Et
-              <br />
-              doloremque corporis asperiore.....
-            </p>
-          </div>
-        </div>
+        </div> */}
+        <Storiescard />
+        <Storiescard />
+        <Storiescard />
+        <Storiescard />
+           
       </div>
       <hr className="line" />
       <div className="third-div">
@@ -179,207 +87,17 @@ export default function Stories() {
         </div>
       </div>
       <div className="fourth-div">
-        <div className="card5-div">
-          <div className="card5">
-            <div className="img2-bg">
-              <img className="img2-1" src={image2} alt="author" />
-            </div>
-          </div>
-          <div className="tri">
-            <div className="tri1">
-              <p>Design</p>
-            </div>
-            <div className="tri2">
-              <p>Idea</p>
-            </div>
-            <div className="tri3">
-              <p>Review</p>
-            </div>
-          </div>
-          <div className="inform">
-            <h1>
-              Migrating to Linear 101 in <br />
-              the Modern Era
-            </h1>
-            <br />
-            <p>
-              Lorem ipsum dolor sit amet
-              <br />
-              consectetur adipisicing elit. Et
-              <br />
-              doloremque corporis asperiore.....
-            </p>
-          </div>
-        </div>
-
-        <div className="card6-div">
-          <div className="card6">
-            <div className="img2-bg">
-              <img className="img2-1" src={image2} alt="author" />
-            </div>
-          </div>
-          <div className="tri">
-            <div className="tri1">
-              <p>Design</p>
-            </div>
-            <div className="tri2">
-              <p>Idea</p>
-            </div>
-            <div className="tri3">
-              <p>Review</p>
-            </div>
-          </div>
-          <div className="inform">
-            <h1>
-              Migrating to Linear 101 in <br />
-              the Modern Era
-            </h1>
-            <br />
-            <p>
-              Lorem ipsum dolor sit amet
-              <br />
-              consectetur adipisicing elit. Et
-              <br />
-              doloremque corporis asperiore.....
-            </p>
-          </div>
-        </div>
-
-        <div className="card7-div">
-          <div className="card7">
-            <div className="img2-bg">
-              <img className="img2-1" src={image2} alt="author" />
-            </div>
-          </div>
-          <div className="tri">
-            <div className="tri1">
-              <p>Design</p>
-            </div>
-            <div className="tri2">
-              <p>Idea</p>
-            </div>
-            <div className="tri3">
-              <p>Review</p>
-            </div>
-          </div>
-          <div className="inform">
-            <h1>
-              Migrating to Linear 101 in <br />
-              the Modern Era
-            </h1>
-            <br />
-            <p>
-              Lorem ipsum dolor sit amet
-              <br />
-              consectetur adipisicing elit. Et
-              <br />
-              doloremque corporis asperiore.....
-            </p>
-          </div>
-        </div>
+        <Storiescard second={true}/>
+        <Storiescard second={true}/>
+        <Storiescard second={true}/>
       </div>
 
       {/* next cards */}
 
       <div className="fourth-div">
-        <div className="card5-div">
-          <div className="card5">
-            <div className="img2-bg">
-              <img className="img2-1" src={image2} alt="author" />
-            </div>
-          </div>
-          <div className="tri">
-            <div className="tri1">
-              <p>Design</p>
-            </div>
-            <div className="tri2">
-              <p>Idea</p>
-            </div>
-            <div className="tri3">
-              <p>Review</p>
-            </div>
-          </div>
-          <div className="inform">
-            <h1>
-              Migrating to Linear 101 in <br />
-              the Modern Era
-            </h1>
-            <br />
-            <p>
-              Lorem ipsum dolor sit amet
-              <br />
-              consectetur adipisicing elit. Et
-              <br />
-              doloremque corporis asperiore.....
-            </p>
-          </div>
-        </div>
-
-        <div className="card6-div">
-          <div className="card6">
-            <div className="img2-bg">
-              <img className="img2-1" src={image2} alt="author" />
-            </div>
-          </div>
-          <div className="tri">
-            <div className="tri1">
-              <p>Design</p>
-            </div>
-            <div className="tri2">
-              <p>Idea</p>
-            </div>
-            <div className="tri3">
-              <p>Review</p>
-            </div>
-          </div>
-          <div className="inform">
-            <h1>
-              Migrating to Linear 101 in <br />
-              the Modern Era
-            </h1>
-            <br />
-            <p>
-              Lorem ipsum dolor sit amet
-              <br />
-              consectetur adipisicing elit. Et
-              <br />
-              doloremque corporis asperiore.....
-            </p>
-          </div>
-        </div>
-
-        <div className="card7-div">
-          <div className="card7">
-            <div className="img2-bg">
-              <img className="img2-1" src={image2} alt="author" />
-            </div>
-          </div>
-          <div className="tri">
-            <div className="tri1">
-              <p>Design</p>
-            </div>
-            <div className="tri2">
-              <p>Idea</p>
-            </div>
-            <div className="tri3">
-              <p>Review</p>
-            </div>
-          </div>
-          <div className="inform">
-            <h1>
-              Migrating to Linear 101 in <br />
-              the Modern Era
-            </h1>
-            <br />
-            <p>
-              Lorem ipsum dolor sit amet
-              <br />
-              consectetur adipisicing elit. Et
-              <br />
-              doloremque corporis asperiore.....
-            </p>
-          </div>
-        </div>
+        <Storiescard />
+        <Storiescard />
+        <Storiescard />
       </div>
       {/* button */}
 
@@ -391,86 +109,14 @@ export default function Stories() {
         <h1>Recommended</h1>
       </div>
       <div className="sixth-div">
-        <div className="card8-div">
-          <div className="card8">
-            <div className="img2-bg">
-              <img className="img3" src={image2} alt="author" />
-            </div>
-          </div>
-          <div className="info-1">
-            <h1>
-              Migrating to Linear 101
-              <br />
-              in the Modern Era
-            </h1>
-            <br />
-          </div>
-        </div>
+        <Storiescard />
+        <Storiescard />
+        <Storiescard />
+        <Storiescard />
+        <Storiescard />
 
-        <div className="card9-div">
-          <div className="card9">
-            <div className="img2-bg">
-              <img className="img3" src={image2} alt="author" />
-            </div>
-          </div>
-          <div className="info-1">
-            <h1>
-              Migrating to Linear 101
-              <br />
-              in the Modern Era
-            </h1>
-          </div>
-        </div>
-        {/* another card */}
-
-        <div className="card10-div">
-          <div className="card10">
-            <div className="img2-bg">
-              <img className="img3" src={image2} alt="author" />
-            </div>
-          </div>
-          <div className="info-1">
-            <h1>
-              Migrating to Linear 101
-              <br />
-              in the Modern Era
-            </h1>
-          </div>
-        </div>
-
-        <div className="card11-div">
-          <div className="card11">
-            <div className="img2-bg">
-              <img className="img3" src={image2} alt="author" />
-            </div>
-          </div>
-          <div className="info-1">
-            <h1>
-              Migrating to Linear 101
-              <br />
-              in the Modern Era
-            </h1>
-          </div>
-        </div>
-
-        {/* another card */}
-
-        <div className="card12-div">
-          <div className="card12">
-            <div className="img2-bg">
-              <img className="img3" src={image2} alt="author" />
-            </div>
-          </div>
-          <div className="info-1">
-            <h1>
-              Migrating to Linear 101
-              <br />
-              in the Modern Era
-            </h1>
-          </div>
-        </div>
       </div>
-      <div className="seventh-div">
+      {/* <div className="seventh-div">
         <div className="subscribe">
           <p>
             Subscribe to our <span>new posts</span>
@@ -480,7 +126,7 @@ export default function Stories() {
           <input type="text" placeholder="Your Email Address" />
           <button>Subscribe</button>
         </div>
-      </div>
+      </div> */}
     </section>
   );
 }

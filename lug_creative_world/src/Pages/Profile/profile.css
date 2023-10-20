@@ -27,7 +27,7 @@
     height: 12rem;
     border-radius: 50%;
     object-fit: cover;
-    outline: 0.8rem solid var(--second-color);
+    outline: 0.5rem solid var(--second-color);
 }
 #profile_page .profile_img_update
 {
@@ -38,6 +38,7 @@
     bottom: 0rem;
     right: 0rem;
     padding: 0.3rem;
+    cursor: pointer;
 }
 #profile_page .profile_first_half h2
 {
@@ -69,12 +70,13 @@
     gap: 0.5rem;
 }
 #profile_page .profile_edit_btn{
-    display: flex;
+    width: max-content;
     cursor: pointer;
     font-size: 1.5rem;
     font-family: var(--poppins);
     background-color: var(--second-color);
     padding: 0.5rem 1rem;
+    /* z-index: inherit; */
 }
 #profile_page .profile_second_half
 {
@@ -84,8 +86,7 @@
 #profile_page .profile_second_half .profile_toggle_row
 {
     margin: auto;
-  /* width: 80%; */
-  width: 90%;
+    width: 90%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;

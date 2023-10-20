@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { GiCancel } from "react-icons/gi";
 import "./comment.css";
 import profilephoto from "../../../images/image2.jpg";
@@ -9,12 +9,15 @@ import Loading from '../loadingmodal/loading';
 
 
 const CommentModal = (props) => {
-  
-  const {data, isloading, error} = useQuery(["commentData",props.articleid],()=> getComments(props.articleid),  { 
-    enabled: props.articleid !== undefined});
-
   const [commentText, setCommenttext] = useState("");
   const [showlargeinput, setShowLargeInput] = useState(false);
+  
+  const {data, isloading, error} = useQuery(["commentData", props.articleid],()=> getComments(props.articleid),  { 
+    enabled: props.articleid !== undefined});
+    
+    // useEffect(()=>{
+    //   props.getComments(data);
+    // },[props, data])
 
   const handlecomment = (e) => {
     setCommenttext(e.target.value);
@@ -31,8 +34,6 @@ const CommentModal = (props) => {
     }
     props.onClose();
   };
-
-  console.log(data);
 
   function handleInputClick(){
     setShowLargeInput(true);

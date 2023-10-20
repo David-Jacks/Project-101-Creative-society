@@ -5,18 +5,64 @@ import "./dashboard.css";
 import profile_img from "../../images/profile6.JPG"
 import profile_img2 from "../../images/image2.jpg"
 import { useQuery } from "react-query";
-import { fetchPostData, getCat } from "../../api";
-// import { useEffect, useState } from "react";
+import { fetchPostData, getArticleByCat, getArticleByTitle, getCat } from "../../api";
+import {FaSearch} from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Loading from "../../components/Modals/loadingmodal/loading";
+import { useEffect, useState } from "react";
 const Dashboard = () =>
 {
+    const [searchresult, setSearchResult] = useState();
+    const [searching, setSearching] = useState(false);
+    const [searchQuery, setSearchQuery] = useState("");
+    const [titleQuery, setTitleQuery] = useState("");
     // const {search} = useLocation();
     // console.log(location);
     const {data: articleData, error: articleerror, isLoading: articleisloading} = useQuery("postdata", fetchPostData);
+    // const {data: articleDataSearch, error: articleerrorSearch, isLoading: articleSearchisloading} = useQuery(["searchdata", searchQuery], getArticleByCat(searchQuery), { 
+    //     enabled: searchQuery !== undefined});
     const {data: catsData, error: catserror, isLoading: catsisloading} = useQuery("catsdata", getCat);
+
+    useEffect(()=>{
+        async function searcher(){
+            const ans = await getArticleByCat(searchQuery);
+            setSearchResult(ans);
+        }
+       
+        searcher();
+    },[searchQuery])
+
+    useEffect(()=>{
+       
+        async function searchByTitle(){
+            const ans = await getArticleByTitle(titleQuery);
+            setSearchResult(ans);
+        }
+       
+        searchByTitle();
+    },[titleQuery])
+
+    let sortedPosts;
+
+    const handleCatClick = (val)=>{
+        setSearching(true);
+        setSearchQuery(val);
+        console.log(val);
+    }
+    const handleSearch = (e) =>{
+        e.preventDefault();
+        setSearching(true);
+        console.log(titleQuery);
+
+        // setTitleQuery(titleQuery)
+       
+    }
     // this is to sort the post according to the time they were created
-    const sortedPosts = articleData ? [...articleData].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) : [];
+    if (!searching){
+        sortedPosts = articleData ? [...articleData].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) : [];
+    }else if (searching){
+        sortedPosts = searchresult ? [...searchresult].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) : [];
+    }
 
     if (articleisloading || catsisloading){
         return(<Loading />);
@@ -28,13 +74,25 @@ const Dashboard = () =>
             <Topbar showBottomBoxShadow={true} />
                 <div className="dashboard_wrapper">
                     <div className="dashboard_left">
-                        <input className="search" type="text" name="" id="" placeholder="Search by username..."/>
+                        <div className="search_div">
+                            <input className="search" 
+                            type="text" 
+                            name="" 
+                            value={titleQuery}
+                            onChange={(e)=>setTitleQuery(e.target.value)}
+                            placeholder="Search by article title..."
+                            />
+                            <FaSearch 
+                            className="search_icon" 
+                            onClick={handleSearch}
+                            />
+                        </div>
                         <div id="categories">
                             <h1>Categories</h1>
                             <ul>
-                                {catsData && catsData.map((data)=>(<Link to={`/?cat=`} className="link">
-                                    <li key={data.id}>{data}</li>
-                                </Link>))}
+                                {catsData && catsData.map((data)=>(
+                                    <li key={data.id} value={data} onClick={()=>{handleCatClick(data)}} className="link">{data}</li>
+                                ))}
                             </ul>
                         </div>
                         <Toppost />
