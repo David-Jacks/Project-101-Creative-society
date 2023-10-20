@@ -52,6 +52,7 @@ const makeAPost = async (req, res, next) => {
 };
 
 const updatePost = async (req, res, next) => {
+  console.log("Did we come to the updatePost section.....");
   try {
     const postId = req.params.id;
     const updatedFields = req.body;
