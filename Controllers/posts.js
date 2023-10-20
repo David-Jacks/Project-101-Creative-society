@@ -57,6 +57,8 @@ const updatePost = async (req, res, next) => {
     const postId = req.params.id;
     const updatedFields = req.body;
     console.log("PostID: ", postId);
+    console.log("Request: ", req);
+    console.log("Request body: ", req.body);
     console.log("Fields to be updated: ", updatedFields);
 
     // Use findOneAndUpdate to find and update the post
