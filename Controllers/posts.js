@@ -53,15 +53,15 @@ const makeAPost = async (req, res, next) => {
 
 const updatePost = async (req, res, next) => {
   try {
-    const updatePost = await Post.findByIdAndUpdate(
+    const updatedPost = await Post.findByIdAndUpdate(
       req.params.id,
       { $set: req.body },
       { new: true }
     );
     console.log("Params for id: ", req.params.id);
-    console.log("Updated Post: ", updatePost);
+    console.log("Updated Post: ", updatedPost);
     console.log("Request Body....: ", req.body);
-    res.status(200).json(updatePost);
+    res.status(200).json(updatedPost);
     console.log("We are here, Edited Succesfully");
   } catch (err) {
     console.log("It failed to update");
