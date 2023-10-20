@@ -29,7 +29,7 @@ const postSchema = new mongoose.Schema(
 // the result to 3. If there are multiple posts with the same
 // number of likes, this method will still return three of them
 postSchema.statics.getTopLikedPosts = async function () {
-  return this.find({}).sort({ likes: -1 }).limit(3).exec();
+  return this.find({}).sort({ likes: -1 }).limit(6).exec();
 };
 
 postSchema.statics.getRecentPosts = async function () {

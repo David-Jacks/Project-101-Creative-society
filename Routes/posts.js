@@ -22,7 +22,7 @@ router.put("/:id", verifyToken, upload.single("descPhoto"), updatePost);
 router.delete("/:id", verifyPostOwner, deletePost);
 
 router.get("/search", searchByTitle);
-//http://localhost:3000/api/search?q=programming
+//http://localhost:3000/api/posts/search?title=programming
 
 router.get("/:id", getPost);
 
