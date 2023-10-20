@@ -52,14 +52,24 @@ const makeAPost = async (req, res, next) => {
 };
 
 const updatePost = async (req, res, next) => {
-  console.log("Did we come to the updatePost section.....");
   try {
     const postId = req.params.id;
     const updatedFields = req.body;
     console.log("PostID: ", postId);
-    console.log("Request: ", req);
     console.log("Request body: ", req.body);
-    console.log("Fields to be updated: ", updatedFields);
+
+    if (req.file) {
+      // Process the new image
+      const processedImageBuffer = await sharp(req.file.buffer)
+        .resize(200, 200)
+        .toBuffer();
+
+      // Convert the processed image buffer to a base64 string
+      const base64Image = processedImageBuffer.toString("base64");
+
+      // Include the base64 image data in the descPhoto field of the updatedFields
+      updatedFields.descPhoto = base64Image;
+    }
 
     // Use findOneAndUpdate to find and update the post
     const updatedPost = await Post.findOneAndUpdate(
@@ -67,7 +77,6 @@ const updatePost = async (req, res, next) => {
       { $set: updatedFields },
       { new: true }
     );
-    console.log("Fields updated now: ", updatedPost);
 
     if (!updatedPost) {
       return res.status(404).json({ error: "Post not found" });
@@ -112,22 +121,6 @@ const getPost = async (req, res, next) => {
 const getPosts = async (req, res, next) => {
   try {
     const posts = await Post.find();
-    // .populate({
-    //   path: "authorId",
-    //   model: "User",
-    //   select: "profilePicture",
-    // })
-    // .exec();
-
-    console.log("Did we get here, getPosts..........");
-
-    // posts.forEach((post) => {
-    //   if (post.authorId) {
-    //     console.log("How about my if func, getPosts..........");
-    //     post.authorProfilePic = post.authorId.profilePicture;
-    //   }
-    // });
-
     // Send the posts as a response
     res.status(200).json(posts);
   } catch (err) {

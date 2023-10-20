@@ -61,22 +61,9 @@ mongoose.connection.on("disconnected", () => {
   console.log("Disconnected From MongoDB");
 });
 
-// Define a route handler for the root URL ("/")
-// app.get("/", (req, res) => {
-//   // Redirect to the desired URL
-//   res.redirect("https://lugblog.netlify.app/");
-// });
-
 const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {
   connect();
   console.log(`Backend server listening on port ${PORT}`);
 });
-
-// const fs = require("fs");
-// const folderPath = "./uploads";
-
-// if (!fs.existsSync(folderPath)) {
-//   fs.mkdirSync(folderPath);
-// }
