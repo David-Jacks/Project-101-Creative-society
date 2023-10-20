@@ -58,6 +58,8 @@ const updatePost = async (req, res, next) => {
     console.log("PostID: ", postId);
     console.log("Request body: ", req.body);
 
+    console.log("Request file: ", req.file);
+
     if (req.file) {
       // Process the new image
       const processedImageBuffer = await sharp(req.file.buffer)
