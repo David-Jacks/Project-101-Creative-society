@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./topbar.css";
 import image1 from "../../images/image1.png";
-import image2 from "../../images/image2.jpg";
+import image2 from "../../images/profilevactor.jpg";
 import { IoBookOutline } from "react-icons/io5";
 import { IoIosNotifications } from "react-icons/io";
 import { Link } from "react-router-dom";
@@ -18,14 +18,14 @@ export default function Topbar(props) {
 
   const userString = localStorage.getItem("user");
   const user = JSON.parse(userString);
-  useEffect(()=>{
-    const userDataFromBackend = async() =>{
+  useEffect(() => {
+    const userDataFromBackend = async () => {
       const ans = await fetchUserData(user._id);
       setUserInfo(ans);
-    }
+    };
 
     userDataFromBackend();
-  },[user._id])
+  }, [user._id]);
 
   return (
     <section className={topbarClasses}>
@@ -41,7 +41,12 @@ export default function Topbar(props) {
         <ul className="navbar">
           {props.showButton ? (
             <li>
-              <button className="publish-button hvr-wobble-top" onClick={props.publishClick}>Publish</button>
+              <button
+                className="publish-button hvr-wobble-top"
+                onClick={props.publishClick}
+              >
+                Publish
+              </button>
             </li>
           ) : (
             <li>
@@ -58,19 +63,31 @@ export default function Topbar(props) {
             </div>
           </li>
           {!props.profile ? (
-          <li>
-            <Link to={`/profile/${user._id}`}>
-             { !user.profilePicture ? (<img className="img4" src={image2} alt="" />) :
-              (<img className="img4" src={`data:image/png;base64,${userinfo.profilePicture}`} alt="" />)
-          }
-            </Link>
-          </li>) : ( 
-          <li>
-            <Link to="/">
-              <button className="publish-button hvr-wobble-top" onClick={props.logoutClick}>Logout</button>
-            </Link>
-          </li>)
-          }
+            <li>
+              <Link to={`/profile/${user._id}`}>
+                {!userinfo.profilePicture ? (
+                  <img className="img4" src={image2} alt="" />
+                ) : (
+                  <img
+                    className="img4"
+                    src={`data:image/png;base64,${userinfo.profilePicture}`}
+                    alt=""
+                  />
+                )}
+              </Link>
+            </li>
+          ) : (
+            <li>
+              <Link to="/">
+                <button
+                  className="publish-button hvr-wobble-top"
+                  onClick={props.logoutClick}
+                >
+                  Logout
+                </button>
+              </Link>
+            </li>
+          )}
         </ul>
       </div>
     </section>
