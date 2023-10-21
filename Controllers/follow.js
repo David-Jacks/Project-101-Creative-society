@@ -17,6 +17,8 @@ const followUser = async (req, res) => {
 
   // Add the current user to the "followers" list of the user being followed
   const userToFollow = await User.findById(userIdToFollow);
+  console.log("userToFollow: ", userToFollow);
+  console.log("currentUser.id: ", currentUser.id);
   userToFollow.followers.push(currentUser.id);
   await userToFollow.save();
 
