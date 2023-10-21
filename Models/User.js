@@ -26,7 +26,6 @@ userSchema.methods.generateAuthToken = function () {
     {
       _id: this._id,
       username: this.username,
-      isAdmin: this.isAdmin,
       following: this.following,
       followers: this.followers,
     },
