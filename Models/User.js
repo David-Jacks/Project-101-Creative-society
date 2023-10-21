@@ -13,8 +13,8 @@ const userSchema = new mongoose.Schema(
     year: { type: String },
     program: { type: String },
     isAdmin: { type: Boolean, default: false },
-    following: { type: Number, default: 0 },
-    followers: { type: Number, default: 0 },
+    following: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    followers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     savedArticles: [postSchema],
   },
   { timestamps: true }

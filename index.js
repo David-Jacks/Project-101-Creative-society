@@ -9,12 +9,13 @@ const likes = require("./Routes/likes");
 const categories = require("./Routes/categories");
 const savedArticle = require("./Routes/savedArticles");
 const profilePicture = require("./Routes/profilePicture");
+const follow = require("./Routes/follow");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
 dotenv.config();
 const app = express();
-app.use(express.json({ limit: "100mb" }));
+app.use(express.json({ limit: "999mb" }));
 
 // CORS configuration to allow any origin
 const corsOptions = {
@@ -34,6 +35,7 @@ app.use("/api/post/likes", likes);
 app.use("/api/categories", categories);
 app.use("/api/article", savedArticle);
 app.use("/api/profile", profilePicture);
+api.use("/api", follow);
 
 // Mount the comment routes
 app.use("/api/posts", require("./Routes/comments"));
