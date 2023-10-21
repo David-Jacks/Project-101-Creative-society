@@ -32,8 +32,6 @@ userSchema.methods.generateAuthToken = function () {
     },
     process.env.JWT_PRIVATEKEY
   );
-  console.log("I am here again when registering ....");
-  console.log(`Token for ${username} : ${token}`);
 
   return token;
 };
