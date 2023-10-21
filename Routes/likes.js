@@ -13,6 +13,6 @@ router.get("/recent-posts", getRecentPosts);
 router.get("/top-liked", topLiked);
 router.post("/:id", verifyToken, likeOrUnlikePost);
 router.get("/:id", verifyToken, likeCount);
-router.get("/top-liked-authors", getTopLikedAuthors);
+router.get("/topauthors/top-liked-authors", getTopLikedAuthors);
 
 module.exports = router;
