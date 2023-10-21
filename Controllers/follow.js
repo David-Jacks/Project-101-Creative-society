@@ -5,6 +5,9 @@ const { User } = require("../Models/User");
 const followUser = async (req, res) => {
   const currentUser = req.user;
   const userIdToFollow = req.params.id;
+  console.log("currentUser: ", currentUser);
+  console.log("userIdToFollow: ", userIdToFollow);
+  console.log("request user id: ", req.user.id);
 
   // Add the user being followed to the "following" list of the current user
   currentUser.following.push(userIdToFollow);
