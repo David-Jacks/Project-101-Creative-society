@@ -3,7 +3,9 @@ const router = express.Router();
 const { User } = require("../Models/User");
 
 const followUser = async (req, res) => {
-  const currentUser = req.user;
+  //   const currentUser = req.user;
+  const currentUser = await User.findById(req.user.id);
+
   const userIdToFollow = req.params.id;
   console.log("currentUser: ", currentUser);
   console.log("userIdToFollow: ", userIdToFollow);
@@ -23,6 +25,7 @@ const followUser = async (req, res) => {
 
 const unfollowUser = async (req, res) => {
   const currentUser = req.user;
+
   const userIdToUnfollow = req.params.id;
 
   // Remove the user being unfollowed from the "following" list of the current user
