@@ -35,7 +35,7 @@ app.use("/api/post/likes", likes);
 app.use("/api/categories", categories);
 app.use("/api/article", savedArticle);
 app.use("/api/profile", profilePicture);
-api.use("/api", follow);
+app.use("/api", follow);
 
 // Mount the comment routes
 app.use("/api/posts", require("./Routes/comments"));
