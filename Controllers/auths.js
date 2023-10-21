@@ -19,6 +19,8 @@ const register = async (req, res, next) => {
       program: req.body.program,
       isAdmin: req.body.isAdmin,
       savedArticles: req.body.savedArticles,
+      following: req.body.following,
+      followers: req.body.followers,
     });
     const newUsername = await User.findOne({ username: req.body.username });
     const newEmail = await User.findOne({ email: req.body.email });
