@@ -14,7 +14,6 @@ const About = () => {
       <div id="About_page">
         <div className="about_head">
           <img src={logo} alt="logo" />
-          <img src={Tag_logo} alt="transnational" />
         </div>
 
         <div className="about_main">

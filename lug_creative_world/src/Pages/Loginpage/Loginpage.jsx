@@ -55,7 +55,7 @@ export default function Loginpage() {
       </div>
       <div className="inner">
         <div className="join">
-          <Link to="/">
+          <Link to="/" className="join_link">
             <button className="cancel-button">
               <GiCancel className="icon" />
             </button>

@@ -109,3 +109,11 @@
     height: 15rem;
     object-fit: contain;
 }
+
+/* handling media queries */
+@media only screen and (min-width: 320px) and (max-width: 768px){
+    .modal_content_editprofile{
+        height: 75vh;
+        width: 90%;
+    }  
+}

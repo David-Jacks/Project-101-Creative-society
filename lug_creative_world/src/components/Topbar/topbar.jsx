@@ -4,6 +4,8 @@ import image1 from "../../images/image1.png";
 import image2 from "../../images/profilevactor.jpg";
 import { IoBookOutline } from "react-icons/io5";
 // import { IoIosNotifications } from "react-icons/io";
+import { GiCancel } from "react-icons/gi";
+import {TbLayoutSidebarLeftCollapseFilled, TbLayoutSidebarLeftExpandFilled} from "react-icons/tb";
 import { FaSun } from "react-icons/fa";
 import { FaMoon } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -52,12 +54,12 @@ function handleThemeClick(){
     <section className={topbarClasses}>
       <div className="container">
         <div className="logo-1">
-          <Link to="/dashboard">
-            <img className="img1" src={image1} alt="lancaster-logo" />
-          </Link>
-          {props.showText && (
-            <span className="logo-text">{props.logoText}</span>
-          )}
+            <Link to="/dashboard">
+              <img className="img1" src={image1} alt="lancaster-logo" />
+            </Link>
+            {props.showText ? (
+              <span className="logo-text">{props.logoText}</span>
+            ):( <span className="logo-text">Scholar <span className="colored_part">Scribe</span></span>)}
         </div>
         <ul className="navbar">
           {props.showButton ? (
@@ -82,7 +84,7 @@ function handleThemeClick(){
                 <label for="checkbox" className="checkbox__label">
                     <FaSun className="fa-sun" />
                     <FaMoon className="fa-moon"/>
-                    <span class="check__ball"></span>
+                    <span class="check__ball" onClick={handleThemeClick}></span>
                 </label>
             </div> 
           </li>
@@ -102,6 +104,8 @@ function handleThemeClick(){
           }
         </ul>
       </div>
+      {!props.sidebar ? (props.showBottomBoxShadow && <TbLayoutSidebarLeftExpandFilled className="topbar_panel" onClick={props.sideBarHandle}/>) : 
+      (props.showBottomBoxShadow && <TbLayoutSidebarLeftCollapseFilled  className="topbar_panel" onClick={props.sideBarHandle}/>)}
     </section>
   );
 }

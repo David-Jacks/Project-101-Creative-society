@@ -11,7 +11,6 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    border-top: .1rem solid var(--black);
     padding-bottom: 1rem;
 }
 /* #articlelist .list_wrapper:last-child{

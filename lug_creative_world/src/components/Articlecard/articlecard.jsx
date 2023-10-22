@@ -92,9 +92,13 @@ const Articlecard = ({articles}) =>
                         <Link to={`/profile/${articles.authorId}` } className="article_card_linker">
                             <li>{articles.authorProfilePic ?<img src={`data:image/png;base64,${articles.authorProfilePic}`} alt="" /> :
                             <img src={profile_img} alt="profile" />
-                            } <span>{articles.author}</span></li>
+                            } <span>{articles.author}</span>
+                            </li>
                         </Link>
                         <li>{new Date(articles.createdAt).toLocaleDateString('en-US', { month: 'short', day: '2-digit' })}</li>
+                        <li className="show_on">
+                            {articles.timeTakenToReadPost} min read  
+                        </li>
                     </ul>
                 </div>
                 <div className="article_card_mid">
@@ -115,7 +119,7 @@ const Articlecard = ({articles}) =>
                             <span className="card_topic">{articles.categories[0]}</span>
                         </li>
                         <li>
-                            <span>{articles.timeTakenToReadPost} min read</span>   
+                            <span className="show_of">{articles.timeTakenToReadPost} min read</span>   
                         </li>
                         <li>{flagged}</li>
                         <li>{likes} likes</li>

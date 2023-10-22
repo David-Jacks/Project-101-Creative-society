@@ -1,15 +1,15 @@
 import Articlecard from "../../components/Articlecard/articlecard";
 import Topbar from "../../components/Topbar/topbar";
-import Toppost from "../../components/Toppost/toppost";
 import "./dashboard.css";
 import top_author_default_img from "../../images/profilevactor.jpg"
 import { useQuery } from "react-query";
-import { fetchPostData, getArticleByCat, getArticleByTitle, getCat, getTopAuthors } from "../../api";
+import { fetchPostData, getArticleByCat, getArticleByTitle, getCat, getTopAuthors, getToppost } from "../../api";
 import {FaSearch} from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Loading from "../../components/Modals/loadingmodal/loading";
 import { useEffect, useState } from "react";
 import InfiniteScroll from 'react-infinite-scroll-component';
+import Articlelist from "../../components/Articlelist/articlelist";
 
 
 const Dashboard = () =>
@@ -21,7 +21,8 @@ const Dashboard = () =>
     const [articleData, setArticleData] = useState([]);
     const [offset, setOffset] = useState(0);
     const [hasMore, setHasMore] = useState(true);
-
+    const [sidebar, setShowSidebar] = useState(true);
+    
     useEffect(()=>{
         console.log("waiting");
           fetchPosts();    
@@ -68,7 +69,7 @@ const Dashboard = () =>
 
     // const {data: articleData, error: articleerror, isLoading: articleisloading} = useQuery("postdata", fetchPostData);
 
-    
+    const {data: topData, error: topError, isLoading: topisLoading, refetch} = useQuery("topdata", getToppost);
     const {data: catsData, error: catserror, isLoading: catsisloading} = useQuery("catsdata", getCat);
     const {data: topauthors, error: topauthorserror, isLoading: topauthorsisloading} = useQuery("topauthorsdata", getTopAuthors);
     console.log("top authors", topauthors);
@@ -96,6 +97,7 @@ const Dashboard = () =>
     const handleCatClick = (val) =>{
         setSearching(true);
         setSearchQuery(val);
+        setShowSidebar(true);
         console.log(val);
     }
 
@@ -104,8 +106,7 @@ const Dashboard = () =>
         setSearching(true);
         console.log(titleQuery);
 
-        // setTitleQuery(titleQuery)
-       
+        // setTitleQuery(titleQuery)       
     }
     // this is to sort the post according to the time they were created
     if (!searching){
@@ -115,16 +116,24 @@ const Dashboard = () =>
         sortedPosts = searchresult ? [...searchresult].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) : [];
     }
 
-    // if (articleisloading || catsisloading){
+    // if (!catsisloading){
     //     return(<Loading />);
     // }
 
+    // handling toggling for sidebar menu in smaller devices
+    const sideBarHandle = () =>{
+        setShowSidebar(!sidebar);
+    }
     return(
         <>
             <div id="dashboard">
-            <Topbar showBottomBoxShadow={true} />
+            <Topbar 
+            showBottomBoxShadow={true}
+            sideBarHandle={sideBarHandle}
+            sidebar={sidebar}
+            />
                 <div className="dashboard_wrapper">
-                    <div className="dashboard_left">
+                    <div className={!sidebar ? "dashboard_left" : "show_left"}>
                         <div className="search_div">
                             <input className="search" 
                             type="text" 
@@ -138,6 +147,7 @@ const Dashboard = () =>
                             onClick={handleSearch}
                             />
                         </div>
+                        {/* categories */}
                         <div id="categories">
                             <h1>Categories</h1>
                             <ul>
@@ -146,7 +156,17 @@ const Dashboard = () =>
                                 ))}
                             </ul>
                         </div>
-                        <Toppost />
+                        {/* toppost */}
+                        <div id="toppost">
+                            <h1>Top Posts</h1>
+                            <ul>
+                                {topData && topData.map((data)=>( 
+                                <li key={data.id} className="link">
+                                <Articlelist article={data}/>
+                                </li>))}
+                            </ul>
+                        </div>
+                        {/* topauthors */}
                         <div className="top_authors">
                             <h2>Top Authors</h2>
                             <div className="authors_contain">
@@ -156,14 +176,14 @@ const Dashboard = () =>
                             </div>
                         </div>
                     </div>
-                    <div className="dashboard_right">
-                    <InfiniteScroll
-                        dataLength={sortedPosts.length}
-                        next={fetchPosts}
-                        hasMore={hasMore}
-                        loader={<h4>Loading...</h4>}
-                        endMessage={<p>No more articles to load.</p>}
-                    >
+                    <div className={sidebar ? "dashboard_right" : "show_right"}>
+                        <InfiniteScroll
+                            dataLength={sortedPosts.length}
+                            next={fetchPosts}
+                            hasMore={hasMore}
+                            loader={<h4>Loading...</h4>}
+                            endMessage={<p>No more articles to load.</p>}
+                        >
                        </InfiniteScroll>
                        {sortedPosts.map((data)=>( <Articlecard key={data._id} articles={data}/>))};
                     </div>

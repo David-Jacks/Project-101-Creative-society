@@ -5,7 +5,7 @@ import "./profile.css";
 import { useState } from "react";
 import profile_img2 from "../../images/profilevactor.jpg";
 import Topbar from "../../components/Topbar/topbar";
-import { IoMdArrowDropdown } from "react-icons/io";
+// import { IoMdArrowDropdown } from "react-icons/io";
 import { CiCamera } from "react-icons/ci";
 import { useQuery } from "react-query";
 import { Logout, fetchUserData, fetchuserArticles } from "../../api";
@@ -96,7 +96,11 @@ const Profile = () =>
   return (
     <>
       <div id="profile_page">
-        <Topbar logoutClick={handleLogout} profile={true} profilepic={userDataQuery.profilePicture}/>
+        <Topbar 
+        logoutClick={handleLogout} 
+        profile={true} 
+        profilepic={userDataQuery.profilePicture}
+        />
         <div className="profile_first_half">
           <div className="profile_img">
             {userDataQuery.profilePicture ? <img src={`data:image/png;base64,${userDataQuery.profilePicture}`} alt="profile" /> :
@@ -106,7 +110,8 @@ const Profile = () =>
           
           </div>
           <h2>{userDataQuery.username}</h2>
-          <ul>
+          
+            {/*<ul> 
             <li>
               <span>{userDataQuery.following} following</span>
               <button className="modal-button" onClick={() => setShowFollowingModal(!showFollowingModal)}>
@@ -118,7 +123,9 @@ const Profile = () =>
               <button className="modal-button" onClick={() => setShowFollowersModal(!showFollowersModal)}>
                 <IoMdArrowDropdown className="icon hvr-sink" />
               </button>
-            </li>
+            </li> 
+            </ul>*/}
+          <ul>
             <li>{userArticleQuery.length} contributed articles</li>
             {rightUser && <li className="profile_edit_btn" onClick={openModal}>
               <span onClick={openModal}>Edit profile</span>

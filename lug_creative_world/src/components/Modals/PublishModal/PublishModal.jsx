@@ -84,7 +84,7 @@ const PublishModal = (props) => {
               <option value="Technology">Technology</option>
             </select>
           </label>
-          <div htmlFor="timetaken" className='label'>
+          <div className='label'>
              <h4> specify the reading time of your article</h4>
             <input type="number" name="timetaken" id="timetaken" value={timeTakenToReadPost} onChange={props.handleTimeTaken}/>
           </div>

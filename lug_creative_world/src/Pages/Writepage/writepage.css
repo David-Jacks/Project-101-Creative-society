@@ -109,6 +109,5 @@ p {
   text-transform: uppercase;
   font-family: var(--roboto);
   margin-bottom: 1rem;
-  padding-left: 1.2rem;
   color: var(--black);
 }

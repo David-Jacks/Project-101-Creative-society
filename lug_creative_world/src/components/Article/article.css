@@ -121,15 +121,7 @@
 {
     padding: 1.1rem 0rem;
 }
-/* #article_view_wrapper .article_view_main .article_view_para
-{
-    margin: auto;
-    font-family: var(--lato);
-    font-size: 1.8rem;
-    line-height: 3rem;
-    font-weight: 400;
-    color: var(--text);
-} */
+
 #article_view_wrapper .article_controls
 {
     position: fixed;
@@ -150,4 +142,19 @@
 #article_view_wrapper .article_controls li
 {
     list-style: none;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 768px){
+    #article_view_wrapper{
+        width: 100%;
+    }
+    #article_view_wrapper .article_wrapper_container{
+        width: 90%;
+        margin: .0rem auto;
+    }
+    #article_view_wrapper .article_controls{
+    position: fixed;
+    right: 2.5rem;
+    bottom: 35vh;
+    }
 }

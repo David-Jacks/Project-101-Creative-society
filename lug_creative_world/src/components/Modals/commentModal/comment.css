@@ -133,3 +133,11 @@
     background-color: var(--second-color); 
     color: var(--black);
   }
+
+  /* handling mediia queries */
+  @media only screen and (min-width: 320px) and (max-width: 768px){
+    .modal_content {
+        height: 78vh;
+        width: 90%;
+    }
+}

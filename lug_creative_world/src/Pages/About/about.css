@@ -1,30 +1,26 @@
 #About_page {
     width: 100dvw;
-    height: 100dvh;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* background-color: var(--white); */
+    background-color: #0e0e0f;
   }
   #About_page .about_head {
-    /* width: 75%; */
+    padding: 0rem 0rem 0rem 1.5rem;
     width: 90%;
     display: flex;
     flex-direction: row;
     align-self: center;
-    justify-content: space-between;
   }
   
   #About_page .about_head img:nth-child(1) {
     width: 10rem;
     height: 10rem;
   }
-  #About_page .about_head img:nth-child(2) {
-    width: 20rem;
-    height: 10rem;
-  }
+
   #About_page .about_main {
-    width: 75%;
+    width: 85%;
     align-self: center;
   }
   #About_page .about_main_head {
@@ -37,8 +33,7 @@
     font-family: var(--roboto);
     font-size: 5rem;
     font-weight: 800;
-    color: var(--first-color);
-    /* letter-spacing: 1.5rem; */
+    color: #b5121b;
     letter-spacing: 1rem;
     line-height: 1.2;
   }
@@ -47,7 +42,7 @@
     font-size: 3rem;
     font-weight: 700;
     line-height: 1.2;
-    color: var(--black);
+    color: #F5F5F5;
   }
   
   #About_page .about_para p {
@@ -55,7 +50,7 @@
     font-size: 2rem;
     font-family: var(--poppins);
     line-height: 1.8;
-    color: var(--black);
+    color: #F5F5F5;
     font-weight: 400;
     margin-top: 1.5rem;
   }
@@ -73,11 +68,15 @@
   
   #About_page .about_icon {
     font-size: 3rem;
-    color: var(--black);
+    color: #F5F5F5;
     /* color: var(--first-color); */
     cursor: pointer;
     margin-bottom: 1.5rem;
   }
-  
-  
+  /* handling responsiveness */
+  @media only screen and (min-width: 320px) and (max-width: 768px){
+    #About_page .about_head {
+      padding: 0rem 0rem 0rem 0rem;
+    }
+  }
   
