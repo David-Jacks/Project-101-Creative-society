@@ -46,6 +46,7 @@
     align-items: center;
     font-size: 1.1rem;
     gap: 0.5rem;
+    color: var(--black);
 }
 #article_card_wrapper .article_card_about .show_on{
     display: none;
@@ -150,7 +151,8 @@
     justify-content: space-between;
      /* background-color: brown; */
     width: 100%;
-    height: 20vh;
+    height: auto;
+    padding: 1.5rem 0rem;
 }
 #article_card_wrapper .img_part img
 {

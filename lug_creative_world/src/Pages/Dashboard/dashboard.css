@@ -227,6 +227,7 @@
     #dashboard .dashboard_wrapper .dashboard_right{
         width: 100%;
         flex: 12;
+        gap: 2rem;
     }
     #dashboard .dashboard_wrapper .show_right{
         display: none;

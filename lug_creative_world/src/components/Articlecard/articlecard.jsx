@@ -99,6 +99,9 @@ const Articlecard = ({articles}) =>
                         <li className="show_on">
                             {articles.timeTakenToReadPost} min read  
                         </li>
+                        <li className="show_on">
+                            {flagged}
+                        </li>
                     </ul>
                 </div>
                 <div className="article_card_mid">
@@ -121,7 +124,9 @@ const Articlecard = ({articles}) =>
                         <li>
                             <span className="show_of">{articles.timeTakenToReadPost} min read</span>   
                         </li>
-                        <li>{flagged}</li>
+                        <li>
+                            <span className="show_of">{flagged}</span> 
+                        </li>
                         <li>{likes} likes</li>
                     </ul>
                     <ul>

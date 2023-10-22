@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.0c7c2069.css",
-    "main.js": "/static/js/main.b8d949aa.js",
+    "main.css": "/static/css/main.c47e9b06.css",
+    "main.js": "/static/js/main.beca656f.js",
     "static/media/profile6.JPG": "/static/media/profile6.8b70c5c9eec61977a924.JPG",
     "static/media/lancaster5.jpg": "/static/media/lancaster5.6a4c0074efcd57e545f5.jpg",
     "static/media/image1.png": "/static/media/image1.a35e90f83fdece8647fd.png",
@@ -11,11 +11,11 @@
     "static/media/TAG-LOGO.png": "/static/media/TAG-LOGO.0c71d74e2207e82661b8.png",
     "static/media/image2.jpg": "/static/media/image2.06cae63020281e75a3c6.jpg",
     "index.html": "/index.html",
-    "main.0c7c2069.css.map": "/static/css/main.0c7c2069.css.map",
-    "main.b8d949aa.js.map": "/static/js/main.b8d949aa.js.map"
+    "main.c47e9b06.css.map": "/static/css/main.c47e9b06.css.map",
+    "main.beca656f.js.map": "/static/js/main.beca656f.js.map"
   },
   "entrypoints": [
-    "static/css/main.0c7c2069.css",
-    "static/js/main.b8d949aa.js"
+    "static/css/main.c47e9b06.css",
+    "static/js/main.beca656f.js"
   ]
 }
