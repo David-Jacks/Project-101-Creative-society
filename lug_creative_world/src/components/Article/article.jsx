@@ -114,7 +114,7 @@ const Article = () => {
               <li>
                 <span>{flagged}</span>
                 <span>{comments} Comments</span>
-                <span>{likes} Likes</span> .
+                <span>{likes} Likes</span>
               </li>
             </ul>
           </div>

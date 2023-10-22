@@ -41,7 +41,7 @@ const EditModal = (props) =>{
       <div className="edit_profile_modal">
       <div className="modal_content_editprofile">
         <div className="edit_profile_top">
-          <h4>David Jackson is editing his profile</h4>
+          <h4>{props.userDataQuery.username} is editing his profile</h4>
           <button className="comment_cancel_button" onClick={props.onClose} >
             <GiCancel />
           </button>
@@ -77,7 +77,7 @@ const EditModal = (props) =>{
     <div className="edit_profile_modal">
       <div className="modal_content_editprofile">
       <div className="edit_profile_top">
-          <h4>David Jackson is editing his profile</h4>
+          <h4>{props.userDataQuery.username} is editing his profile</h4>
           <button className="comment_cancel_button" onClick={props.onClose} >
             <GiCancel />
           </button>

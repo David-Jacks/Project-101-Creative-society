@@ -57,15 +57,24 @@ export const fetchUserData = async(id) =>{
     }
 }
 
-export const fetchPostData = async() =>{
+// export const fetchPostData = async() =>{
+//     try {
+//         const response = await Axios.get("/api/posts");
+//         return response.data;
+//     } catch (error) {
+//         throw error;
+//     }
+// }
+
+//implementing pagination when getting post
+export const fetchPostData = async(offset) =>{
     try {
-        const response = await Axios.get("/api/posts");
+        const response = await Axios.get(`/api/posts?offset=${offset}`);
         return response.data;
     } catch (error) {
         throw error;
     }
 }
-
 export const fetchuserArticles = async(id) =>{
     try {
         const response = await Axios.get(`/api/posts/user/${id}`);
@@ -107,7 +116,15 @@ export const getToppost = async() =>{
         throw error;
     }
 }
-
+// getting top authors
+export const getTopAuthors = async() =>{
+    try {
+        const res = await axios.get("/api/post/likes/topauthors/top-liked-authors");
+        return res.data;
+    } catch (error) {
+        throw error;
+    }
+}
 export const deleteArticle = async(id) =>{
     const token = localStorage.getItem("token");
 

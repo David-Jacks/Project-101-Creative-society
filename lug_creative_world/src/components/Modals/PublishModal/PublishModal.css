@@ -7,15 +7,16 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: var(--modal-bg);
     z-index: 9999;
   }
   
   .modal-content {
+    border: .2rem solid var(--black);
       background-color: var(--white);
       padding: 2rem;
       border-radius: 0.7rem;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 10px var(--modal-bg);
       height: 75vh;
       overflow-y: scroll;
       width: 50%;
@@ -40,6 +41,7 @@
     font-family: var(--roboto);
     font-weight: normal;
     padding-bottom: 1rem;
+    color: var(--black);
   }
   .publish-top .cancel-button {
     background: none;
@@ -68,6 +70,7 @@
     font-size: 1.8rem;
     border-radius: 0.5rem;
     outline: none;
+    color: var(--black);
   }
   label .box{
     height: 5vh;
@@ -83,6 +86,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    color: var(--black);
   }
   #timetaken{
     background: var(--second-color);
@@ -90,6 +94,7 @@
     outline: none;
     border: none;
     height: 3.5vh;
+    color: var(--black);
   }
   form{
     padding: 0;
@@ -101,6 +106,7 @@
   }
   .publish-modal label {
     display: block;
+    
   }
   
   .publish-modal input[type="file"]{
@@ -125,13 +131,17 @@
 
   .proceed-button{
     background-color: var(--black);
-    color: #fff; 
+    color: var(--white); 
     padding: 1rem 1.5rem;
     border-radius: 0.5rem;
     cursor: pointer;
     border: none;
     font-size: 1.5rem;
     font-family: var(--poppins);
+  }
+  .proceed-button:hover{
+    background-color: var(--second-color); 
+    color: var(--black);
   }
   .publish-modal .articlePhotoHandle{
     display: flex;
@@ -149,5 +159,6 @@
     width: 15rem;
     height: 15rem;
     border-radius: 1rem;
+    border: .1rem solid var(--black);
     /* margin-bottom: 3rem; */
   }

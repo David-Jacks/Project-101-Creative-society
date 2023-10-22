@@ -28,6 +28,7 @@
 .comment_box_head .profile_data{
     display: flex;
     flex-direction: column;
+    color: var(--black);
 }
 .comment_box_head .profile_data span:nth-child(2){
     font-size: 1rem;
@@ -37,6 +38,7 @@
     font-size: 1.3rem;
     line-height: normal;
     font-family: var(--poppins);
+    color: var(--black);
 }
 #comment_box .comment_box_reactions{
     display: flex;

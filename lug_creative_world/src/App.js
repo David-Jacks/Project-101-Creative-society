@@ -9,8 +9,25 @@ import Joinpage from "./Pages/Joinpage/Joinpage";
 import Dashboard from "./Pages/Dashboard/dashboard";
 import Writepage from "./Pages/Writepage/Writepage";
 import Stories from "./components/Stories/stories";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const App = () => {
+  const [darkmode, setDarkMode] = useState(false);
+  const theme = useSelector((state)=>state.theme.value);
+
+
+
+  useEffect(() => {
+    // Set darkmode state based on the theme value
+    if (theme) {
+      setDarkMode(true);
+    } else {
+      setDarkMode(false);
+    }
+  }, [theme]);
+
+
   // function PrivateRoute({ children }) {
   //   const user = localStorage.getItem("user");
 
@@ -20,8 +37,9 @@ const App = () => {
   //     return children;
   //   }
   // }
+
   return (
-    <div className="App">
+    <div className={`App ${darkmode ? "dark-mode": ""}`}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={ <Home /> } />

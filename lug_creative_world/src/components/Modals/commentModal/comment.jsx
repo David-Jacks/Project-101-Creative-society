@@ -28,18 +28,20 @@ const CommentModal = (props) => {
     e.preventDefault();
     
     if (commentText){
+      setShowLargeInput(false);
       // handle commenting post api
       const ans = await postComment(props.articleid, formData);
       console.log(ans);
     }
-    props.onClose();
+    // props.onClose();
   };
 
   function handleInputClick(){
     setShowLargeInput(true);
   }
-  if (isloading)
+  if (isloading){
     return (<Loading />);
+  }
   return (
     <div className="comment_modal">
       <div className="modal_content">

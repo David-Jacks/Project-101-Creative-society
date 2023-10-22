@@ -1,13 +1,15 @@
  .article_view_para
 {
-    margin: auto;
+    /* margin: auto; */
     width: 100%;
     font-family: var(--lato);
-    font-size: 1.8rem;
     line-height: 3rem;
-    font-weight: 400;
     color: var(--text);
     /* letter-spacing: -0.003rem; */
 }
-
+.article_view_para.ql-editor blockquote {
+    border-left: 4px solid var(--second-color);
+    padding-left: 1.5rem;
+    margin-top: .8rem;
+  }
 /*  */

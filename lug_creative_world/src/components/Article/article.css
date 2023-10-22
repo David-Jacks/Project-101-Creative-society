@@ -12,6 +12,7 @@
 {
     width: 60%;
     margin: 1rem auto;
+    user-select: text;
 }
 #article_view_wrapper .article_view_head
 {
@@ -66,14 +67,15 @@
 #article_view_wrapper .article_view_head .to_follow
 {
     font-size: 1.5rem;
-    font-weight: 400;
-    color: var(--third-color);
+    font-weight: 500;
+    color: var(--second-color);
     text-transform: capitalize;
 }
 #article_view_wrapper .article_view_head .div2 span
 {
     font-size: 1.2rem;
     font-weight: 400;
+    color: var(--black);
 }
 #article_view_wrapper .article_view_head ul
 {
@@ -94,6 +96,7 @@
     align-items: center;
     gap: 1rem;
     font-size: 1.3rem;
+    color: var(--black);
 }
 #article_view_wrapper .article_view_head li span
 {
@@ -104,7 +107,7 @@
 {
     font-size: 2.2rem;
     cursor: pointer;
-    color: var(--first-color);
+    color: var(--black);
 }
 
 #article_view_wrapper .article_view_head img

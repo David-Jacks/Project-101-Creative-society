@@ -5,24 +5,22 @@
     width: 100%;
     gap: 1.2rem;
 }
-#articlelist > h2
-{
-    font-family: var(--poppins);
-    font-size: 2rem;
-    font-weight: 500;
-    align-self: flex-start;
-    width: 10%;
-}
 #articlelist .list_wrapper
 {
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    border-top: .1rem solid var(--black);
+    padding-bottom: 1rem;
 }
+/* #articlelist .list_wrapper:last-child{
+    border-bottom:none;
+} */
 #articlelist .list_wrapper h3
 {
     font-family: var(--poppins);
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     font-weight: 600;
     line-height: 2rem;
     text-transform: capitalize;
@@ -32,6 +30,7 @@
     font-family: var(--poppins);
     font-weight: 300;
     font-size: 1.3rem;
+    color: var(--black);
 }
 #articlelist .list_wrapper > div
 {
@@ -42,6 +41,6 @@
 }
 #articlelist .list_wrapper .link
 {
-    /* text-decoration: none; */
+    text-decoration: none;
     color: var(--black);
 }

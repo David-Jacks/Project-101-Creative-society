@@ -3,13 +3,19 @@ import "./topbar.css";
 import image1 from "../../images/image1.png";
 import image2 from "../../images/profilevactor.jpg";
 import { IoBookOutline } from "react-icons/io5";
-import { IoIosNotifications } from "react-icons/io";
+// import { IoIosNotifications } from "react-icons/io";
+import { FaSun } from "react-icons/fa";
+import { FaMoon } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { fetchUserData } from "../../api";
+import { useDispatch } from "react-redux";
+import { updateTheme } from "../../features/theme";
 
 export default function Topbar(props) {
   const [userinfo, setUserInfo] = useState({});
+  const [dark, setdarkMode] = useState(false);
 
+  const dispach = useDispatch();
   // css classes specification
   const topbarClasses = [
     "topbar",
@@ -18,14 +24,29 @@ export default function Topbar(props) {
 
   const userString = localStorage.getItem("user");
   const user = JSON.parse(userString);
-  useEffect(() => {
-    const userDataFromBackend = async () => {
+  useEffect(()=>{
+    const userDataFromBackend = async() =>{
       const ans = await fetchUserData(user._id);
       setUserInfo(ans);
-    };
+    }
 
     userDataFromBackend();
-  }, [user._id]);
+  },[user._id])
+
+// taking care of changing themes
+
+const handleBgChange = () =>{
+  if(dark){
+    dispach(updateTheme(dark));
+  }else {
+    dispach(updateTheme(dark));
+  }
+}
+
+function handleThemeClick(){
+  setdarkMode(!dark);
+  handleBgChange();
+}
 
   return (
     <section className={topbarClasses}>
@@ -41,12 +62,7 @@ export default function Topbar(props) {
         <ul className="navbar">
           {props.showButton ? (
             <li>
-              <button
-                className="publish-button hvr-wobble-top"
-                onClick={props.publishClick}
-              >
-                Publish
-              </button>
+              <button className="publish-button hvr-wobble-top" onClick={props.publishClick}>Publish</button>
             </li>
           ) : (
             <li>
@@ -57,37 +73,33 @@ export default function Topbar(props) {
             </li>
           )}
           <li>
-            <div className="notification">
+            {/* <div className="notification">
               <IoIosNotifications className="notification-icon hvr-pulse-shrink" />
               <span>5</span>
-            </div>
+            </div> */}
+            <div className="bg__change">
+                <input type="checkbox" className="checkbox" onClick={handleThemeClick}/>
+                <label for="checkbox" className="checkbox__label">
+                    <FaSun className="fa-sun" />
+                    <FaMoon className="fa-moon"/>
+                    <span class="check__ball"></span>
+                </label>
+            </div> 
           </li>
           {!props.profile ? (
-            <li>
-              <Link to={`/profile/${user._id}`}>
-                {!userinfo.profilePicture ? (
-                  <img className="img4" src={image2} alt="" />
-                ) : (
-                  <img
-                    className="img4"
-                    src={`data:image/png;base64,${userinfo.profilePicture}`}
-                    alt=""
-                  />
-                )}
-              </Link>
-            </li>
-          ) : (
-            <li>
-              <Link to="/">
-                <button
-                  className="publish-button hvr-wobble-top"
-                  onClick={props.logoutClick}
-                >
-                  Logout
-                </button>
-              </Link>
-            </li>
-          )}
+          <li>
+            <Link to={`/profile/${user._id}`}>
+             { !userinfo.profilePicture ? (<img className="img4" src={image2} alt="" />) :
+              (<img className="img4" src={`data:image/png;base64,${userinfo.profilePicture}`} alt="" />)
+          }
+            </Link>
+          </li>) : ( 
+          <li>
+            <Link to="/">
+              <button className="publish-button hvr-wobble-top" onClick={props.logoutClick}>Logout</button>
+            </Link>
+          </li>)
+          }
         </ul>
       </div>
     </section>

@@ -9,13 +9,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import userReducer from "./features/users";
 import articleReducer from "./features/article";
-import likeReducer from "./features/likes";
+import themeReducer from "./features/theme";
 // creating redux store that will contain all my app state and manage my states using reducers
 const store = configureStore({
   reducer: {
     user: userReducer,
     article: articleReducer,
-    likes: likeReducer
+    theme: themeReducer
   },
 });
 

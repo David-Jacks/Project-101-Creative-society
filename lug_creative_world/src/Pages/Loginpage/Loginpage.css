@@ -13,7 +13,7 @@
   margin-top: 2rem;
   font-size: 1.4rem;
   text-decoration: underline;
-  color: var(--first-color);
+  color: #b5121b;
 }
 .loginbutton {
   padding: 1.5rem 2.5rem;
@@ -22,8 +22,8 @@
   width: 25rem;
   margin-left: 5rem;
   margin-top: 2rem;
-  background-color: var(--first-color);
-  color: var(--white);
+  background-color: #b5121b;
+  color: #F5F5F5;
   font-weight: bold;
   cursor: pointer;
   font-size: 1.5rem;
@@ -46,7 +46,7 @@
   text-align: center;
 }
 .div-account .login-button {
-  color: var(--first-color);
+  color: #b5121b;
   background: none;
   border: none;
   cursor: pointer;
@@ -59,6 +59,6 @@
 .loginpage .login_err
 {
     font-family: var(--poppins);
-    color: var(--first-color);
+    color: #b5121b;
     font-size: 1.1rem;
 }

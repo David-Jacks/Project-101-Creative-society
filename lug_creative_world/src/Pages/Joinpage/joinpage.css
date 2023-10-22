@@ -29,6 +29,7 @@
 }
 .join button .icon {
   font-size: 3rem;
+  color: #F5F5F5;
 }
 .join h1 {
   text-align: center;
@@ -96,7 +97,7 @@ input:focus {
   cursor: pointer;
 }
 .checkbox-label span {
-  color: var(--first-color);
+  color: #b5121b;
   font-weight: normal;
   text-decoration: underline;
 }
@@ -123,8 +124,8 @@ input:focus {
 }
 
 .twi-buttons .signup-button {
-  background-color: var(--first-color);
-  color: var(--white);
+  background-color: #b5121b;
+  color: #F5F5F5;
   padding: 1rem 2rem;
   border: none;
   border-radius: 5rem;
@@ -138,7 +139,7 @@ input:focus {
   font-family: var(--poppins);
 }
 .twi-buttons .login-button {
-  color: var(--first-color);
+  color: #b5121b;
   background: none;
   border: none;
   cursor: pointer;
@@ -149,6 +150,6 @@ input:focus {
 .joinpage .join_err
 {
     font-family: var(--poppins);
-    color: var(--first-color);
+    color: #b5121b;
     font-size: 1.1rem;
 }

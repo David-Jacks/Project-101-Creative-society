@@ -70,7 +70,6 @@ const Landing = () => {
 
         <div className="scroll">
           {/* <BiDownArrowAlt className="scroll_icon animate__animated animate__bounce animate__repeat-3"/> */}
-          <p>The Best Writter is always chosen by deligence</p>
         </div>
       </div>
     </>
