@@ -8,8 +8,6 @@ const likeOrUnlikePost = async (req, res, next) => {
     const postId = req.params.id;
     const userId = req.user.id;
 
-    console.log("userId: ", req.user.id);
-
     // Check if the user has already liked the post
     const post = await Post.findById(postId);
 
@@ -18,7 +16,6 @@ const likeOrUnlikePost = async (req, res, next) => {
     }
 
     const isLiked = post.likes.includes(userId);
-    console.log("isLiked before: ", isLiked);
 
     if (isLiked) {
       // User has already liked the post, so unlike it
@@ -26,7 +23,6 @@ const likeOrUnlikePost = async (req, res, next) => {
         (like) => like.toString() !== userId.toString()
       );
       const isLikedAgain = post.likes.includes(userId);
-      console.log("isLiked after: ", isLikedAgain);
     } else {
       // User hasn't liked the post, so like it
       post.likes.push(userId);
@@ -51,13 +47,8 @@ const likeCount = async (req, res, next) => {
     const postId = req.params.id;
     const userId = req.user.id;
     const post = await Post.findById(postId);
-    console.log("In likeCount logic...........");
-    console.log("postId: ", postId);
-    console.log("userId: ", userId);
-    console.log("post: ", post);
 
     const isLiked = post.likes.includes(userId);
-    console.log("isLiked: ", isLiked);
 
     if (!post) {
       return res.status(404).send("Post not found!");
@@ -65,7 +56,6 @@ const likeCount = async (req, res, next) => {
 
     // Calculate the number of likes
     const numberOfLikes = post.likes.length;
-    console.log("numberOfLikes: ", numberOfLikes);
 
     // Send the post details, including the number of likes
     res.status(200).json({ liked: isLiked, likes: numberOfLikes });
@@ -88,10 +78,19 @@ const topLiked = async (req, res, next) => {
 const getTopLikedAuthors = async (req, res, next) => {
   try {
     const topLikedPosts = await Post.getTopLikedPosts();
-    const topLikedAuthors = topLikedPosts.map((post) => ({
-      name: post.author,
-      profilePic: post.authorProfilePic,
-    }));
+
+    // Create a Set to store unique authors
+    const uniqueAuthors = new Set();
+
+    topLikedPosts.forEach((post) => {
+      uniqueAuthors.add({
+        name: post.author,
+        profilePic: post.authorProfilePic,
+      });
+    });
+
+    // Convert the Set back to an array
+    const topLikedAuthors = [...uniqueAuthors];
 
     res.status(200).json(topLikedAuthors);
   } catch (error) {
