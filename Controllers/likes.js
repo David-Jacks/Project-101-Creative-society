@@ -22,7 +22,6 @@ const likeOrUnlikePost = async (req, res, next) => {
       post.likes = post.likes.filter(
         (like) => like.toString() !== userId.toString()
       );
-      const isLikedAgain = post.likes.includes(userId);
     } else {
       // User hasn't liked the post, so like it
       post.likes.push(userId);
@@ -78,19 +77,10 @@ const topLiked = async (req, res, next) => {
 const getTopLikedAuthors = async (req, res, next) => {
   try {
     const topLikedPosts = await Post.getTopLikedPosts();
-
-    // Create a Set to store unique authors
-    const uniqueAuthors = new Set();
-
-    topLikedPosts.forEach((post) => {
-      uniqueAuthors.add({
-        name: post.author,
-        profilePic: post.authorProfilePic,
-      });
-    });
-
-    // Convert the Set back to an array
-    const topLikedAuthors = [...uniqueAuthors];
+    const topLikedAuthors = topLikedPosts.map((post) => ({
+      name: post.author,
+      profilePic: post.authorProfilePic,
+    }));
 
     res.status(200).json(topLikedAuthors);
   } catch (error) {
