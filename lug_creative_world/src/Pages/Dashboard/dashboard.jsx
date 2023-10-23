@@ -8,7 +8,7 @@ import {FaSearch} from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Loading from "../../components/Modals/loadingmodal/loading";
 import { useEffect, useState } from "react";
-import InfiniteScroll from 'react-infinite-scroll-component';
+// import InfiniteScroll from 'react-infinite-scroll-component';
 import Articlelist from "../../components/Articlelist/articlelist";
 
 
@@ -20,7 +20,7 @@ const Dashboard = () =>
     const [titleQuery, setTitleQuery] = useState("");
     const [articleData, setArticleData] = useState([]);
     const [offset, setOffset] = useState(0);
-    const [hasMore, setHasMore] = useState(true);
+    // const [hasMore, setHasMore] = useState(true);
     const [sidebar, setShowSidebar] = useState(true);
     
     useEffect(()=>{
@@ -41,7 +41,7 @@ const Dashboard = () =>
         setOffset(offset + data.length);
 
         if (data.length === 0) {
-        setHasMore(false);
+        // setHasMore(false);
         return;
         }
 
@@ -116,9 +116,9 @@ const Dashboard = () =>
         sortedPosts = searchresult ? [...searchresult].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) : [];
     }
 
-    // if (!catsisloading){
-    //     return(<Loading />);
-    // }
+    if (catsisloading || !articleData){
+        return(<Loading />);
+    }
 
     // handling toggling for sidebar menu in smaller devices
     const sideBarHandle = () =>{
@@ -177,14 +177,14 @@ const Dashboard = () =>
                         </div>
                     </div>
                     <div className={sidebar ? "dashboard_right" : "show_right"}>
-                        <InfiniteScroll
+                        {/* <InfiniteScroll
                             dataLength={sortedPosts.length}
                             next={fetchPosts}
                             hasMore={hasMore}
                             loader={<h4>Loading...</h4>}
                             endMessage={<p>No more articles to load.</p>}
                         >
-                       </InfiniteScroll>
+                       </InfiniteScroll> */}
                        {sortedPosts.map((data)=>( <Articlecard key={data._id} articles={data}/>))};
                     </div>
                 </div>

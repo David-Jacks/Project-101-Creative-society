@@ -72,7 +72,8 @@ input:focus {
 }
 
 .form-group {
-  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .checkbox-label {
@@ -125,6 +126,8 @@ input:focus {
 
 .twi-buttons {
   display: flex;
+  flex-direction: row;
+  align-items: center;
   margin-top: 1.5rem;
 }
 
@@ -163,5 +166,9 @@ input:focus {
   .join {
     width: 90%;
     margin: auto;
+  }
+  #form-container {
+    padding: 2rem 0rem;
+    margin: 4rem auto;
   }
 }

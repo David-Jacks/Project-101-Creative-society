@@ -180,4 +180,8 @@
     .article_reactions ul li .show_of{
         display: none;
     }
+    #article_card_wrapper .article_card_icons{
+     font-size: 2.4rem;
+    }
+
 }

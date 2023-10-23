@@ -14,7 +14,6 @@ import { update } from "../../features/article";
 
 const Articlecard = ({articles}) =>
 {
-
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const userdatastring= localStorage.getItem("user");
@@ -59,7 +58,7 @@ const Articlecard = ({articles}) =>
     
     }
 
-     function handleDelete()
+    function handleDelete()
     {
         deleteArticle(articles._id);
     }

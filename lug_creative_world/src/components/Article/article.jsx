@@ -7,7 +7,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 // import { useQuery } from "react-query";
 import Loading from "../Modals/loadingmodal/loading";
-import profile_img from "../../images/profile6.JPG";
+// import profile_img from "../../images/profile6.JPG";
 import Articletext from "../Articletext/articletext";
 // import { useDispatch, useSelector } from "react-redux";
 import Axios from "axios";
@@ -85,7 +85,10 @@ const Article = () => {
             <h2>{article.title}</h2>
             <div className="div_main">
               <Link to={`/profile/${article.authorId}`}>
-                <img src={profile_img} alt="" />
+                <img
+                  src={`data:image/png;base64,${article.authorProfilePic}`}
+                  alt="author_profile"
+                />
               </Link>
               <div className="div_p">
                 <div className="div1">

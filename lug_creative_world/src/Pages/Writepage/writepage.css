@@ -55,14 +55,13 @@ p {
   color: var(--black);
 }
 .ql-editor img {
-  width: 45%; /* Limit the image width to the container width */
+  width: 45%;
   height: auto;
   margin: 1rem auto;
   margin-left: 0;
   display: flex;
   flex-direction: row;
-  object-fit: contain; /* Maintain the aspect ratio */
-  /* You can adjust the max-width and height values to control the image size */
+  object-fit: contain; 
 }
 .quill .ql-toolbar.ql-snow {
   border: .3rem solid var(--second-color);
@@ -110,4 +109,23 @@ p {
   font-family: var(--roboto);
   margin-bottom: 1rem;
   color: var(--black);
+}
+
+@media only screen and (min-width: 320px) and (max-width: 768px){
+  .writediv {
+    padding-top: 2rem;
+    margin: auto;
+    /* display: flex; */
+  }
+  .Editor_container #header{ 
+    width: 100%;
+    min-height: 6rem;
+    font-size: 3rem;
+    padding: 0rem 1.2rem;
+    background: var(--white);
+    border: none;
+    text-transform: capitalize;
+    color: var(--black);
+  }
+
 }

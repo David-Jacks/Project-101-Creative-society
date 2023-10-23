@@ -4,7 +4,6 @@ import image1 from "../../images/image1.png";
 import image2 from "../../images/profilevactor.jpg";
 import { IoBookOutline } from "react-icons/io5";
 // import { IoIosNotifications } from "react-icons/io";
-import { GiCancel } from "react-icons/gi";
 import {TbLayoutSidebarLeftCollapseFilled, TbLayoutSidebarLeftExpandFilled} from "react-icons/tb";
 import { FaSun } from "react-icons/fa";
 import { FaMoon } from "react-icons/fa";
@@ -59,7 +58,9 @@ function handleThemeClick(){
             </Link>
             {props.showText ? (
               <span className="logo-text">{props.logoText}</span>
-            ):( <span className="logo-text">Scholar <span className="colored_part">Scribe</span></span>)}
+            ):( <Link to="/dashboard" className="home_link">
+                <span className="logo-text other_small">Scholar <span className="colored_part">Scribe</span></span>
+              </Link>)}
         </div>
         <ul className="navbar">
           {props.showButton ? (

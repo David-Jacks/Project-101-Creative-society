@@ -42,6 +42,9 @@ body {
   user-select: none;
   height: 100%;
 }
+a:-webkit-any-link{
+  text-decoration: none;
+}
 
 /* defining a general class for all icons, instead of using a component */
 .icon

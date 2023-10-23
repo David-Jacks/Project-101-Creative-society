@@ -1,0 +1,23 @@
+#error_wrapper{
+    width: 100dvw;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: var(--second-color);
+}
+
+#error_wrapper .error_message{
+    font-size: 3rem;
+    font-family: var(--poppins);
+    color: var(--black);
+    text-align: center;
+}
+#error_wrapper .error_btn{
+    border: none;
+    outline: none;
+    padding: 1rem 3rem;
+    background: var(--black);
+    font-size: 2rem;
+}

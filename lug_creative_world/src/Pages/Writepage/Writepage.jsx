@@ -28,13 +28,6 @@ const Writepage = () => {
 
 
 
-// const textarea = document.getElementById('header');
-
-// textarea.addEventListener('input', function () {
-//     this.style.height = 'auto';
-//     this.style.height = (this.scrollHeight) + 'px';
-// });
-
   const userdatastring= localStorage.getItem("user");//getting user info from the localstorage
   const user = JSON.parse(userdatastring);
   useEffect(()=>{
@@ -122,10 +115,10 @@ const Writepage = () => {
       />
       <div className="writediv">
         <div id="toolbar">
-                    {<button className="button-click " onClick={handleSave}>Draft</button>}
-                    {reviewed && <button className="button-click " onClick={handleCustomRedo}>redo</button>}
-                    {reviewed && <button className="button-click " onClick={handleCustomUndo}>undo</button>}
-                    <button className="button-click" onClick={handleReview}> {reviewed ? "Preview": "back"}</button>
+            {<button className="button-click " onClick={handleSave}>Draft</button>}
+            {reviewed && <button className="button-click " onClick={handleCustomRedo}>redo</button>}
+            {reviewed && <button className="button-click " onClick={handleCustomUndo}>undo</button>}
+            <button className="button-click" onClick={handleReview}> {reviewed ? "Preview": "back"}</button>
         </div>
         {reviewed ? (  
           <div className="Editor_container">

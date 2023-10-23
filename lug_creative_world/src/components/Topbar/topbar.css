@@ -1,6 +1,6 @@
 .topbar {
   background-color: var(--white); /*use variables everytime*/
-  height: 13vh;
+  height: auto;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -10,7 +10,6 @@
 .logo-1 .img1 {
   height: 6.5rem;
   transform: translateY(0.5rem); /*you can rather translate so that it deos not take space*/
-  /* margin-top: 1rem;  */ /*this reduces whitespaces on screen, and removing it will be fine*/
 }
 .topbar .container {
   width: 100%;
@@ -22,8 +21,11 @@
 .logo-1 {
   width: 50%;
   display: flex;
+  flex-direction: row;
+  align-items: center;
   color: var(--black);
 }
+
 .navbar {
   display: flex;
   justify-content: flex-end;
@@ -77,7 +79,6 @@
   align-items: center;
 }
 .topbar .notification span {
- /* width: 2.5rem; */
   width: 2.4rem;
   font-family: var(--poppins);
   text-align: center;
@@ -151,6 +152,7 @@
   padding-top: 2.2rem;
   text-shadow: var(--white) 2px 1px 1px;
   color: var(--black);
+  transform: translateY(-1rem);
 }
 .logo-text .colored_part{
   color: var(--first-color);
@@ -182,20 +184,26 @@
 /* handling media queries */
 @media only screen and (min-width: 320px) and (max-width: 768px){
   .topbar {
-    padding: 0.2rem .2rem;
+    padding: 0.4rem .2rem;
   }
   .logo-1 {
     width: 40%;
     display: flex;
+    flex-direction: row;
     align-items: center;
     color: var(--black);
   }
-  .logo-text {
-    font-size: 2rem;
+  .logo-1 .img1 {
+    height: 7rem;
+    transform: translateY(0.5rem); /*you can rather translate so that it deos not take space*/
+  }
+  .logo-text{
+    font-size: 1.3rem;
     margin-left: 0rem;
-    font-family: var(--poppins);
-    padding-top: 1rem;
-    text-shadow: var(--white) 2px 1px 1px;
+    padding: 0;
+    transform: translateX(-.5rem);
+    word-wrap: break-word;
+    overflow: hidden;
   }
   .navbar {
     display: flex;

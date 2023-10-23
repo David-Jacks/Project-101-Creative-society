@@ -5,10 +5,13 @@ import { GiCancel } from "react-icons/gi";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux/es/hooks/useDispatch";
 import { join } from "../../api";
+import Loading from "../../components/Modals/loadingmodal/loading";
+import Error from "../../components/Modals/errors/errors";
 export default function JoinPage() {
   const dispatch = useDispatch();///calling the dispatch function to be able to update my user state
   const [checked, setChecked] = useState(false);
-  const [clicked, setClicked] = useState(false);
+  const [load, setLoading] = useState(false);
+  const [myerr, setMyErr] = useState(false);
   const [valid, setValid] = useState(false);
   const [error, setError] = useState({});
   const [formData, setFormData] = useState({
@@ -19,9 +22,9 @@ export default function JoinPage() {
     agreeToTerms: checked,
   });
 
-  const nameRegex = /^[a-zA-Z0-9_]{3,20}$/;
+  const nameRegex = /^.{1,19}$/;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const passwordRegex = /^(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])(?=.*[0-9])(?=.{11,19}$).*/;
+  const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{5,20}$/;
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     const newValue = type === "checkbox" ? checked : value;
@@ -33,7 +36,7 @@ export default function JoinPage() {
 
     if (name === "username")
     {
-      error.name = !nameRegex.test(newValue) ? "Invalid Username Ex.Name:Jackson@faithchamp" : "";
+      error.name = !nameRegex.test(newValue) ? "Username should be less than 20" : "";
 
       !nameRegex.test(newValue) ? setValid(false) : setValid(true);
     } else if (name === "email")
@@ -43,7 +46,7 @@ export default function JoinPage() {
       !emailRegex.test(newValue) ? setValid(false) : setValid(true);
     } else if (name === "password")
     {
-      error.password = !passwordRegex.test(newValue) ? "Between 10 and 20 chars, have numbers and special chars" : "";
+      error.password = !passwordRegex.test(newValue) ? "Between 5 and 20 chars, have numbers and special chars" : "";
 
       !passwordRegex.test(newValue) ? setValid(false) : setValid(true);
     }  else if (name === "confirmPassword")
@@ -66,11 +69,25 @@ const { confirmPassword, agreeToTerms, ...actData } = formData;
   const handleSubmit = async (e) =>
   {
     e.preventDefault();
-    setClicked(true)
+    setLoading(true);
     if (valid && checked)
     {
-     join(actData);
+     const res = await join(actData);
+     if (res === 400){
+      setLoading(false);
+      setMyErr(true);
+     }
+    //  setLoading(false);
     }
+  }
+
+  if (load){
+    return(<Loading />);
+  }else if(myerr){
+    return (<Error 
+      handleErrorClick={()=>{setMyErr(false)}}
+      err_message={"Username already exist... please trying using a new username"}
+      />);
   }
 
   return (
@@ -167,7 +184,7 @@ const { confirmPassword, agreeToTerms, ...actData } = formData;
             <div className="form-group">
               <div className="twi-buttons">
                   <button type="submit" className="signup-button hvr-wobble-skew">
-                    {!clicked ? "Sign up": "loading..."}
+                  Sign up
                   </button>
                 <p>or</p>
                 <Link to="/loginpage">

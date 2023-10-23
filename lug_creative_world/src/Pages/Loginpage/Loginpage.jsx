@@ -6,19 +6,23 @@ import { Link, useNavigate } from "react-router-dom";
 import { Login } from "../../api";
 import { useDispatch } from "react-redux";
 import { login } from "../../features/users";
+import Loading from "../../components/Modals/loadingmodal/loading";
+import Error from "../../components/Modals/errors/errors";
 
 export default function Loginpage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [errorMessage, setErrMessage] = useState("");
   const [error, setError] = useState({});
   const [valid, setValid] = useState(false);
-  const [clicked, setClicked] = useState(false);
+  const [load, setLoading] = useState(false);
+  const [myerr, setMyErr] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
-  const nameRegex = /^[a-zA-Z0-9_]{3,20}$/;
-  const passwordRegex = /^(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])(?=.*[0-9])(?=.{11,19}$).*/;
+  const nameRegex = /^.{1,19}$/;
+  const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{5,20}$/;
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -26,12 +30,12 @@ export default function Loginpage() {
 
     if (name === "username")
     {
-      error.name = !nameRegex.test(value) ? "Invalid Username 'no space required'" : "";
+      error.name = !nameRegex.test(value) ? "Username should be less than 20" : "";
 
       !nameRegex.test(value) ? setValid(false) : setValid(true);
     } else if (name === "password")
     {
-      error.password = !passwordRegex.test(value) ? "Between 10 and 20 chars, have numbers and special chars" : "";
+      error.password = !passwordRegex.test(value) ? "Between 5 and 20 chars, have numbers and special chars" : "";
 
       !passwordRegex.test(value) ? setValid(false) : setValid(true);
     }
@@ -40,12 +44,27 @@ export default function Loginpage() {
   const HandleSubmit = async (e) =>
   {
     e.preventDefault();
-    setClicked(true);
-    if (valid)
-    {
-      const res = await Login(formData);
+    setLoading(true)
+    const res = await Login(formData);
+    if(res === 400){
+      setLoading(false);
+      setMyErr(true);
+      setErrMessage("You inputed a wrong password");
+    }else if(res === 500){
+      setMyErr(true);
+      setErrMessage("Network error please try again!");
+    }else{
       dispatch(login(res));
     }
+  }
+
+  if (load){
+    return(<Loading />);
+  }else if(myerr){
+    return (<Error 
+      handleErrorClick={()=>{setMyErr(false)}}
+      err_message={errorMessage}
+      />);
   }
 
   return (
@@ -92,11 +111,11 @@ export default function Loginpage() {
                 className="input-field"
               />
               <span className="login_err">{error.password}</span>
-              <button className="forgot-button">Forgot Password ?</button>
+              {/* <button className="forgot-button">Forgot Password ?</button> */}
             </div>
             <div className="form-group">
               <div className="twi-buttons">
-                  <button className="loginbutton hvr-wobble-skew" onClick={HandleSubmit}>{!clicked ? "Log in" : "loading..."}</button>
+                  <button className="loginbutton hvr-wobble-skew" onClick={HandleSubmit}>Log in</button>
               </div>
               <div className="div-account">
                 <p>Don't have an account yet ?</p>

@@ -11,10 +11,10 @@ export const Login = async(data) =>
             return (response.data.details);
         } else 
         {
-            console.log(response);
+            return response.status;
         }
     } catch (error) {
-        throw error;
+        return (error.response.status);
     }
 }
 
@@ -41,10 +41,10 @@ export const join = async(data) =>{
         {
           window.location.href = "/loginpage";
         }else {
-            console.log(response);
+            return response.status;
         }
     } catch (error) {
-        throw error;
+        return (error.response.status);
     }
 }
 
@@ -120,7 +120,7 @@ export const getToppost = async() =>{
 export const getTopAuthors = async() =>{
     try {
         const res = await axios.get("/api/post/likes/topauthors/top-liked-authors");
-        return res.data;
+        return res.data; 
     } catch (error) {
         throw error;
     }
