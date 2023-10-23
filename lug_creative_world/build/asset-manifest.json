@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.65cd10d0.css",
-    "main.js": "/static/js/main.eab6862d.js",
+    "main.js": "/static/js/main.ba92d25e.js",
     "static/media/lancaster5.jpg": "/static/media/lancaster5.6a4c0074efcd57e545f5.jpg",
     "static/media/image1.png": "/static/media/image1.a35e90f83fdece8647fd.png",
     "static/media/profilevactor.jpg": "/static/media/profilevactor.4779aeafa6e57abc3cd1.jpg",
@@ -11,10 +11,10 @@
     "static/media/image2.jpg": "/static/media/image2.06cae63020281e75a3c6.jpg",
     "index.html": "/index.html",
     "main.65cd10d0.css.map": "/static/css/main.65cd10d0.css.map",
-    "main.eab6862d.js.map": "/static/js/main.eab6862d.js.map"
+    "main.ba92d25e.js.map": "/static/js/main.ba92d25e.js.map"
   },
   "entrypoints": [
     "static/css/main.65cd10d0.css",
-    "static/js/main.eab6862d.js"
+    "static/js/main.ba92d25e.js"
   ]
 }
