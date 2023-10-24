@@ -78,7 +78,7 @@ const getTopLikedAuthors = async (req, res, next) => {
   try {
     const topLikedPosts = await Post.getTopLikedPosts();
     const topLikedAuthors = topLikedPosts.map((post) => ({
-      name: post.author,
+      id: post.authorId,
       profilePic: post.authorProfilePic,
     }));
 

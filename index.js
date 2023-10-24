@@ -9,7 +9,6 @@ const likes = require("./Routes/likes");
 const categories = require("./Routes/categories");
 const savedArticle = require("./Routes/savedArticles");
 const profilePicture = require("./Routes/profilePicture");
-const follow = require("./Routes/follow");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
@@ -35,7 +34,6 @@ app.use("/api/post/likes", likes);
 app.use("/api/categories", categories);
 app.use("/api/article", savedArticle);
 app.use("/api/profile", profilePicture);
-app.use("/api", follow);
 
 // Mount the comment routes
 app.use("/api/posts", require("./Routes/comments"));
