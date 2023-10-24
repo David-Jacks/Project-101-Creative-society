@@ -52,7 +52,7 @@
     padding-bottom: 1rem;
     padding-top: 0.5rem;
   }
-  label h4, .label h4{
+  label h4{
     margin: 0;
     font-size: 1.5rem;
     font-family: var(--poppins);
@@ -78,15 +78,6 @@
     font-family: var(--poppins);
     border-radius: 0.5rem;
     padding-left: 0.8rem;
-  }
-  .label{
-    margin-top: 1rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    color: var(--black);
   }
   #timetaken{
     background: var(--second-color);
@@ -168,10 +159,8 @@
     .modal-content {
         width: 90%;
     }
-    .label{
-      flex-direction: column;
-      align-items: flex-start;
-    
+    form{
+      gap: 1.5rem;
     }
     .publish-top h4 {
       font-size: 2rem;

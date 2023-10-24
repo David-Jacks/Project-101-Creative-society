@@ -8,8 +8,19 @@ import { useDispatch } from "react-redux";
 import { login } from "../../features/users";
 import Loading from "../../components/Modals/loadingmodal/loading";
 import Error from "../../components/Modals/errors/errors";
+import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 
 export default function Loginpage() {
+
+  const [showPassword, setShowPassword] = useState(false);
+
+
+    // Function to toggle password visibility
+    const togglePasswordVisibility = () => {
+      setShowPassword(!showPassword);
+    };
+
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [errorMessage, setErrMessage] = useState("");
@@ -35,7 +46,7 @@ export default function Loginpage() {
       !nameRegex.test(value) ? setValid(false) : setValid(true);
     } else if (name === "password")
     {
-      error.password = !passwordRegex.test(value) ? "Between 5 and 20 chars, have numbers and special chars" : "";
+      error.password = !passwordRegex.test(value) ? "Between 5 and 20 char's, have numbers and special char's" : "";
 
       !passwordRegex.test(value) ? setValid(false) : setValid(true);
     }
@@ -56,6 +67,7 @@ export default function Loginpage() {
         setErrMessage("Username not registered please signup");
     }else if(res === 500){
       setMyErr(true);
+      setLoading(false)
       setErrMessage("Network error please try again!");
     }else{
       dispatch(login(res));
@@ -105,15 +117,26 @@ export default function Loginpage() {
               <label htmlFor="password" className="label-name">
                 PASSWORD
               </label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                required
-                className="input-field"
-              />
+          <div className="password-input-container">
+          <input
+            type={showPassword ? "text" : "password"}
+            id="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+            className="input-field"
+          />
+          {formData.password && ( // Only display the button if there is text in the password input
+            <button
+              type="button"
+              className="password-visibility-button"
+              onClick={togglePasswordVisibility}
+            >
+              {showPassword ? <IoMdEyeOff /> : <IoMdEye />}
+            </button>
+          )}
+        </div>
               <span className="login_err">{error.password}</span>
               {/* <button className="forgot-button">Forgot Password ?</button> */}
             </div>

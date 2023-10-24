@@ -1,6 +1,7 @@
 .topbar {
   background-color: var(--white); /*use variables everytime*/
-  height: auto;
+  /* height: auto; */
+  height: 15vh;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -58,6 +59,7 @@
 .img4 {
   height: 5rem;
   border-radius: 10rem;
+  border: 3px solid var(--black);
   /* margin-top: 1rem; */ /*this reduces whitespaces on screen, and removing it will be fine*/
 }
 .navbar li {
@@ -156,7 +158,7 @@
 }
 .logo-text .colored_part{
   color: var(--first-color);
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 .publish-button {
   background-color: var(--second-color);

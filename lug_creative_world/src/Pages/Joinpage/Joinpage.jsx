@@ -3,12 +3,28 @@ import "./joinpage.css";
 import Landing from "../../components/Landing/landing";
 import { GiCancel } from "react-icons/gi";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux/es/hooks/useDispatch";
 import { join } from "../../api";
 import Loading from "../../components/Modals/loadingmodal/loading";
 import Error from "../../components/Modals/errors/errors";
+import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 export default function JoinPage() {
-  const dispatch = useDispatch();///calling the dispatch function to be able to update my user state
+
+
+  const [showPassword, setShowPassword] = useState(false);
+   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  // Function to toggle password visibility
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+
+    // Function to toggle confirm password visibility
+    const toggleConfirmPasswordVisibility = () => {
+      setShowConfirmPassword(!showConfirmPassword);
+    };
+  
+
   const [checked, setChecked] = useState(false);
   const [load, setLoading] = useState(false);
   const [myerr, setMyErr] = useState(false);
@@ -102,7 +118,7 @@ const { confirmPassword, agreeToTerms, ...actData } = formData;
               <GiCancel className="icon" />
             </button>
           </Link>
-          <h1>Join LUG BLOG</h1>
+          <h1>Join ScholarScribe</h1>
           <form id="form-container" onSubmit={handleSubmit}>
             <div className="form-group">
               <label htmlFor="name" className="label-name">
@@ -139,30 +155,52 @@ const { confirmPassword, agreeToTerms, ...actData } = formData;
               <label htmlFor="password" className="label-name">
                 PASSWORD
               </label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                required
-                className="input-field"
-              />
+          <div className="password-input-container">
+          <input
+            type={showPassword ? "text" : "password"}
+            id="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+            className="input-field"
+          />
+          {formData.password && ( // Only display the button if there is text in the password input
+            <button
+              type="button"
+              className="password-visibility-button"
+              onClick={togglePasswordVisibility}
+            >
+              {showPassword ? <IoMdEyeOff /> : <IoMdEye />}
+            </button>
+          )}
+        </div>
               <span className="join_err">{error.password}</span>
             </div>
             <div className="form-group">
               <label htmlFor="confirmPassword" className="label-name">
                 CONFIRM PASSWORD
               </label>
-              <input
-                type="password"
-                id="confirmPassword"
-                name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                required
-                className="input-field"
-              />
+          <div className="password-input-container">
+          <input
+            type={showConfirmPassword ? "text" : "password"}
+            id="confirmPassword"
+            name="confirmPassword"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            required
+            className="input-field"
+          />
+          {formData.confirmPassword && ( // Only display the button if there is text in the confirm password input
+            <button
+              type="button"
+              className="password-visibility-button"
+              onClick={toggleConfirmPasswordVisibility}
+            >
+              {showConfirmPassword ? <IoMdEyeOff /> : <IoMdEye />}
+            </button>
+          )}
+        </div>
               <span className="join_err">{error.passwordConfirm}</span>
             </div>
             <div>

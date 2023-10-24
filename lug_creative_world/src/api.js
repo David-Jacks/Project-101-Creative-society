@@ -1,4 +1,3 @@
-import axios from "axios";
 import Axios from "axios";
 
 export const Login = async(data) =>
@@ -119,7 +118,7 @@ export const getToppost = async() =>{
 // getting top authors
 export const getTopAuthors = async() =>{
     try {
-        const res = await axios.get("/api/post/likes/topauthors/top-liked-authors");
+        const res = await Axios.get("/api/post/likes/topauthors/top-liked-authors");
         return res.data; 
     } catch (error) {
         throw error;
@@ -179,7 +178,7 @@ export const uploadProfileImage = async(file) =>{
         try {
           const formData = new FormData();
           formData.append("file", file);
-          const res = await axios.post("/api/profile/upload-profile-picture", formData);
+          const res = await Axios.post("/api/profile/upload-profile-picture", formData);
           return res.data;
         } catch (err) {
           console.log(err);
@@ -199,7 +198,7 @@ export const uploadProfileImage = async(file) =>{
 
 export const profileUpdate = async (data) =>{
     try{
-        const res = await axios.post("/api/profile/upload-profile-picture", data);
+        const res = await Axios.post("/api/profile/upload-profile-picture", data);
         console.log("res...", res);
     }catch(err){
         throw err;
@@ -210,7 +209,7 @@ export const profileUpdate = async (data) =>{
 
 export const handleLikeClick = async (id) =>{
     try{
-        const res = await axios.post(`/api/post/likes/${id}`);
+        const res = await Axios.post(`/api/post/likes/${id}`);
         return res.data;
     }catch(err){
         throw err;
@@ -229,7 +228,7 @@ export const getLikes = async(id) =>{
 
 export const postComment = async(id, body) =>{
     try {
-        const res = await axios.post(`/api/posts/${id}/comments`, body);
+        const res = await Axios.post(`/api/posts/${id}/comments`, body);
         return res.data;
     } catch (error) {
         throw error;
@@ -237,7 +236,7 @@ export const postComment = async(id, body) =>{
 }
 export const getComments = async(id) =>{
     try {
-        const res = await axios.get(`/api/posts/${id}/comments`);
+        const res = await Axios.get(`/api/posts/${id}/comments`);
         return res.data;
     } catch (error) {
         throw error;
@@ -245,7 +244,7 @@ export const getComments = async(id) =>{
 }
 export const delComment = async(id, commentid) =>{
     try {
-        const res = await axios.delete(`/api/posts/${id}/comments/${commentid}`);
+        const res = await Axios.delete(`/api/posts/${id}/comments/${commentid}`);
         return res.data;
     } catch (error) {
         throw error;
@@ -256,7 +255,7 @@ export const delComment = async(id, commentid) =>{
 
 export const getArticleByCat = async(query) =>{
     try {
-        const res = await axios.get(`/api/categories/${query}`);
+        const res = await Axios.get(`/api/categories/${query}`);
         return res.data;
     } catch (error) {
         throw error;
@@ -265,7 +264,7 @@ export const getArticleByCat = async(query) =>{
 
 export const getArticleByTitle = async(query) =>{
     try {
-        const res = await axios.get(`/api/posts/search?q=${query}`);
+        const res = await Axios.get(`/api/posts/search?q=${query}`);
         return res.data;
     } catch (error) {
         throw error;

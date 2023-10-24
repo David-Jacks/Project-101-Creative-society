@@ -6,7 +6,6 @@ import {
 } from "react-icons/ai";
 import { CgWebsite } from "react-icons/cg";
 import logo from "../../images/image1.png";
-import Tag_logo from "../../images/TAG-LOGO.png";
 
 const About = () => {
   return (

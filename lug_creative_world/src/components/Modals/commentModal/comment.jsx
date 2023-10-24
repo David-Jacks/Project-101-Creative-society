@@ -1,23 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import { GiCancel } from "react-icons/gi";
 import "./comment.css";
-import profilephoto from "../../../images/image2.jpg";
-import { getComments, postComment } from "../../../api";
+import profile_img from "../../../images/profilevactor.jpg";
+import { fetchUserData, getComments, postComment } from "../../../api";
 import Commentbox from '../../comment/commentbox';
-import { useQuery } from 'react-query';
-import Loading from '../loadingmodal/loading';
 
 
 const CommentModal = (props) => {
+  const user = localStorage.getItem("user");
+  const userObject = JSON.parse(user);
   const [commentText, setCommenttext] = useState("");
+  const [comments, setComments] = useState([]);
   const [showlargeinput, setShowLargeInput] = useState(false);
-  
-  const {data, isloading, error} = useQuery(["commentData", props.articleid],()=> getComments(props.articleid),  { 
-    enabled: props.articleid !== undefined});
+  const [userDetails, setUserDetails] = useState({});
     
-    // useEffect(()=>{
-    //   props.getComments(data);
-    // },[props, data])
+    useEffect(()=>{
+      async function getUserCommenting(){
+          const ans = await fetchUserData(userObject._id);
+          console.log(ans)
+          setUserDetails(ans);
+      }
+      getUserCommenting();
+
+      async function getAllComments(){
+        const ans = await getComments(props.articleid);
+        setComments(ans);
+      }
+
+      getAllComments();
+    },[commentText])
 
   const handlecomment = (e) => {
     setCommenttext(e.target.value);
@@ -31,7 +42,6 @@ const CommentModal = (props) => {
       setShowLargeInput(false);
       // handle commenting post api
       const ans = await postComment(props.articleid, formData);
-      console.log(ans);
     }
     // props.onClose();
   };
@@ -39,14 +49,14 @@ const CommentModal = (props) => {
   function handleInputClick(){
     setShowLargeInput(true);
   }
-  if (isloading){
-    return (<Loading />);
-  }
+  // if (isloading){
+  //   return (<Loading />);
+  // }
   return (
     <div className="comment_modal">
       <div className="modal_content">
         <div className="comment_top">
-          <h4>{props.article.author} is commenting</h4>
+          <h4>{userDetails.username} is commenting</h4>
           <button className="comment_cancel_button" onClick={props.onClose}>
             <GiCancel />
           </button>
@@ -54,8 +64,10 @@ const CommentModal = (props) => {
         {!showlargeinput && <input type="text" onClick={handleInputClick} name="" id="inputclick" placeholder="pin down your opinions"/>}
         {<form className={`comment_form ${showlargeinput ? "active" : ""}`} onSubmit={handleSubmit}>
           <div className="comment_owner_profile">
-            <img src={profilephoto} alt="profile" />
-            <span>{props.article.author}</span>
+          {userDetails.profilePicture ? <img src={`data:image/png;base64,${userDetails.profilePicture}`} alt="profile" /> :
+            <img src={profile_img} alt="default_profile" />
+            }
+            <span>{userDetails.username}</span>
           </div>
             <textarea 
               className="comment_area"
@@ -68,13 +80,13 @@ const CommentModal = (props) => {
            <div className="comment_bottom_container">
 
                 <span onClick={()=>{setShowLargeInput(false)}}>Cancel</span>
-                <button type="submit" className="comment_button">
+                <button type="submit" className="comment_button" >
                     comment
                 </button>
             </div>
         </form>}
 
-        {data && data.map((val)=>(<Commentbox key={val._id} comment={val} postid={props.articleid}/>))}
+        {comments && comments.map((val)=>(<Commentbox key={val._id} comment={val} postid={props.articleid}/>))}
       </div>
     </div>
   );

@@ -1,21 +1,29 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route} from "react-router-dom";
 import "./App.css";
-import About from "./Pages/About/about";
-import Profile from "./Pages/Profile/profile";
-import Home from "./Pages/Home/home";
-import Article from "./components/Article/article";
+// import About from "./Pages/About/about";
+// import Profile from "./Pages/Profile/profile";
+// import Home from "./Pages/Home/home";
+// import Article from "./components/Article/article";
 import Loginpage from "./Pages/Loginpage/Loginpage";
 import Joinpage from "./Pages/Joinpage/Joinpage";
-import Dashboard from "./Pages/Dashboard/dashboard";
-import Writepage from "./Pages/Writepage/Writepage";
-import Stories from "./components/Stories/stories";
-import { useEffect, useState } from "react";
+// import Dashboard from "./Pages/Dashboard/dashboard";
+// import Writepage from "./Pages/Writepage/Writepage";
+// import Stories from "./components/Stories/stories";
+import { Suspense, lazy, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import Loading from "./components/Modals/loadingmodal/loading";
+// import { lazyLoad } from "./lazyload";
 
 const App = () => {
+  const Home = lazy(()=>import("./Pages/Home/home"));
+  const About = lazy(()=>import("./Pages/About/about"));
+  const Dashboard = lazy(()=>import("./Pages/Dashboard/dashboard"));
+  const Writepage = lazy(()=>import("./Pages/Writepage/Writepage"));
+  const Article = lazy(()=>import("./components/Article/article"));
+  const Profile = lazy(()=>import("./Pages/Profile/profile"));
+
   const [darkmode, setDarkMode] = useState(false);
   const theme = useSelector((state)=>state.theme.value);
-
 
 
   useEffect(() => {
@@ -40,6 +48,7 @@ const App = () => {
 
   return (
     <div className={`App ${darkmode ? "dark-mode": ""}`}>
+      <Suspense fallback={<Loading />}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={ <Home /> } />
@@ -54,9 +63,9 @@ const App = () => {
           <Route path="/loginpage" element={<Loginpage />} />
           <Route path="/joinpage" element={<Joinpage />} />
           <Route path="/writepage" element={<Writepage />} />
-          <Route path="/stories" element={<Stories />} />
         </Routes>
       </BrowserRouter>
+      </Suspense>
     </div>
   );
 };

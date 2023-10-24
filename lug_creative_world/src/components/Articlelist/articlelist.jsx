@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import "./articlelist.css";
+import { memo } from "react";
 
-const Articlelist = (props) =>
+const Articlelist = memo((props) =>
 {
     return(
         <>
@@ -17,6 +18,6 @@ const Articlelist = (props) =>
         </div>
         </>
     );
-}
+});
 
 export default Articlelist;

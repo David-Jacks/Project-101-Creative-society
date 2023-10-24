@@ -4,7 +4,7 @@ import { BiSolidEditAlt, BiLike } from "react-icons/bi";
 import {MdDeleteForever} from "react-icons/md";
 import {AiFillLike} from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import profile_img from "../../images/profilevactor.jpg";
 import article_img from "../../images/articlepic.jpg";
 import { deleteArticle, getLikes, handleLikeClick, saveArticle} from "../../api";
@@ -12,14 +12,13 @@ import { useDispatch } from "react-redux/";
 import { update } from "../../features/article";
 
 
-const Articlecard = ({articles}) =>
+const Articlecard = memo(({articles}) => ///memoizing this component, so that it will remember the props that chages to prevent unneccesary rerendering
 {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const userdatastring= localStorage.getItem("user");
     const user = JSON.parse(userdatastring);
     const rightUser = user._id === articles.authorId;
-    // const [likeData, setLikeData] = useState({});
     const [likes, setLikes] = useState(0);
     const [liked, setLiked] = useState(false);
     const [flagged, setFlaged] = useState("Not Flagged");
@@ -81,6 +80,7 @@ const Articlecard = ({articles}) =>
         else if (flagged === "Not Flagged")
             setFlaged("Flagged");
     }
+
     return (
         <>
             <div className="article_post">
@@ -111,8 +111,11 @@ const Articlecard = ({articles}) =>
                         <p>{articles.description}</p>                  
                     </div>
                     <div className="img_part">
-                        {!articles.descPhoto ? <img src={article_img} alt="article_img" /> :
-                        <img src={`data:image/png;base64,${articles.descPhoto}`} alt="article_img" />}
+                    {articles.descPhoto !== null ? (
+                            <img src={`data:image/png;base64,${articles.descPhoto}`} alt="article_img_blob" />
+                        ) : (
+                            <img src={article_img} alt="default_img" />
+                        )}
                     </div>
                 </div>
                 <div className="article_reactions">
@@ -142,6 +145,6 @@ const Articlecard = ({articles}) =>
            
         </>
     );
-}
+});
 
 export default Articlecard

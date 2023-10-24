@@ -1,5 +1,5 @@
 import "./commentbox.css";
-import profilephoto from "../../images/image2.jpg";
+import profile_img from "../../images/profilevactor.jpg";
 import {AiFillLike} from "react-icons/ai";
 import { BiLike } from "react-icons/bi";
 import { BsThreeDots } from "react-icons/bs";
@@ -10,7 +10,7 @@ import { delComment } from "../../api";
 
 const Commentbox = ({comment, postid}) =>{
     const [showDrop, setShowDrop] = useState(false);
-
+    console.log(comment);
     const handleDrop = () =>{
         setShowDrop(!showDrop);
     }
@@ -22,7 +22,9 @@ const Commentbox = ({comment, postid}) =>{
     <div id="comment_box">
         <div className="comment_box_head">
             <div className="comment_profile_contain">
-                <img src={profilephoto} alt="profile" />
+            {comment.user.profilePicture ?<img src={`data:image/png;base64,${comment.user.profilePicture}`} alt="" /> :
+                            <img src={profile_img} alt="profile" />
+                            }
                 <div className="profile_data">
                     <span>{comment.user.username}</span>
                     <span>{moment(comment.createdAt).fromNow()}</span>

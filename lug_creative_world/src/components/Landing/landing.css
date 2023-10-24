@@ -181,6 +181,27 @@
 	        animation: shake-top 0.8s ease-in-out 3s 3 both;
 }
 
+
+.btn_container {
+  width: 20%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn_container button {
+  height: 50px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 30px;
+  margin-left: 2rem;
+}
+
 @-webkit-keyframes shake-top {
     0%,
     100% {
@@ -254,8 +275,11 @@
 /* handling media query */
 @media only screen and (min-width: 320px) and (max-width: 768px){
   #landing_page_wrapper .logo img{
-    width: 6rem;
-    height: 6rem;
+    /* width: 6rem;
+    height: 6rem; */
+    width: 10rem;
+    height: 10rem;
+    margin-top: 2rem;
   }
   #landing_page_wrapper {
     gap: 4rem;
@@ -277,20 +301,38 @@
     justify-content: space-between;
     align-items: center;
   }
-  #landing_page_wrapper ul{
+  .landbar{
+    height: auto;
+    position: absolute;
+    top: 8rem;
+    width:100%;
+    right: -200%;
+    list-style: none;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    justify-content: flex-start;
     gap: 1rem;
+    align-items: center;
+    transition: all ease-in-out 0.5s;
+  }
+  #landing_page_wrapper .landbar.active {
+    padding: 2rem 0rem;
+    right: 0; 
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    /* background: black; */
+    align-items: flex-end;
+    /* justify-content: space-around; */
   }
   #landing_page_wrapper ul li{
-    font-size: 1rem;
-    font-weight: 500;
-    list-style: none;
+   background: transparent;
   }
-#landing_page_wrapper ul li .link{
+  #landing_page_wrapper ul li .link{
     text-decoration: none;
     padding: 0.5rem 2rem;
     border-radius: 10px;
+    background-color: transparent;
   }
   .section_1 .section_text{
     width: 95%;
@@ -302,22 +344,57 @@
 
 .section_text .text_main_side h2{   
     font-size: 9rem;
-    font-weight: 700;
-    letter-spacing: 4rem;
+    font-weight: 1500;
+    letter-spacing: 1rem;
     line-height: 1;
+    text-shadow: 0.8rem 0.8rem 1.5rem rgba(0, 0, 0, 0.40);
   }
 .section_text .text_main_side h4{
     font-size: 3rem;
-    font-weight: 700;
+    font-weight: 900;
+    margin-top: 2rem;
     /* letter-spacing: 0.5rem; */
 }
 .section_text .text_main_side p{
-    font-size: 2rem;
+    font-size: 2.5rem;
     letter-spacing: .2rem;
-    line-height: 1;
+    line-height: 1.5;
 }
 #landing_page_wrapper .section_1 .section_svg img{
-    width: 47rem;
-    height: 30rem;
+    /* width: 47rem;
+    height: 30rem; */
+    width: 60rem;
+    height: 43rem;
+}
+.btn_container {
+  display: block;
+}
+}
+
+@media only screen and (min-width: 375px) and (max-width: 768px){
+  #landing_page_wrapper .logo img{
+    width: 8rem;
+    height: 8rem;
+  }
+  .section_text .text_main_side h2{   
+    font-size: 7rem;
+    font-weight: 1500;
+    letter-spacing: 1rem;
+    line-height: 1;
+    text-shadow: 0.8rem 0.8rem 1.5rem rgba(0, 0, 0, 0.40);
+  }
+  #landing_page_wrapper .section_1 .section_svg img{
+    width: 49rem;
+    height: 32rem;
+}
+.section_text .text_main_side h4{
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin-top: 2rem;
+}
+.section_text .text_main_side p{
+  font-size: 2.2rem;
+  letter-spacing: .2rem;
+  line-height: 1.5;
 }
 }

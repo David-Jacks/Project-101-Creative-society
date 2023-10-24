@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import "./writepage.css";
 import "react-quill/dist/quill.snow.css";
 import Topbar from "../../components/Topbar/topbar";
 import ReactQuill from "react-quill";
-import { useLocation, useNavigate } from "react-router-dom";
+// import {  useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { preview, update } from "../../features/article";
+import { preview } from "../../features/article";
 import Articletext from "../../components/Articletext/articletext";
 import { fetchUserData } from "../../api";
 import PublishModal from "../../components/Modals/PublishModal/PublishModal"
@@ -15,7 +15,7 @@ const Writepage = () => {
   const articleUpdateData = useSelector((state)=>state.article.value);
   const QuillRef = useRef(null);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [title, setHeading] = useState(articleUpdateData.title);
   const [description, setDesc] = useState(articleUpdateData.description);
   const [body, setText] = useState(articleUpdateData.body);
@@ -72,15 +72,17 @@ const Writepage = () => {
   const handleCatChange = (e) => {
     setcategories(e.target.value);
   };
-  const handleSave = () => {
-    navigate("/profile");
-  };
+  // const handleSave = () => {
+  //   navigate("/profile");
+  // };
 
-  const openModal = () => {
+  const openModal = useCallback(() => {
     if (title && body){
       setIsModalOpen(true);
+    }else{
+      alert("Please check!! The Title or Body is Empty");
     }
-  };
+  }, [title, body]);
 
 
   const handleReview = () => {
@@ -115,7 +117,7 @@ const Writepage = () => {
       />
       <div className="writediv">
         <div id="toolbar">
-            {<button className="button-click " onClick={handleSave}>Draft</button>}
+            {/* {<button className="button-click " onClick={handleSave}>Draft</button>} */}
             {reviewed && <button className="button-click " onClick={handleCustomRedo}>redo</button>}
             {reviewed && <button className="button-click " onClick={handleCustomUndo}>undo</button>}
             <button className="button-click" onClick={handleReview}> {reviewed ? "Preview": "back"}</button>
@@ -129,7 +131,8 @@ const Writepage = () => {
                   placeholder="Write your tittle" 
                   value={title} 
                   rows={rows}
-                  onChange={handleHeadingChange} required>
+                  onChange={handleHeadingChange} 
+                  >
                   </textarea>
                 </div>
               

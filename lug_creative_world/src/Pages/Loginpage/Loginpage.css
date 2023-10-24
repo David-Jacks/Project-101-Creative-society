@@ -64,6 +64,22 @@
     color: #b5121b;
     font-size: 1.1rem;
 }
+.password-input-container{
+  display: flex;
+  width: 100%;
+ }
+ .password-visibility-button-1{
+ font-size: 1.8rem;
+ border: none;
+ background: none;
+ border-bottom: 0.1rem solid #808080;
+ cursor: pointer;
+ }
+
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
 
 /* handling responsiveness */
 @media only screen and (min-width: 320px) and (max-width: 768px){

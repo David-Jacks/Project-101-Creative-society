@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 import "./topbar.css";
 import image1 from "../../images/image1.png";
 import image2 from "../../images/profilevactor.jpg";
@@ -12,7 +12,7 @@ import { fetchUserData } from "../../api";
 import { useDispatch } from "react-redux";
 import { updateTheme } from "../../features/theme";
 
-export default function Topbar(props) {
+const Topbar = memo((props) => {
   const [userinfo, setUserInfo] = useState({});
   const [dark, setdarkMode] = useState(false);
 
@@ -36,13 +36,13 @@ export default function Topbar(props) {
 
 // taking care of changing themes
 
-const handleBgChange = () =>{
+const handleBgChange = useCallback(() =>{
   if(dark){
     dispach(updateTheme(dark));
   }else {
     dispach(updateTheme(dark));
   }
-}
+});
 
 function handleThemeClick(){
   setdarkMode(!dark);
@@ -59,7 +59,7 @@ function handleThemeClick(){
             {props.showText ? (
               <span className="logo-text">{props.logoText}</span>
             ):( <Link to="/dashboard" className="home_link">
-                <span className="logo-text other_small">Scholar <span className="colored_part">Scribe</span></span>
+                <span className="logo-text other_small">Scholar<span className="colored_part">Scribe</span></span>
               </Link>)}
         </div>
         <ul className="navbar">
@@ -85,7 +85,7 @@ function handleThemeClick(){
                 <label for="checkbox" className="checkbox__label">
                     <FaSun className="fa-sun" />
                     <FaMoon className="fa-moon"/>
-                    <span class="check__ball" onClick={handleThemeClick}></span>
+                    <span class="check__ball"  onClick={handleThemeClick}></span>
                 </label>
             </div> 
           </li>
@@ -109,4 +109,6 @@ function handleThemeClick(){
       (props.showBottomBoxShadow && <TbLayoutSidebarLeftCollapseFilled  className="topbar_panel" onClick={props.sideBarHandle}/>)}
     </section>
   );
-}
+});
+
+export default Topbar;

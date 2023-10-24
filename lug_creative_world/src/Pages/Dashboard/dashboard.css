@@ -60,6 +60,7 @@
     gap: 1.5rem;
     overflow-y: scroll;
 }
+
 #dashboard .top_authors
 {
     width: 36rem;
@@ -88,11 +89,9 @@
 }
 #dashboard .top_authors img
 {
-  /* width: 10rem;
-  height: 9rem; */
   width: 11rem;
   height: 10rem;
-  /* border-radius: 0.8rem; */
+  outline: .2rem solid var(--black);
   border-radius: 0.5rem;
   object-fit: cover;
 }

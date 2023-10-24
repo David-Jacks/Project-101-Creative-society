@@ -2,9 +2,11 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { GiCancel } from "react-icons/gi";
 import "./PublishModal.css";
 import { sendPostData, updateArticle } from "../../../api";
+import Loading from '../loadingmodal/loading';
 
 const PublishModal = (props) => {
   const [descPhoto, setPhoto] = useState(null); 
+  const [load, setLoad] = useState(false); 
   const [isPhotoSelected, setIsPhotoSelected] = useState(false);
 
   const handlePhotoChange = (e) => {
@@ -27,20 +29,26 @@ const PublishModal = (props) => {
     return data;
   }, [title, body, description, author, timeTakenToReadPost, categories, authorId, descPhoto]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     // Collect form data and pass it to the onProceed function
     if (title && body && description) {
+      setLoad(true);
       if (props.transfer2.isUpdate) {
-        updateArticle(props.transfer2.id, formData);
+        const ans = await updateArticle(props.transfer2.id, formData);
       } else {
-        sendPostData(formData);
+        const ans = await sendPostData(formData);
       }
     // Call the onProceed function with the form data
     // onProceed(formData);
     // Close the modal
     props.onClose();
+    setLoad(false);
   };
+  }
+
+  if (load){
+    return(<Loading />);
   }
   return (
     <div className="publish-modal">
@@ -58,7 +66,7 @@ const PublishModal = (props) => {
               value={description}
               onChange={props.handleDescChange}
               required
-              placeholder='Make your post a magnet for readers! Just drop in a quick, captivating description (50-150 words) to draw them into your world effortlessly.'
+              placeholder='Make your post a magnet for readers! Just drop in a quick, captivating description (up to 50 Words) to draw them into your world effortlessly.'
             />
           </label>
 
@@ -68,26 +76,38 @@ const PublishModal = (props) => {
               onChange={props.handleCatChange}
               required
             >
-              <option value="">Pick your preferable categories</option>
-              <option value="Programming">Programming</option>
-              <option value="Drama">Drama</option>
+              <option value="">Pick Category</option>
+              <option value="Programming">Student Businesses</option>
+              <option value="Case Study">Case Study</option>
               <option value="Lifestyle">Lifestyle</option>
               <option value="Health and wellness">Health and wellness</option>
-              <option value="Finance">Finance</option>
-              <option value="Education">Education</option>
-              <option value="Career and Business">Career and Business</option>
-              <option value="Science and nature">Science and nature</option>
-              <option value="Arts and culture">Arts and culture</option>
-              <option value="Hobbies and Interests">Hobbies and Interests</option>
-              <option value="Sports">Sports</option>
-              <option value="Inspiration and motivation">Inspiration and motivation</option>
-              <option value="Technology">Technology</option>
+              <option value="Research Proposal">Research Proposal</option>
+              <option value="Comedy">Comedy</option>
+              <option value="Love and Relationships">Love and Relationships</option>
+              <option value="Creative Writing">Creative Writing</option>
+              <option value="Science and Technology">Science and Technology</option>
+              <option value="Announcements">Announcements</option>
+              <option value="Academics">Academics</option>
+              <option value="Sports and Entertainment">Sports and Entertainment</option>
             </select>
           </label>
-          <div className='label'>
-             <h4> specify the reading time of your article</h4>
-            <input type="number" name="timetaken" id="timetaken" value={timeTakenToReadPost} onChange={props.handleTimeTaken}/>
-          </div>
+          <label>
+          <select className="box"
+              value={timeTakenToReadPost}
+              onChange={props.handleTimeTaken}
+              required
+            >
+              <option value="">Specify Reading Time</option>
+              <option value="4">Less Than 4 min</option>
+              <option value="7">Less Than 7 min</option>
+              <option value="10">Less Than 10 min</option>
+              <option value="2">More Than 2 min</option>
+              <option value="5">More Than 5 min</option>
+              <option value="8">More Than 8 min</option>
+              <option value="12">More Than 10 min</option>
+            </select>
+          </label>
+
           <div className="articlePhotoHandle">
 
             <label className="file-input-label">

@@ -1,22 +1,19 @@
-import React from "react";
-import Button from "../../components/button/button";
+import React, { memo, useCallback } from "react";
 import Articlecard from "../../components/Articlecard/articlecard";
 import "./profile.css";
 import { useState } from "react";
 import profile_img2 from "../../images/profilevactor.jpg";
 import Topbar from "../../components/Topbar/topbar";
-// import { IoMdArrowDropdown } from "react-icons/io";
 import { CiCamera } from "react-icons/ci";
 import { useQuery } from "react-query";
 import { Logout, fetchUserData, fetchuserArticles } from "../../api";
 import { useDispatch } from "react-redux";
 import { logout } from "../../features/users";
-import FollowerList from "../../components/Modals/Follow-modal/FollowerList"
 import { useLocation } from "react-router-dom";
 import EditModal from "../../components/Modals/editprofile/Editprofile";
 import Loading from "../../components/Modals/loadingmodal/loading";
 
-const Profile = () => 
+const Profile = memo(() => 
 {
     const userdatastring= localStorage.getItem("user");
     const user = JSON.parse(userdatastring);
@@ -38,14 +35,11 @@ const Profile = () =>
     const {data: userArticleQuery, error: userArticleerror, isLoading: userarticleisloading} = useQuery(["userArticle", userProfileId], () =>fetchuserArticles(userProfileId), {
       enabled: userProfileId !== undefined});
 
-    const [showFollowersModal, setShowFollowersModal] = useState(false);
-    const [showFollowingModal, setShowFollowingModal] = useState(false);
 
-
-  const handleLogout = () => {
+  const handleLogout = useCallback(() => {
     dispatch(logout());
     Logout();
-  };
+  }, [dispatch]);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -66,27 +60,7 @@ const Profile = () =>
   // };
 
 
-  const followers = [
-    { id: 1, name: "Follower 1", photo: "https://esbenoxholm.dk/wp-content/uploads/2016/08/Profile4_400px.jpg" },
-    { id: 2, name: "Follower 2", photo: "https://si-interactive.s3.amazonaws.com/prod/planadviser-com/wp-content/uploads/2023/09/01112809/PAPS-090123-People-Moves_Mark_Higgins-400px-web.jpg" },
-    { id: 3, name: "Follower 3", photo: "https://esbenoxholm.dk/wp-content/uploads/2016/08/Profile4_400px.jpg" },
-    { id: 4, name: "Follower 4", photo: "https://esbenoxholm.dk/wp-content/uploads/2016/08/Profile4_400px.jpg" },
-    { id: 5, name: "Follower 5", photo: "https://esbenoxholm.dk/wp-content/uploads/2016/08/Profile4_400px.jpg" },
-    { id: 6, name: "Follower 6", photo: "https://esbenoxholm.dk/wp-content/uploads/2016/08/Profile4_400px.jpg" },
-    { id: 7, name: "Follower 7", photo: "https://esbenoxholm.dk/wp-content/uploads/2016/08/Profile4_400px.jpg" },
-    { id: 8, name: "Follower 8", photo: "https://esbenoxholm.dk/wp-content/uploads/2016/08/Profile4_400px.jpg" },
-    { id: 9, name: "Follower 9", photo: "https://esbenoxholm.dk/wp-content/uploads/2016/08/Profile4_400px.jpg" },
-  ];
 
-  const following = [
-    { id: 1, name: "Following 1", photo: "https://esbenoxholm.dk/wp-content/uploads/2016/08/Profile4_400px.jpg" },
-    { id: 2, name: "Following 2", photo: "https://esbenoxholm.dk/wp-content/uploads/2016/08/Profile4_400px.jpg" },
-    { id: 3, name: "Following 3", photo: "https://si-interactive.s3.amazonaws.com/prod/planadviser-com/wp-content/uploads/2023/09/01112809/PAPS-090123-People-Moves_Mark_Higgins-400px-web.jpg" },
-    { id: 4, name: "Following 4", photo: "https://esbenoxholm.dk/wp-content/uploads/2016/08/Profile4_400px.jpg" },
-    { id: 5, name: "Following 5", photo: "https://esbenoxholm.dk/wp-content/uploads/2016/08/Profile4_400px.jpg" },
-    { id: 6, name: "Following 6", photo: "https://esbenoxholm.dk/wp-content/uploads/2016/08/Profile4_400px.jpg" },
-    { id: 7, name: "Following 7", photo: "https://esbenoxholm.dk/wp-content/uploads/2016/08/Profile4_400px.jpg" },
-  ];
 
   if (userisloading || userarticleisloading)
   {
@@ -109,29 +83,13 @@ const Profile = () =>
             {rightUser && <CiCamera className="profile_img_update" onClick={handleProfilePic}/>}
           
           </div>
-          <h2>{userDataQuery.username}</h2>
-          
-            {/*<ul> 
-            <li>
-              <span>{userDataQuery.following} following</span>
-              <button className="modal-button" onClick={() => setShowFollowingModal(!showFollowingModal)}>
-                <IoMdArrowDropdown className="icon hvr-sink" />
-              </button>
-            </li>
-            <li>
-            <span>{userDataQuery.followers} followers</span>
-              <button className="modal-button" onClick={() => setShowFollowersModal(!showFollowersModal)}>
-                <IoMdArrowDropdown className="icon hvr-sink" />
-              </button>
-            </li> 
-            </ul>*/}
+            <h2>{userDataQuery.username}</h2>
           <ul>
             <li>{userArticleQuery.length} contributed articles</li>
             {rightUser && <li className="profile_edit_btn" onClick={openModal}>
               <span onClick={openModal}>Edit profile</span>
             </li>}
           </ul>
-          {!rightUser && <Button name={"Follow"} />}
         </div>
         {isModalOpen && <EditModal 
             isOpen={isModalOpen}
@@ -166,34 +124,9 @@ const Profile = () =>
           )}
         </div>
 
-        {showFollowersModal && (
-      <div className="modal">
-        <div className="modal-content">
-        <FollowerList
-            title="Followers"
-            followers={followers}
-            buttonText="remove"
-            onClose={() => setShowFollowersModal(false)}
-          />
-        </div>
-      </div>
-        )}
-
-        {showFollowingModal && (
-        <div className="modal">
-            <div className="modal-content">
-            <FollowerList
-            title="Following"
-            followers={following}
-            buttonText="Following"
-            onClose={() => setShowFollowingModal(false)}
-          />
-            </div>
-        </div>
-        )}
       </div>
     </>
   );
-};
+});
 
 export default Profile;
