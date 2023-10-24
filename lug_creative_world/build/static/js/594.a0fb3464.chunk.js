@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunklug_creative_world=self.webpackChunklug_creative_world||[]).push([[594],{4594:function(e,n,r){r.r(n),r.d(n,{default:function(){return c}});var t=r(9469),u=r(184),c=function(){return(0,u.jsx)(u.Fragment,{children:(0,u.jsx)("div",{id:"home_container",children:(0,u.jsx)(t.Z,{})})})}}}]);
+//# sourceMappingURL=594.a0fb3464.chunk.js.map
