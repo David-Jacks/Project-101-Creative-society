@@ -96,7 +96,7 @@ const getTopLikedAuthors = async (req, res, next) => {
         $group: {
           _id: "$authorId",
           profilePic: { $first: "$authorProfilePic" },
-          postIds: { $push: "$_id" },
+          postIds: { $push: "$authorId" },
         },
       },
       { $limit: 6 },
