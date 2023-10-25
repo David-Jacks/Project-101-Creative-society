@@ -95,11 +95,13 @@ const getTopLikedAuthors = async (req, res, next) => {
       {
         $group: {
           _id: "$authorId",
+          id: { $push: "$_id" },
           profilePic: { $first: "$authorProfilePic" },
         },
       },
       { $limit: 6 },
     ]);
+    console.log("What is here: ", topLikedAuthors);
 
     res.status(200).json(topLikedAuthors);
   } catch (error) {
