@@ -74,13 +74,32 @@ const topLiked = async (req, res, next) => {
   }
 };
 
+// const getTopLikedAuthors = async (req, res, next) => {
+//   try {
+//     const topLikedPosts = await Post.getTopLikedPosts();
+//     const topLikedAuthors = topLikedPosts.map((post) => ({
+//       id: post.authorId,
+//       profilePic: post.authorProfilePic,
+//     }));
+
+//     res.status(200).json(topLikedAuthors);
+//   } catch (error) {
+//     next(error);
+//   }
+// };
+
 const getTopLikedAuthors = async (req, res, next) => {
   try {
-    const topLikedPosts = await Post.getTopLikedPosts();
-    const topLikedAuthors = topLikedPosts.map((post) => ({
-      id: post.authorId,
-      profilePic: post.authorProfilePic,
-    }));
+    const topLikedAuthors = await Post.aggregate([
+      { $sort: { likes: -1 } },
+      {
+        $group: {
+          id: "$authorId",
+          profilePic: { $first: "$authorProfilePic" },
+        },
+      },
+      { $limit: 6 },
+    ]);
 
     res.status(200).json(topLikedAuthors);
   } catch (error) {
