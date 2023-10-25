@@ -8,22 +8,18 @@ import Loading from "../../components/Modals/loadingmodal/loading";
 import Error from "../../components/Modals/errors/errors";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 export default function JoinPage() {
-
-
   const [showPassword, setShowPassword] = useState(false);
-   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   // Function to toggle password visibility
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-
-    // Function to toggle confirm password visibility
-    const toggleConfirmPasswordVisibility = () => {
-      setShowConfirmPassword(!showConfirmPassword);
-    };
-  
+  // Function to toggle confirm password visibility
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
 
   const [checked, setChecked] = useState(false);
   const [load, setLoading] = useState(false);
@@ -38,9 +34,10 @@ export default function JoinPage() {
     agreeToTerms: checked,
   });
 
-  const nameRegex = /^.{1,19}$/;
+  const nameRegex = /^.{1,14}$/;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{5,20}$/;
+  const passwordRegex =
+    /^(?=.*[0-9])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{5,20}$/;
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     const newValue = type === "checkbox" ? checked : value;
@@ -50,60 +47,63 @@ export default function JoinPage() {
       [name]: newValue,
     });
 
-    if (name === "username")
-    {
-      error.name = !nameRegex.test(newValue) ? "Username should be less than 20" : "";
+    if (name === "username") {
+      error.name = !nameRegex.test(newValue)
+        ? "Username should be less than 15"
+        : "";
 
       !nameRegex.test(newValue) ? setValid(false) : setValid(true);
-    } else if (name === "email")
-    {
+    } else if (name === "email") {
       error.email = !emailRegex.test(newValue) ? "Invalid Email" : "";
 
       !emailRegex.test(newValue) ? setValid(false) : setValid(true);
-    } else if (name === "password")
-    {
-      error.password = !passwordRegex.test(newValue) ? "Between 5 and 20 chars, have numbers and special chars" : "";
+    } else if (name === "password") {
+      error.password = !passwordRegex.test(newValue)
+        ? "Between 5 and 20 char's, have numbers and special char's"
+        : "";
 
       !passwordRegex.test(newValue) ? setValid(false) : setValid(true);
-    }  else if (name === "confirmPassword")
-    {
-      error.passwordConfirm = !(formData.password === newValue ) ? "password mismach" : "";
+    } else if (name === "confirmPassword") {
+      error.passwordConfirm = !(formData.password === newValue)
+        ? "password mismach"
+        : "";
 
       setValid(formData.password === newValue);
-    } else if (name === "agreeToTerms")
-    {
+    } else if (name === "agreeToTerms") {
       error.terms = !checked ? "Please resolve terms and conditions" : "";
 
-      !checked? setChecked(false) : setChecked(true);
+      !checked ? setChecked(false) : setChecked(true);
     }
-
   };
 
- 
-const { confirmPassword, agreeToTerms, ...actData } = formData;
+  const { confirmPassword, agreeToTerms, ...actData } = formData;
 
-  const handleSubmit = async (e) =>
-  {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    if (valid && checked)
-    {
-     const res = await join(actData);
-     if (res === 400){
-      setLoading(false);
-      setMyErr(true);
-     }
-    //  setLoading(false);
+    if (valid && checked) {
+      const res = await join(actData);
+      if (res === 400) {
+        setLoading(false);
+        setMyErr(true);
+      }
+      //  setLoading(false);
     }
-  }
+  };
 
-  if (load){
-    return(<Loading />);
-  }else if(myerr){
-    return (<Error 
-      handleErrorClick={()=>{setMyErr(false)}}
-      err_message={"Username already exist... please trying using a new username"}
-      />);
+  if (load) {
+    return <Loading />;
+  } else if (myerr) {
+    return (
+      <Error
+        handleErrorClick={() => {
+          setMyErr(false);
+        }}
+        err_message={
+          "Username already exist... please trying using a new username"
+        }
+      />
+    );
   }
 
   return (
@@ -137,13 +137,13 @@ const { confirmPassword, agreeToTerms, ...actData } = formData;
             </div>
             <div className="form-group">
               <label htmlFor="email" className="label-name">
-                INSTITUTIONAL EMAIL
+                EMAIL
               </label>
               <input
                 type="email"
                 id="email"
                 name="email"
-                placeholder="@youremail.com"
+                placeholder="@gmail.com"
                 value={formData.email}
                 onChange={handleChange}
                 required
@@ -155,75 +155,75 @@ const { confirmPassword, agreeToTerms, ...actData } = formData;
               <label htmlFor="password" className="label-name">
                 PASSWORD
               </label>
-          <div className="password-input-container">
-          <input
-            type={showPassword ? "text" : "password"}
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-            className="input-field"
-          />
-          {formData.password && ( // Only display the button if there is text in the password input
-            <button
-              type="button"
-              className="password-visibility-button"
-              onClick={togglePasswordVisibility}
-            >
-              {showPassword ? <IoMdEyeOff /> : <IoMdEye />}
-            </button>
-          )}
-        </div>
+              <div className="password-input-container">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                  className="input-field"
+                />
+                {formData.password && ( // Only display the button if there is text in the password input
+                  <button
+                    type="button"
+                    className="password-visibility-button"
+                    onClick={togglePasswordVisibility}
+                  >
+                    {showPassword ? <IoMdEyeOff /> : <IoMdEye />}
+                  </button>
+                )}
+              </div>
               <span className="join_err">{error.password}</span>
             </div>
             <div className="form-group">
               <label htmlFor="confirmPassword" className="label-name">
                 CONFIRM PASSWORD
               </label>
-          <div className="password-input-container">
-          <input
-            type={showConfirmPassword ? "text" : "password"}
-            id="confirmPassword"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            required
-            className="input-field"
-          />
-          {formData.confirmPassword && ( // Only display the button if there is text in the confirm password input
-            <button
-              type="button"
-              className="password-visibility-button"
-              onClick={toggleConfirmPasswordVisibility}
-            >
-              {showConfirmPassword ? <IoMdEyeOff /> : <IoMdEye />}
-            </button>
-          )}
-        </div>
+              <div className="password-input-container">
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  required
+                  className="input-field"
+                />
+                {formData.confirmPassword && ( // Only display the button if there is text in the confirm password input
+                  <button
+                    type="button"
+                    className="password-visibility-button"
+                    onClick={toggleConfirmPasswordVisibility}
+                  >
+                    {showConfirmPassword ? <IoMdEyeOff /> : <IoMdEye />}
+                  </button>
+                )}
+              </div>
               <span className="join_err">{error.passwordConfirm}</span>
             </div>
             <div>
               <label className="checkbox-label">
                 <input
                   type="checkbox"
-                  checked = {formData.agreeToTerms}
+                  checked={formData.agreeToTerms}
                   name="agreeToTerms"
                   onChange={handleChange}
                   className="checkbox-input"
                 />
                 <div className="custom-checkbox"></div>
                 <p>
-                  By signing up i agree to the <span>terms and conditions</span>
+                  By signing up i agree to the <span>Terms and Conditions</span>
                 </p>
               </label>
-                <span className="join_err">{error.terms}</span>
+              <span className="join_err">{error.terms}</span>
             </div>
             <div className="form-group">
               <div className="twi-buttons">
-                  <button type="submit" className="signup-button hvr-wobble-skew">
+                <button type="submit" className="signup-button hvr-wobble-skew">
                   Sign up
-                  </button>
+                </button>
                 <p>or</p>
                 <Link to="/loginpage">
                   <button className="login-button hvr-buzz">Log in</button>

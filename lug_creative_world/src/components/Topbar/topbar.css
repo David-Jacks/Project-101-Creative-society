@@ -103,12 +103,12 @@
 }
 
 /* dealling with toggle menu for switching between white and dark modes */
-.bg__change{
+.topbar .bg__change{
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.checkbox{
+.topbar .checkbox{
   opacity: 0;
   width: 5rem;
   height: 2rem;
@@ -116,8 +116,8 @@
   z-index: 10;
   cursor: pointer;
 }
-.checkbox__label{
-  background: var(--third-color);
+.topbar .checkbox__label{
+  background: #565858;
   width: 5rem;
   height: 2.4rem;
   border-radius: 4.8rem;
@@ -126,9 +126,9 @@
   justify-content: space-between;
   align-items: center;
   position: relative;
-  border: .3rem solid var(--black);
+  border: .2rem solid var(--black);
 }
-.fa-sun, .fa-moon{
+.topbar .fa-sun, .topbar .fa-moon{
   color: #F5F5F5;
   font-size: 1.8rem;
 }
@@ -142,7 +142,7 @@
   transition: transform .2s linear;
 }
 
-.checkbox:checked + .checkbox__label .check__ball{
+.topbar .checkbox:checked + .checkbox__label .check__ball{
   transform: translateX(2.4rem);
 }
 

@@ -36,6 +36,7 @@
     height: 2.6rem;
     border-radius: 50%;
     object-fit: cover;
+    outline: .1rem solid var(--black);
 }
 #article_card_wrapper .article_card_about li
 {

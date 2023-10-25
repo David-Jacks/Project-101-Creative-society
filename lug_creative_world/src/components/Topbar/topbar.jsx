@@ -4,7 +4,10 @@ import image1 from "../../images/image1.png";
 import image2 from "../../images/profilevactor.jpg";
 import { IoBookOutline } from "react-icons/io5";
 // import { IoIosNotifications } from "react-icons/io";
-import {TbLayoutSidebarLeftCollapseFilled, TbLayoutSidebarLeftExpandFilled} from "react-icons/tb";
+import {
+  TbLayoutSidebarLeftCollapseFilled,
+  TbLayoutSidebarLeftExpandFilled,
+} from "react-icons/tb";
 import { FaSun } from "react-icons/fa";
 import { FaMoon } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -25,47 +28,56 @@ const Topbar = memo((props) => {
 
   const userString = localStorage.getItem("user");
   const user = JSON.parse(userString);
-  useEffect(()=>{
-    const userDataFromBackend = async() =>{
+  useEffect(() => {
+    const userDataFromBackend = async () => {
       const ans = await fetchUserData(user._id);
       setUserInfo(ans);
-    }
+    };
 
     userDataFromBackend();
-  },[user._id])
+  }, [user._id]);
 
-// taking care of changing themes
+  // taking care of changing themes
 
-const handleBgChange = useCallback(() =>{
-  if(dark){
-    dispach(updateTheme(dark));
-  }else {
-    dispach(updateTheme(dark));
-  }
-});
+  const handleBgChange = () => {
+    if (dark) {
+      dispach(updateTheme(dark));
+    } else {
+      dispach(updateTheme(dark));
+    }
+  };
 
-function handleThemeClick(){
-  setdarkMode(!dark);
-  handleBgChange();
-}
+  const handleThemeClick = () => {
+    setdarkMode(!dark);
+    handleBgChange();
+  };
 
   return (
     <section className={topbarClasses}>
       <div className="container">
         <div className="logo-1">
-            <Link to="/dashboard">
-              <img className="img1" src={image1} alt="lancaster-logo" />
+          <Link to="/dashboard">
+            <img className="img1" src={image1} alt="lancaster-logo" />
+          </Link>
+          {props.showText ? (
+            <span className="logo-text">{props.logoText}</span>
+          ) : (
+            <Link to="/dashboard" className="home_link">
+              <span className="logo-text other_small">
+                Scholar<span className="colored_part">Scribe</span>
+              </span>
             </Link>
-            {props.showText ? (
-              <span className="logo-text">{props.logoText}</span>
-            ):( <Link to="/dashboard" className="home_link">
-                <span className="logo-text other_small">Scholar<span className="colored_part">Scribe</span></span>
-              </Link>)}
+          )}
         </div>
         <ul className="navbar">
           {props.showButton ? (
             <li>
-              <button className="publish-button hvr-wobble-top" onClick={props.publishClick}>Publish</button>
+              <button
+                className="publish-button hvr-wobble-top"
+                onClick={props.publishClick}
+              >
+                Publish
+              </button>
             </li>
           ) : (
             <li>
@@ -81,32 +93,60 @@ function handleThemeClick(){
               <span>5</span>
             </div> */}
             <div className="bg__change">
-                <input type="checkbox" className="checkbox" onClick={handleThemeClick}/>
-                <label for="checkbox" className="checkbox__label">
-                    <FaSun className="fa-sun" />
-                    <FaMoon className="fa-moon"/>
-                    <span class="check__ball"  onClick={handleThemeClick}></span>
-                </label>
-            </div> 
+              <input
+                type="checkbox"
+                id="checkbox"
+                className="checkbox"
+                onClick={handleThemeClick}
+              />
+              <label for="checkbox" className="checkbox__label">
+                <FaMoon className="fa-moon" />
+                <FaSun className="fa-sun" />
+                <span className="check__ball" onClick={handleThemeClick}></span>
+              </label>
+            </div>
           </li>
           {!props.profile ? (
-          <li>
-            <Link to={`/profile/${user._id}`}>
-             { !userinfo.profilePicture ? (<img className="img4" src={image2} alt="" />) :
-              (<img className="img4" src={`data:image/png;base64,${userinfo.profilePicture}`} alt="" />)
-          }
-            </Link>
-          </li>) : ( 
-          <li>
-            <Link to="/">
-              <button className="publish-button hvr-wobble-top" onClick={props.logoutClick}>Logout</button>
-            </Link>
-          </li>)
-          }
+            <li>
+              <Link to={`/profile/${user._id}`}>
+                {!userinfo.profilePicture ? (
+                  <img className="img4" src={image2} alt="" />
+                ) : (
+                  <img
+                    className="img4"
+                    src={`data:image/png;base64,${userinfo.profilePicture}`}
+                    alt=""
+                  />
+                )}
+              </Link>
+            </li>
+          ) : (
+            <li>
+              <Link to="/">
+                <button
+                  className="publish-button hvr-wobble-top"
+                  onClick={props.logoutClick}
+                >
+                  Logout
+                </button>
+              </Link>
+            </li>
+          )}
         </ul>
       </div>
-      {!props.sidebar ? (props.showBottomBoxShadow && <TbLayoutSidebarLeftExpandFilled className="topbar_panel" onClick={props.sideBarHandle}/>) : 
-      (props.showBottomBoxShadow && <TbLayoutSidebarLeftCollapseFilled  className="topbar_panel" onClick={props.sideBarHandle}/>)}
+      {!props.sidebar
+        ? props.showBottomBoxShadow && (
+            <TbLayoutSidebarLeftExpandFilled
+              className="topbar_panel"
+              onClick={props.sideBarHandle}
+            />
+          )
+        : props.showBottomBoxShadow && (
+            <TbLayoutSidebarLeftCollapseFilled
+              className="topbar_panel"
+              onClick={props.sideBarHandle}
+            />
+          )}
     </section>
   );
 });

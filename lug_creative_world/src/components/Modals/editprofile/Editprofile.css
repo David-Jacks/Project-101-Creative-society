@@ -38,6 +38,9 @@
 }
 .modal_content_editprofile .edit_profile_top .comment_cancel_button{
     color: var(--black);
+    background: transparent;
+    border: none;
+    font-size:2.5rem;
 }
 .edit_profile_modal .edit_profile_form{
     padding-top: 2rem;

@@ -275,8 +275,6 @@
 /* handling media query */
 @media only screen and (min-width: 320px) and (max-width: 768px){
   #landing_page_wrapper .logo img{
-    /* width: 6rem;
-    height: 6rem; */
     width: 10rem;
     height: 10rem;
     margin-top: 2rem;
@@ -301,7 +299,7 @@
     justify-content: space-between;
     align-items: center;
   }
-  .landbar{
+  #landing_page_wrapper .landbar{
     height: auto;
     position: absolute;
     top: 8rem;
@@ -316,12 +314,12 @@
     transition: all ease-in-out 0.5s;
   }
   #landing_page_wrapper .landbar.active {
-    padding: 2rem 0rem;
+    padding: 2rem .8rem;
     right: 0; 
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-    /* background: black; */
+    gap: 1rem;
+    z-index: 32434;
     align-items: flex-end;
     /* justify-content: space-around; */
   }
@@ -335,7 +333,7 @@
     background-color: transparent;
   }
   .section_1 .section_text{
-    width: 95%;
+    width: 97%;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -353,18 +351,18 @@
     font-size: 3rem;
     font-weight: 900;
     margin-top: 2rem;
-    /* letter-spacing: 0.5rem; */
 }
 .section_text .text_main_side p{
-    font-size: 2.5rem;
+    font-size: 2.1rem;
     letter-spacing: .2rem;
-    line-height: 1.5;
+    line-height: 1.2;
 }
 #landing_page_wrapper .section_1 .section_svg img{
     /* width: 47rem;
     height: 30rem; */
-    width: 60rem;
-    height: 43rem;
+    width: 54rem;
+    height: 33rem;
+    transform: translateY(-2.5rem);
 }
 .btn_container {
   display: block;

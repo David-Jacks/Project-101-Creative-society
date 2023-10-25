@@ -1,7 +1,8 @@
 
 #load_body{
+	width: 100%;
 	margin: 0;
-	height: 100vh;
+	height: 100dvh;
 	display: flex;
 	justify-content: center;
 	align-items: center;

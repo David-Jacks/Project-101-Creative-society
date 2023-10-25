@@ -149,12 +149,15 @@
         width: 100%;
     }
     #article_view_wrapper .article_wrapper_container{
-        width: 90%;
+        width: 95%;
         margin: .0rem auto;
     }
     #article_view_wrapper .article_controls{
     position: fixed;
-    right: 2.5rem;
+    right: 1rem;
     bottom: 35vh;
+    }
+    #article_view_wrapper .article_view_main{
+    padding: 1.1rem 2.5rem 1rem .5rem;
     }
 }
