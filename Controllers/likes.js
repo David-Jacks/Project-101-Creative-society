@@ -74,13 +74,40 @@ const topLiked = async (req, res, next) => {
   }
 };
 
+// const getTopLikedAuthors = async (req, res, next) => {
+//   try {
+//     const topLikedPosts = await Post.getTopLikedPosts();
+//     const topLikedAuthors = topLikedPosts.map((post) => ({
+//       id: post.authorId,
+//       profilePic: post.authorProfilePic,
+//     }));
+
+//     res.status(200).json(topLikedAuthors);
+//   } catch (error) {
+//     next(error);
+//   }
+// };
+
 const getTopLikedAuthors = async (req, res, next) => {
   try {
-    const topLikedPosts = await Post.getTopLikedPosts();
-    const topLikedAuthors = topLikedPosts.map((post) => ({
-      id: post.authorId,
-      profilePic: post.authorProfilePic,
-    }));
+    const topLikedAuthors = await Post.aggregate([
+      { $sort: { likes: -1 } },
+      {
+        $group: {
+          _id: "$authorId",
+          profilePic: { $first: "$authorProfilePic" },
+          postIds: { $push: "$_id" },
+        },
+      },
+      { $limit: 6 },
+      {
+        $project: {
+          _id: 0, // Exclude _id field
+          id: { $arrayElemAt: ["$postIds", 0] }, // Get the first id
+          profilePic: 0, // Exclude the profilePic field
+        },
+      },
+    ]);
 
     res.status(200).json(topLikedAuthors);
   } catch (error) {
