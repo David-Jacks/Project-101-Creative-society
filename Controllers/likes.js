@@ -104,7 +104,7 @@ const getTopLikedAuthors = async (req, res, next) => {
         $project: {
           _id: 0, // Exclude _id field
           id: { $arrayElemAt: ["$postIds", 0] }, // Get the first id
-          profilePic: 0, // Exclude the profilePic field
+          profilePic: 1, // Include the profilePic field
         },
       },
     ]);
