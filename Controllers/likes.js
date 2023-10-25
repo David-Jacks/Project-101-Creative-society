@@ -74,40 +74,40 @@ const topLiked = async (req, res, next) => {
   }
 };
 
-// const getTopLikedAuthors = async (req, res, next) => {
-//   try {
-//     const topLikedPosts = await Post.getTopLikedPosts();
-//     const topLikedAuthors = topLikedPosts.map((post) => ({
-//       id: post.authorId,
-//       profilePic: post.authorProfilePic,
-//     }));
-
-//     res.status(200).json(topLikedAuthors);
-//   } catch (error) {
-//     next(error);
-//   }
-// };
-
 const getTopLikedAuthors = async (req, res, next) => {
   try {
-    const topLikedAuthors = await Post.aggregate([
-      { $sort: { likes: -1 } },
-      {
-        $group: {
-          _id: "$authorId",
-          id: { $push: "$_id" },
-          profilePic: { $first: "$authorProfilePic" },
-        },
-      },
-      { $limit: 6 },
-    ]);
-    console.log("What is here: ", topLikedAuthors);
+    const topLikedPosts = await Post.getTopLikedPosts();
+    const topLikedAuthors = topLikedPosts.map((post) => ({
+      id: post.authorId,
+      profilePic: post.authorProfilePic,
+    }));
 
     res.status(200).json(topLikedAuthors);
   } catch (error) {
     next(error);
   }
 };
+
+// const getTopLikedAuthors = async (req, res, next) => {
+//   try {
+//     const topLikedAuthors = await Post.aggregate([
+//       { $sort: { likes: -1 } },
+//       {
+//         $group: {
+//           _id: "$authorId",
+//           id: { $push: "$_id" },
+//           profilePic: { $first: "$authorProfilePic" },
+//         },
+//       },
+//       { $limit: 6 },
+//     ]);
+//     console.log("What is here: ", topLikedAuthors);
+
+//     res.status(200).json(topLikedAuthors);
+//   } catch (error) {
+//     next(error);
+//   }
+// };
 
 // Get the 6 most recent blog posts
 const getRecentPosts = async (req, res, next) => {
