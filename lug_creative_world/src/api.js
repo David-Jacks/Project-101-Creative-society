@@ -236,7 +236,7 @@ export const getComments = async (id) => {
 export const delComment = async (id, commentid) => {
   try {
     const res = await Axios.delete(`/api/posts/${id}/comments/${commentid}`);
-    return res.data;
+    return res.status;
   } catch (error) {
     throw error;
   }

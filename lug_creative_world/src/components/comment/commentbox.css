@@ -74,3 +74,6 @@
     font-size: 1.3rem;
     font-family: var(--poppins);
 }
+#comment_box .drop_down_comment .drop span{
+    cursor: pointer;
+}
