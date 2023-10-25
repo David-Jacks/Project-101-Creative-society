@@ -94,7 +94,7 @@ const getTopLikedAuthors = async (req, res, next) => {
       { $sort: { likes: -1 } },
       {
         $group: {
-          id: "$authorId",
+          _id: "$authorId",
           profilePic: { $first: "$authorProfilePic" },
         },
       },
