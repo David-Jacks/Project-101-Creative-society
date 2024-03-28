@@ -1,6 +1,7 @@
 #About_page {
     width: 100dvw;
-    height: auto;
+    /* height: auto; this is making the page hieght not responsive*/ 
+    height: 100dvh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -23,6 +24,7 @@
     width: 85%;
     align-self: center;
   }
+  
   #About_page .about_main_head {
     display: flex;
     flex-direction: column;
